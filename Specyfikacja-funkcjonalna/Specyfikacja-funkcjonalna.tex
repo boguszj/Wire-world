@@ -111,6 +111,7 @@ Symulacja przeprowadzona zgodnie z powyższymi regułami może prowadzić do pow
 Reguły symulacji umożliwiają również tworzenie dużo bardziej skomplikowanych struktur (jak na przykład maszyna Turinga -- https://youtu.be/My8AsV7bA94).
 
 \section{Interfejs użytkownika}
+\label{sec:opis-interfejs}
 Ważnym aspektem programu jest sposób interakcji z użytkownikiem.
 Realizowana aplikacja będzie obsługiwana poprzez graficzny interfejs użytkownika.
 
@@ -127,9 +128,23 @@ Interfejs pozwoli na poniższe funkcjonalności:
 \chapter{Działanie programu}
 
 \section{Opis komunikacja z użytkownikiem}
-Program będzie posiadać graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny sposób, zgodny z regułami symulacji. W razie wystąpienia błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
+Po programu zostanie wyświetlony graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny sposób, zgodny z regułami symulacji. W razie wystąpienia błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
 
-\section{Graficzny interfejs użytkownika:}
+W ramach interfejsu użytkownik będzie mógł wykonywać czynności opisane w punkcie \ref{sec:opis-interfejs} oraz przełączać między automatami Game of Life i Wireworld.
+
+\section{Wygląd interfejsu użytkownika}
+Poniżej przedstawiony jest szkic interfejsu użytkownika w różnych stanach.
+
+\subsection{Po włączeniu programu}
+Większość kontrolek jest \textbf{wyłączonych} do momentu wczytania planszy z pliku lub wygenerowania losowej. Program domyślnie wyświetla okno symulacji automatu Wireworld.
+
+\subsection{W trakcie symulacji}
+Można zmienić tempo symulacji oraz wstrzymać generację następnych pokoleń, co umożliwi edycję aktualnego pokolenia.
+
+\subsection{Symulacja wstrzymana}
+Możliwe jest edytowanie komórek przy pomocy narzędzie i wstawianie figur.
+
+\subsection{Tryb automatu Game of Live}
 
 %\begin{figure}[h]
 %\centering
@@ -139,7 +154,6 @@ Program będzie posiadać graficzny interfejs, który pozwoli użytkownikowi ste
 %\caption{Przykłady struktur}
 %\end{figure}
 
-\section{Przykłady wywołania} 
 
 \section{Plik wejściowy}  \label{format}
 Plik wejściowy pozwala na wczytanie stanu planszy. Dzięki temu użytkownik ma kontrolę nad początkiem symulacji, oraz może kontynuować symulacje z zapisanego wcześniej etapu.
