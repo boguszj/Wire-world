@@ -45,13 +45,15 @@ Projektu skupia się na realizacji 3 głównych aspektów problemu. Są to odpow
 Wire World jest automatem komórkowym wymyślonym przez Briana Silvermana w roku 1987.  Jest często używany do symulacji elementów elektronicznych operujących na wartościach bitowych. Pomimo prostoty reguł, jakie nim rządzą, za pomocą Wireworld można nawet stworzyć działający komputer.
 
 \subsection{Symulacja}
-\paragraph{Stany}  Komórka może znajdować się w jednym z czterech stanów:
-\begin{itemize}
-\item pusta,
-\item głowa elektronu,
-\item ogon elektronu,
-\item przewodnik.
-\end{itemize}
+\begin{minipage}{\textwidth} %Akapit ma być na jednej stronie
+    \paragraph{Stany}  Komórka może znajdować się w jednym z czterech stanów:
+    \begin{itemize}
+    \item pusta,
+    \item głowa elektronu,
+    \item ogon elektronu,
+    \item przewodnik.
+    \end{itemize}
+\end{minipage}
 
 \paragraph{Pokolenie} to zbiór stanów wszystkich komórek w danej chwili. Gdy stan pokolenia jest ustalony, możliwe jest utworzenie nowego (potomnego) pokolenia komórek, powstających według poniższych zasad.
 
@@ -108,12 +110,24 @@ Symulacja przeprowadzona zgodnie z powyższymi regułami może prowadzić do pow
 
 Reguły symulacji umożliwiają również tworzenie dużo bardziej skomplikowanych struktur (jak na przykład maszyna Turinga -- https://youtu.be/My8AsV7bA94).
 
+\section{Interfejs użytkownika}
+Ważnym aspektem programu jest sposób interakcji z użytkownikiem.
+Realizowana aplikacja będzie obsługiwana poprzez graficzny interfejs użytkownika.
 
+Interfejs pozwoli na poniższe funkcjonalności:
+\begin{itemize}
+    \item Bieżący podgląd stanu symulacji
+    \item Możliwość dostosowania prędkości symulacji
+    \item Zapis aktualnego pokolenia do pliku
+    \item Wyczytanie pokolenia z pliku
+    \item Edycje poszczególnych komórek w trakcie symulacji
+    \item Wstawianie figur wybranch z przybornika
+\end{itemize}
 
 \chapter{Działanie programu}
 
 \section{Opis komunikacja z użytkownikiem}
-Program będzie posiadać graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny (jeśli poprawny) sposób. W razie błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
+Program będzie posiadać graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny sposób, zgodny z regułami symulacji. W razie wystąpienia błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
 
 \section{Graficzny interfejs użytkownika:}
 
