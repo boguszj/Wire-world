@@ -19,7 +19,7 @@
 % \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
 \makeatother
 
-\title{Specyfikacja funkcjonalna -- Gra w życie}
+\title{Specyfikacja funkcjonalna -- Wireworld}
 \author{Krzysztof Dąbrowski i Jakub Bogusz}
 \date{\today}
 
@@ -29,14 +29,20 @@
 \tableofcontents{}
 
 \chapter{Cel projektu}
-Celem projektu jest implementacja Wire World w języku Java z interfejsem graficznym zaimplementowanym przy pomocy biblioteki JavaFX. Gotowy program ma pozwalać użytkownikowi przeprowadzać symulacje zgodne z określonymi zasadami. Parametrami generacji użytkownik będzie mógł sterować ręcznie z wbudowanego menu opisanego niżej [TU DAĆ LINK DO SEKCJI Z GRAFIKĄ I OPISEM CZĘŚCI].
-Ponadto będzie istnieć również możliwość przełączenia trybu symulacji z Wire World na prostsze Game of life.
+Celem projektu jest implementacja automatu komórkowego Wire World w języku Java z interfejsem graficznym zaimplementowanym przy pomocy biblioteki JavaFX. Gotowy program ma pozwalać użytkownikowi przeprowadzać symulacje zgodne z określonymi zasadami. Parametrami generacji użytkownik będzie mógł sterować ręcznie z wbudowanego menu opisanego niżej [TU DAĆ LINK DO SEKCJI Z GRAFIKĄ I OPISEM CZĘŚCI].
+%TODO: Link do GUI
+Interfejs będzie wyświetlał na bierząco podgląd kolejnych generacji. Użytkownik będzie miał możliwość wstrzymania symulacji oraz zmianę stanu planszy przy pomocy narzędzi edycji.
+
+Ponadto będzie istnieć również możliwość przełączenia trybu symulacji z Wire World na automat komórkowy Game of life.
 
 \chapter{Opis ogólny problemu}
 
+\section{Wstęp}
+Projektu skupia się na realizacji 3 głównych aspektów problemu. Są to odpowiednio automaty komórkowe ,,Game of Life'' i ,,Wireworld'' oraz wizualna prezentacja działania tych automatów. 
+
 \section{Wire World}
 
-Wire World jest automatem komórkowym wymyślonym przez Briana Silvermana w roku 1987.  Jest często używany do symulacji elementów elektronicznych operujących na wartościach bitowych. Pomimo prostoty reguł, jakie nim rządzą, za pomocą Wireworld można stworzyć działający komputer.
+Wire World jest automatem komórkowym wymyślonym przez Briana Silvermana w roku 1987.  Jest często używany do symulacji elementów elektronicznych operujących na wartościach bitowych. Pomimo prostoty reguł, jakie nim rządzą, za pomocą Wireworld można nawet stworzyć działający komputer.
 
 \subsection{Symulacja}
 \paragraph{Stany}  Komórka może znajdować się w jednym z czterech stanów:
@@ -47,7 +53,7 @@ Wire World jest automatem komórkowym wymyślonym przez Briana Silvermana w roku
 \item przewodnik.
 \end{itemize}
 
-\paragraph{Pokolenie} to stan wszystkich komórek w danej chwili. Gdy stan pokolenia jest ustalony, możliwe jest utworzenie nowego (potomnego) pokolenia komórek, powstających według poniższych zasad.
+\paragraph{Pokolenie} to zbiór stanów wszystkich komórek w danej chwili. Gdy stan pokolenia jest ustalony, możliwe jest utworzenie nowego (potomnego) pokolenia komórek, powstających według poniższych zasad.
 
 \paragraph{Reguły} Następne pokolenie generowane jest zgodnie z regułami:
 \begin{itemize}
@@ -71,7 +77,6 @@ Symulacja przeprowadzona zgodnie z powyższymi regułami może prowadzić do pow
 \section{Game of life}
 
 Game of life jest automatem komórkowym wymyślonym przez brytyjskiego matematyka John Horton Conway
-%%TODO: Dopisać więcej, Czym jest siatka, czym są stany
 w 1970 roku. Polega na symulacji kolejnych pokoleń życia komórek według następujących zasad.
 
 \subsection{Symulacja}
