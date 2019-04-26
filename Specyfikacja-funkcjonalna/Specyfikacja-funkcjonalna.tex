@@ -29,14 +29,52 @@
 \tableofcontents{}
 
 \chapter{Cel projektu}
-Celem projektu jest implementacja gry w życie w języku C. Gotowy program ma przeprowadzać symulację kolejnych pokoleń oraz generować na ich podstawie pliki graficzne przedstawiające etapy symulacji. Generacja odbywa się na podstawie parametrów podanych przez użytkownika w postaci flag. Program działa wyłącznie w trybie wsadowym, co oznacza, że cały proces symulacji odbywać się bez ingerencji użytkownika. Aplikacja może generować jeden z trzech rodzajów plików wyjściowych: obrazów, animacji lub plików tekstowych.
+Celem projektu jest implementacja Wire World w języku Java z interfejsem graficznym zaimplementowanym przy pomocy biblioteki JavaFX. Gotowy program ma pozwalać użytkownikowi przeprowadzać symulacje zgodne z określonymi zasadami. Parametrami generacji użytkownik będzie mógł sterować ręcznie z wbudowanego menu opisanego niżej [TU DAĆ LINK DO SEKCJI Z GRAFIKĄ I OPISEM CZĘŚCI].
+Ponadto będzie istnieć również możliwość przełączenia trybu symulacji z Wire World na prostsze Game of life.
 
 \chapter{Opis ogólny problemu}
-Gra w życie jest automatem komórkowym wymyślonym przez brytyjskiego matematyka John Horton Conway
+
+\section{Wire World}
+
+Wire World jest automatem komórkowym wymyślonym przez Briana Silvermana w roku 1987.  Jest często używany do symulacji elementów elektronicznych operujących na wartościach bitowych. Pomimo prostoty reguł, jakie nim rządzą, za pomocą Wireworld można stworzyć działający komputer.
+
+\subsection{Symulacja}
+\paragraph{Stany}  Komórka może znajdować się w jednym z czterech stanów:
+\begin{itemize}
+\item pusta,
+\item głowa elektronu,
+\item ogon elektronu,
+\item przewodnik.
+\end{itemize}
+
+\paragraph{Pokolenie} to stan wszystkich komórek w danej chwili. Gdy stan pokolenia jest ustalony, możliwe jest utworzenie nowego (potomnego) pokolenia komórek, powstających według poniższych zasad.
+
+\paragraph{Reguły} Następne pokolenie generowane jest zgodnie z regułami:
+\begin{itemize}
+\item Jeżeli komórka jest pusta, to pozostaje pusta niezależnie od jej otoczenia,
+\item Jeżeli komórka jest głową elektronu, to zmieni się w ogon elektronu,
+\item Jeżeli komórka jest ogonem elektronu, to zmieni się w przewodnik,
+\item Jeżeli komórka jest przewodnikiem i sąsiaduję z jedną lub dwoma komórkami będącymi głowami elektronu, to zmieni się w przewodnik.
+\end{itemize}
+
+\subsection{Struktury}
+Symulacja przeprowadzona zgodnie z powyższymi regułami może prowadzić do powstania ciekawych obiektów zwanych strukturami. 
+\begin{figure}[h]
+\centering
+\setlength{\fboxsep}{0pt} %Odstęp 0
+\setlength{\fboxrule}{1pt} %Grubość ramki 1p
+\fbox{\includegraphics[width=8cm]{Obrazy/struktury_w.png}}
+\caption{Przykłady struktur - dioda przewodząca i nieprzewodząca}
+\end{figure}
+
+
+\section{Game of life}
+
+Game of life jest automatem komórkowym wymyślonym przez brytyjskiego matematyka John Horton Conway
 %%TODO: Dopisać więcej, Czym jest siatka, czym są stany
 w 1970 roku. Polega na symulacji kolejnych pokoleń życia komórek według następujących zasad.
 
-\section{Symulacja}
+\subsection{Symulacja}
 
 \paragraph{Stany}  Komórka może znajdować się w jednym z dwóch stanów:
 \begin{itemize}
@@ -52,14 +90,14 @@ w 1970 roku. Polega na symulacji kolejnych pokoleń życia komórek według nast
 \item Jeżeli komórka była żywa to pozostaje żywa jeśli miała dwóch lub trzech żywych sąsiadów. W przeciwnym razie staje się martwa.
 \end{itemize}
 
-\section{Struktury}
+\subsection{Struktury}
 Symulacja przeprowadzona zgodnie z powyższymi regułami może prowadzić do powstania ciekawych obiektów zwanych strukturami. 
 
 \begin{figure}[h]
 \centering
 \setlength{\fboxsep}{0pt} %Odstęp 0
 \setlength{\fboxrule}{1pt} %Grubość ramki 1p
-\fbox{\includegraphics[width=13cm]{struktury}}
+\fbox{\includegraphics[width=13cm]{Obrazy/struktury.png}}
 \caption{Przykłady struktur}
 \end{figure}
 
@@ -69,33 +107,20 @@ Reguły symulacji umożliwiają również tworzenie dużo bardziej skomplikowany
 
 \chapter{Działanie programu}
 
-\section{Komunikacja z użytkownikiem}
-Program działa w trybie wsadowym. Oznacza to, że użytkownik podaje jedynie argumenty początkowe dla symulacji wraz z uruchomieniem programu (w formie flag), a następnie program automatycznie przetwarza dane i generuje wyniki.
+\section{Opis komunikacja z użytkownikiem}
+Program będzie posiadać graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny (jeśli poprawny) sposób. W razie błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
 
-\section{Tryb wsadowy}
-\paragraph{Argumenty} \label{argumenty}
-\begin{itemize}
-\item \texttt{-h / --help} \\ Wyświetlenie pomocy,
-\item \texttt{ -f [nazwa pliku]  / --file plik [nazwa pliku] } 
-	\\ \textit{ Łańcuch znaków }będący nazwą pliku z wejściowym stanem planszy zgodny z \hyperref[format]{\textcolor{LinkColor}{formatem}}; wyklucza się z  \hyperref[s]{\textcolor{LinkColor}{flagą -s}}
-\item \texttt{-o [ścieżka] / --output\textunderscore{}dest [ścieżka]}  \\\textit{ Łańcuch znaków }będący ścieżką do folderu, w którym zostaną zapisane wyniki \label{output_dest} symulacji. Domyślnie pliki  będą generowane w folderze  o nazwie będącej aktualną datą i godziną wywołania programu,
-\item \texttt{-t [gif | png | txt] / --type [gif | png | txt])} \\\textit{ Łańcuch znaków }reprezentujący typ generowanych rezultatów. Domyślnie gif, \label{output_args}
-\item \texttt{-n [liczba] / --number\textunderscore{}of\textunderscore{}generations [liczba]} \\ \textit{ Liczba } pokoleń do wygenerowania. Domyślnie 15,
-\item \texttt{-p [liczba] / --step [liczba]} \\ \textit{ Liczba }decydująca o tym, co który stan symulacji będzie zapisywany. Domyślnie 1,
-\item \label{s} \texttt{-s [LICZBAxLICZBA] / --size [LICZBAxLICZBA]} \\ \textit{ Łańcuch znaków } o formacie "XxY" (X -- szerokość planszy, Y -- wysokość planszy), będący wymiarami losowo generowanej planszy początkowej. Wyklucza się z -f, 
-\item \label{delay} \texttt{-d [liczba] / --delay [liczba]} \\ Podanie tego argumentu spowoduje wyświetlanie w konsoli kolejnych pokolenie symulacji. \textit{ Liczba } ta będzie oznaczać czas  w milisekundach między wyświetleniem poszczególnych pokoleń. Wartość -1, co oznacza manualne przechodzenie do następnego pokolenia klawiszem ENTER lub zapisanie wyświetlanego pokolenia w pliku.txt wpisując ,,save''.
-\end{itemize}
+\section{Graficzny interfejs użytkownika:}
 
-Wywołanie programu bez żadnego argumentu przyjmuje flagę --size 10, i wartości domyślne innych parametrów.
+%\begin{figure}[h]
+%\centering
+%\setlength{\fboxsep}{0pt} %Odstęp 0
+%\setlength{\fboxrule}{1pt} %Grubość ramki 1p
+%\fbox{\includegraphics[width=13cm]{Obrazy/gui.png}}
+%\caption{Przykłady struktur}
+%\end{figure}
 
-Wywołanie programu z błędnymi argumentami lub niewystarczającą ich liczbą wyświetli pomoc wraz z   \hyperref[przyklady]{\textcolor{LinkColor}{przykładami wywołania i ich opisami.}}
-
-\section{Przykłady wywołania}  \label{przyklady}
-\paragraph{\texttt{gra\textunderscore{}w\textunderscore{}zycie -s 5x8 -d -1}} \mbox{} \\
-Program utworzy losową planszę o 5 komórkach szerokości i 8 wysokości i przeprowadzi symulację wyświetlając kolejne pokolenia w konsoli, pomiędzy którymi użytkownik będzie przełączać się wciskając ENTER oraz będzie mógł zapisać aktualnie wyświetlane pokolenie wpisując ,,save'' i zatwierdzając klawiszem ENTER.
-
-\paragraph{\texttt{gra\textunderscore{}w\textunderscore{}zycie -f dane\textunderscore{}wejsciowe.txt -p 3 -t png -n 21}} \mbox{} \\
-Program wyczyta początkową planszę z pliku o nazwie ,,dane\textunderscore{}wejsciowe.txt'', utworzy nowy folder o nazwie będącej dzisiejszą data oraz godziną i zapisze do niego 7 obrazów w formacie .png (co 3 pokolenie). 
+\section{Przykłady wywołania} 
 
 \section{Plik wejściowy}  \label{format}
 Plik wejściowy pozwala na wczytanie stanu planszy. Dzięki temu użytkownik ma kontrolę nad początkiem symulacji, oraz może kontynuować symulacje z zapisanego wcześniej etapu.
@@ -105,14 +130,6 @@ Plik wejściowy pozwala na wczytanie stanu planszy. Dzięki temu użytkownik ma 
 1 0 0 1 1 \tab -- Wartości poszczególnych komórek \\
 0 1 1 0 1 \tab -- 1 - żywa \\
 0 0 0 1 1 \tab -- 0 - martwa \\
-
-\begin{figure}[h]
-\centering
-\setlength{\fboxsep}{0pt} %Odstęp 0
-\setlength{\fboxrule}{1pt} %Grubość ramki 1p
-\fbox{\includegraphics[width=7cm]{Przyklad_planszy}}
-\caption{Grafika wygenerowana na podstawie przykładowej planszy}
-\end{figure}
 
 \subsection{Format pliku}
 \subsubsection*{Kodowanie}
