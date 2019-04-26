@@ -154,21 +154,51 @@ Możliwe jest edytowanie komórek przy pomocy narzędzie i wstawianie figur.
 %\caption{Przykłady struktur}
 %\end{figure}
 
+\chapter{Edycja planszy}
+Użytkownik ma kilka możliwości na wgranie planszy do programu lub edycję już istniejącej.
 
 \section{Plik wejściowy}  \label{format}
-Plik wejściowy pozwala na wczytanie stanu planszy. Dzięki temu użytkownik ma kontrolę nad początkiem symulacji, oraz może kontynuować symulacje z zapisanego wcześniej etapu.
+Program pozwala na wczytanie całego stanu planszy (wraz z rozmiarem) z pliku. Dzięki temu możliwe jest łatwe odtworzenie stanu ze wcześniejszej symulacji lub prezentacja skomplikowanego układu.
 
-\subsection{Przykład}
+Program będzie w stanie obsłużyć różnie formaty plików wymienione poniżej.
+
+\subsection{Pliki txt}
+Najprostszym formatem, z którego będzie można wczytać stan planszy będzie zwykły format tekstowy zapisany w plikach \texttt{.txt}. W zależności od rodzaju wybranego automatu pliki będą miały \textbf{różne formaty}
+
+\subsubsection{Kodowanie}
+Ponieważ plik powinien zawierać tylko liczby arabskie i odstępy możliwe jest dowolne kodowanie kompatybilne z ASCII. \\
+\paragraph{Sugerowane kodowania to:}
+ASCII, UTF-8, ISO 8859, Windows-1250
+
+\subsection{Wireworld}
+
+\begin{samepage}
+\paragraph{Przykład}\mbox{}\\
+3 6 \tab -- rozmiar (x y) \\
+3 3 2 \tab -- Wartości poszczególnych komórek \\
+0 3 2 \tab -- 0 - pusta \\
+0 1 2 \tab -- 1 - głowa elektronu \\
+1 2 1 \tab -- 2 - ogon elektronu \\
+2 3 2 \tab -- 3 - przewodnik \\
+3 0 3 \\
+\end{samepage}
+
+\paragraph{Opis formatu}\mbox{}\\
+Plik w pierwszej linii powinien zawierać 2 liczby. Pierwsza z nich oznacza rozmiar planszy w poziomie, druga w pionie.
+Następnie plik powinien zawierać liczbę linii zgodną z podanym rozmiarem w pionie. W każdej z tych linii powinno być tyle liczb ze zbioru \{0, 1, 2, 3\} ile wynosi rozmiar w poziomie.
+
+Zero oznacza komórkę pustą, jeden oznacza głowę elektronu, dwa oznacza ogon elektronu, trzy oznacza przewodnik.
+%TODO: Opis znaczeń liczb (co jest głową itd.)
+
+\subsection{Game of Life}
+
+\paragraph{Przykład} \mbox{} \\
 5 3 \tab -- rozmiar (x y) \\
 1 0 0 1 1 \tab -- Wartości poszczególnych komórek \\
 0 1 1 0 1 \tab -- 1 - żywa \\
 0 0 0 1 1 \tab -- 0 - martwa \\
 
-\subsection{Format pliku}
-\subsubsection*{Kodowanie}
-Ponieważ plik powinien zawierać tylko liczby arabskie i odstępy możliwe jest dowolne kodowanie kompatybilne z ASCII. \\
-\paragraph{Sugerowane kodowania to:}
-ASCII, UTF-8, ISO 8859, Windows-1250
+\subsubsection{Format pliku}
 
 \subsubsection*{Opis formatu}
 Plik w pierwszej linii powinien zawierać 2 liczby. Pierwsza z nich oznacza rozmiar planszy w poziomie, druga w pionie. \\
