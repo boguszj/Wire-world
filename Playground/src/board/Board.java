@@ -20,6 +20,18 @@ public class Board {
         }
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public List<State> getStates() {
+        return states;
+    }
+
     private final int width;
     private final int height;
 
