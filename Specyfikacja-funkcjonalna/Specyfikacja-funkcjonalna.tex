@@ -155,7 +155,7 @@ Możliwe jest edytowanie komórek przy pomocy narzędzie i wstawianie figur.
 %\end{figure}
 
 \chapter{Edycja planszy}
-Użytkownik ma kilka możliwości na wgranie planszy do programu lub edycję już istniejącej.
+Użytkownik ma kilka możliwości na wgranie planszy do programu lub edycję już istniejącej. Są one wymienione poniżej.
 
 \section{Plik wejściowy}  \label{format}
 Program pozwala na wczytanie całego stanu planszy (wraz z rozmiarem) z pliku. Dzięki temu możliwe jest łatwe odtworzenie stanu ze wcześniejszej symulacji lub prezentacja skomplikowanego układu.
@@ -204,12 +204,23 @@ Następnie plik powinien zawierać tyle linii jaki został podany rozmiar w pion
 Zero oznacz komórkę martwą, a jeden komórkę żywą.
 
 \subsection{JSON}
+%TODO: Zobaczyć czy byłoby to łatwe
 
 \subsection{XML}
 
 \section{Przybornik stanów}
+Jedną z części interfejsu użytkownika będzie przybornik pozwalający na wybór jednego ze stanów aktualnego automatu komórkowego. Po zaznaczeniu jednego ze stanów użytkownik będzie miał możliwość zamiany wybranych komórek aktualnego pokolenia na wybrany stan.
 
 \section{Wstawianie figur}
+Interfejs będzie zawierał zestaw typowych figur dla aktualnego automatu komórkowego. Możliwe będzie zaznaczenie wybranej figury oraz wstawienie jej w wybrane miejsce symulacji.
+
+\subsection{Rozszerzanie listy figur}
+%TODO: Przemyśleć Rozszerzanie listy figur do wklejenia i ich zapisywanie
+Użytkownik będzie miał możliwość dodania własnych figur do domyślnej listy.
+
+\section{Zapis stanu planszy}
+Program będzie w stanie zapisać aktualny stan planszy w formacie, który umożliwi późniejsze  wczytanie planszy.
+%TODO: Czy użytkownik będzie mógł wybrać format?
 
 \chapter{Sytuacje wyjątkowe}
 %TODO Sytuacje wyjątkowe
