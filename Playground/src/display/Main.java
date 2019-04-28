@@ -1,10 +1,14 @@
 package display;
 
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.geometry.Point2D;
@@ -17,6 +21,8 @@ import java.util.List;
  * Tests of how to display and interact wit board
  */
 public class Main extends Application {
+    final int rows = 2, columns = 3;
+
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -27,11 +33,35 @@ public class Main extends Application {
         Group root = new Group();
         Canvas canvas = new Canvas(300, 250);
 
+        //TODO: Test drawing javafx.scene.shape on Pane
+//        Pane pane = new Pane();
+//        pane.getHeight();
+
         drawLayout(canvas);
+        canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::changeColor);
 
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    private void changeColor(MouseEvent event) {
+        final double mouseX = event.getSceneX();
+        final double mouseY = event.getSceneY();
+
+//        String text = String.format("Mouse was clicked at: X=%f, Y=%f", mouseX, mouseY);
+//        new Alert(Alert.AlertType.INFORMATION, text).show();
+
+        Canvas canvas = (Canvas)event.getTarget();
+
+        final double rectWidth = canvas.getWidth() / this.columns;
+        final double rectHeight = canvas.getHeight() / this.rows;
+
+        //Find out which rectangle was clicked
+        int row = (int)(mouseY / canvas.getHeight() * this.rows);
+        int column = (int)(mouseX / canvas.getWidth() * this.columns);
+
+        new Alert(Alert.AlertType.INFORMATION, "Row: " + row + " Column: " + column).showAndWait();
     }
 
     private void drawLayout(Canvas canvas) {
@@ -46,8 +76,6 @@ public class Main extends Application {
 
 //        gc.setFill(colors.get(1));
 //        gc.fillRect(0, 0, width/2, height/2);
-
-        final int rows = 2, columns = 3;
 
         final double rectWidth = canvas.getWidth() / columns;
         final double rectHeight = canvas.getHeight() / rows;
