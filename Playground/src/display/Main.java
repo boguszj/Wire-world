@@ -54,14 +54,20 @@ public class Main extends Application {
 
         Canvas canvas = (Canvas)event.getTarget();
 
-        final double rectWidth = canvas.getWidth() / this.columns;
-        final double rectHeight = canvas.getHeight() / this.rows;
-
         //Find out which rectangle was clicked
         int row = (int)(mouseY / canvas.getHeight() * this.rows);
         int column = (int)(mouseX / canvas.getWidth() * this.columns);
 
-        new Alert(Alert.AlertType.INFORMATION, "Row: " + row + " Column: " + column).showAndWait();
+//        new Alert(Alert.AlertType.INFORMATION, "Row: " + row + " Column: " + column).showAndWait();
+
+        final GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        final double rectWidth = canvas.getWidth() / this.columns;
+        final double rectHeight = canvas.getHeight() / this.rows;
+        gc.setFill(Color.BLACK);
+
+        double x = column * rectWidth, y = row * rectHeight;
+        gc.fillRect(x, y, rectWidth, rectHeight);
     }
 
     private void drawLayout(Canvas canvas) {
