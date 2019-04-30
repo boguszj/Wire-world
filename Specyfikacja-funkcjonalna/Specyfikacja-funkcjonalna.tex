@@ -19,7 +19,7 @@
 % \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
 \makeatother
 
-\title{Specyfikacja funkcjonalna -- Gra w życie}
+\title{Specyfikacja funkcjonalna -- Wireworld}
 \author{Krzysztof Dąbrowski i Jakub Bogusz}
 \date{\today}
 
@@ -29,25 +29,33 @@
 \tableofcontents{}
 
 \chapter{Cel projektu}
-Celem projektu jest implementacja Wire World w języku Java z interfejsem graficznym zaimplementowanym przy pomocy biblioteki JavaFX. Gotowy program ma pozwalać użytkownikowi przeprowadzać symulacje zgodne z określonymi zasadami. Parametrami generacji użytkownik będzie mógł sterować ręcznie z wbudowanego menu opisanego niżej [TU DAĆ LINK DO SEKCJI Z GRAFIKĄ I OPISEM CZĘŚCI].
-Ponadto będzie istnieć również możliwość przełączenia trybu symulacji z Wire World na prostsze Game of life.
+Celem projektu jest implementacja automatu komórkowego Wire World w języku Java z interfejsem graficznym zaimplementowanym przy pomocy biblioteki JavaFX. Gotowy program ma pozwalać użytkownikowi przeprowadzać symulacje zgodne z określonymi zasadami. Parametrami generacji użytkownik będzie mógł sterować ręcznie z wbudowanego menu opisanego niżej [TU DAĆ LINK DO SEKCJI Z GRAFIKĄ I OPISEM CZĘŚCI].
+%TODO: Link do GUI
+Interfejs będzie wyświetlał na bierząco podgląd kolejnych generacji. Użytkownik będzie miał możliwość wstrzymania symulacji oraz zmianę stanu planszy przy pomocy narzędzi edycji.
+
+Ponadto będzie istnieć również możliwość przełączenia trybu symulacji z Wire World na automat komórkowy Game of life.
 
 \chapter{Opis ogólny problemu}
 
+\section{Wstęp}
+Projektu skupia się na realizacji 3 głównych aspektów problemu. Są to odpowiednio automaty komórkowe ,,Game of Life'' i ,,Wireworld'' oraz wizualna prezentacja działania tych automatów. 
+
 \section{Wire World}
 
-Wire World jest automatem komórkowym wymyślonym przez Briana Silvermana w roku 1987.  Jest często używany do symulacji elementów elektronicznych operujących na wartościach bitowych. Pomimo prostoty reguł, jakie nim rządzą, za pomocą Wireworld można stworzyć działający komputer.
+Wire World jest automatem komórkowym wymyślonym przez Briana Silvermana w roku 1987.  Jest często używany do symulacji elementów elektronicznych operujących na wartościach bitowych. Pomimo prostoty reguł, jakie nim rządzą, za pomocą Wireworld można nawet stworzyć działający komputer.
 
 \subsection{Symulacja}
-\paragraph{Stany}  Komórka może znajdować się w jednym z czterech stanów:
-\begin{itemize}
-\item pusta,
-\item głowa elektronu,
-\item ogon elektronu,
-\item przewodnik.
-\end{itemize}
+\begin{minipage}{\textwidth} %Akapit ma być na jednej stronie
+    \paragraph{Stany}  Komórka może znajdować się w jednym z czterech stanów:
+    \begin{itemize}
+    \item pusta,
+    \item głowa elektronu,
+    \item ogon elektronu,
+    \item przewodnik.
+    \end{itemize}
+\end{minipage}
 
-\paragraph{Pokolenie} to stan wszystkich komórek w danej chwili. Gdy stan pokolenia jest ustalony, możliwe jest utworzenie nowego (potomnego) pokolenia komórek, powstających według poniższych zasad.
+\paragraph{Pokolenie} to zbiór stanów wszystkich komórek w danej chwili. Gdy stan pokolenia jest ustalony, możliwe jest utworzenie nowego (potomnego) pokolenia komórek, powstających według poniższych zasad.
 
 \paragraph{Reguły} Następne pokolenie generowane jest zgodnie z regułami:
 \begin{itemize}
@@ -71,7 +79,6 @@ Symulacja przeprowadzona zgodnie z powyższymi regułami może prowadzić do pow
 \section{Game of life}
 
 Game of life jest automatem komórkowym wymyślonym przez brytyjskiego matematyka John Horton Conway
-%%TODO: Dopisać więcej, Czym jest siatka, czym są stany
 w 1970 roku. Polega na symulacji kolejnych pokoleń życia komórek według następujących zasad.
 
 \subsection{Symulacja}
@@ -103,14 +110,41 @@ Symulacja przeprowadzona zgodnie z powyższymi regułami może prowadzić do pow
 
 Reguły symulacji umożliwiają również tworzenie dużo bardziej skomplikowanych struktur (jak na przykład maszyna Turinga -- https://youtu.be/My8AsV7bA94).
 
+\section{Interfejs użytkownika}
+\label{sec:opis-interfejs}
+Ważnym aspektem programu jest sposób interakcji z użytkownikiem.
+Realizowana aplikacja będzie obsługiwana poprzez graficzny interfejs użytkownika.
 
+Interfejs pozwoli na poniższe funkcjonalności:
+\begin{itemize}
+    \item Bieżący podgląd stanu symulacji
+    \item Możliwość dostosowania prędkości symulacji
+    \item Zapis aktualnego pokolenia do pliku
+    \item Wyczytanie pokolenia z pliku
+    \item Edycje poszczególnych komórek w trakcie symulacji
+    \item Wstawianie figur wybranch z przybornika
+\end{itemize}
 
 \chapter{Działanie programu}
 
 \section{Opis komunikacja z użytkownikiem}
-Program będzie posiadać graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny (jeśli poprawny) sposób. W razie błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
+Po programu zostanie wyświetlony graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny sposób, zgodny z regułami symulacji. W razie wystąpienia błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
 
-\section{Graficzny interfejs użytkownika:}
+W ramach interfejsu użytkownik będzie mógł wykonywać czynności opisane w punkcie \ref{sec:opis-interfejs} oraz przełączać między automatami Game of Life i Wireworld.
+
+\section{Wygląd interfejsu użytkownika}
+Poniżej przedstawiony jest szkic interfejsu użytkownika w różnych stanach.
+
+\subsection{Po włączeniu programu}
+Większość kontrolek jest \textbf{wyłączonych} do momentu wczytania planszy z pliku lub wygenerowania losowej. Program domyślnie wyświetla okno symulacji automatu Wireworld.
+
+\subsection{W trakcie symulacji}
+Można zmienić tempo symulacji oraz wstrzymać generację następnych pokoleń, co umożliwi edycję aktualnego pokolenia.
+
+\subsection{Symulacja wstrzymana}
+Możliwe jest edytowanie komórek przy pomocy narzędzie i wstawianie figur.
+
+\subsection{Tryb automatu Game of Live}
 
 %\begin{figure}[h]
 %\centering
@@ -120,38 +154,76 @@ Program będzie posiadać graficzny interfejs, który pozwoli użytkownikowi ste
 %\caption{Przykłady struktur}
 %\end{figure}
 
-\section{Przykłady wywołania} 
+\chapter{Edycja planszy}
+Użytkownik ma kilka możliwości na wgranie planszy do programu lub edycję już istniejącej. Są one wymienione poniżej.
 
 \section{Plik wejściowy}  \label{format}
-Plik wejściowy pozwala na wczytanie stanu planszy. Dzięki temu użytkownik ma kontrolę nad początkiem symulacji, oraz może kontynuować symulacje z zapisanego wcześniej etapu.
+Program pozwala na wczytanie całego stanu planszy (wraz z rozmiarem) z pliku. Dzięki temu możliwe jest łatwe odtworzenie stanu ze wcześniejszej symulacji lub prezentacja skomplikowanego układu.
 
-\subsection{Przykład}
+Program będzie w stanie obsłużyć różnie formaty plików wymienione poniżej.
+
+\subsection{Pliki txt}
+Najprostszym formatem, z którego będzie można wczytać stan planszy będzie zwykły format tekstowy zapisany w plikach \texttt{.txt}. W zależności od rodzaju wybranego automatu pliki będą miały \textbf{różne formaty}
+
+\subsubsection{Kodowanie}
+Ponieważ plik powinien zawierać tylko liczby arabskie i odstępy możliwe jest dowolne kodowanie kompatybilne z ASCII. \\
+\paragraph{Sugerowane kodowania to:}
+ASCII, UTF-8, ISO 8859, Windows-1250
+
+\subsubsection{Wireworld}
+
+\begin{samepage}
+\paragraph{Przykład}\mbox{}\\
+3 6 \tab -- rozmiar (x y) \\
+3 3 2 \tab -- Wartości poszczególnych komórek \\
+0 3 2 \tab -- 0 - pusta \\
+0 1 2 \tab -- 1 - głowa elektronu \\
+1 2 1 \tab -- 2 - ogon elektronu \\
+2 3 2 \tab -- 3 - przewodnik \\
+3 0 3 \\
+\end{samepage}
+
+\paragraph{Opis formatu}\mbox{}\\
+Plik w pierwszej linii powinien zawierać 2 liczby. Pierwsza z nich oznacza rozmiar planszy w poziomie, druga w pionie.
+Następnie plik powinien zawierać liczbę linii zgodną z podanym rozmiarem w pionie. W każdej z tych linii powinno być tyle liczb ze zbioru \{0, 1, 2, 3\} ile wynosi rozmiar w poziomie.
+
+Zero oznacza komórkę pustą, jeden oznacza głowę elektronu, dwa oznacza ogon elektronu, trzy oznacza przewodnik.
+%TODO: Opis znaczeń liczb (co jest głową itd.)
+
+\subsubsection{Game of Life}
+
+\paragraph{Przykład} \mbox{} \\
 5 3 \tab -- rozmiar (x y) \\
 1 0 0 1 1 \tab -- Wartości poszczególnych komórek \\
 0 1 1 0 1 \tab -- 1 - żywa \\
 0 0 0 1 1 \tab -- 0 - martwa \\
 
-\subsection{Format pliku}
-\subsubsection*{Kodowanie}
-Ponieważ plik powinien zawierać tylko liczby arabskie i odstępy możliwe jest dowolne kodowanie kompatybilne z ASCII. \\
-\paragraph{Sugerowane kodowania to:}
-ASCII, UTF-8, ISO 8859, Windows-1250
-
-\subsubsection*{Opis formatu}
+\paragraph{Opis formatu}
 Plik w pierwszej linii powinien zawierać 2 liczby. Pierwsza z nich oznacza rozmiar planszy w poziomie, druga w pionie. \\
 Następnie plik powinien zawierać tyle linii jaki został podany rozmiar w pionie. W każdej z tych linii powinno być tyle 0 lub 1 ile wynosi rozmiar w poziomie. \\
 Zero oznacz komórkę martwą, a jeden komórkę żywą.
 
-\chapter{Wyniki działania programu}
-Wyniki działania programu będą zależeć od preferencji użytkownika -  od podanych \hyperref[argumenty]{\textcolor{LinkColor}{argumentów}}. 
-\begin{itemize}
-\item wyświetlić wybraną ilość pokoleń w konsoli,
-\item wygenerować plik lub pliki .png z reprezentacjami graficznymi kolejnych pokoleń,
-\item wygenerować plik .gif przedstawiający życie cywilizacji,
-\item wygenerować plik lub pliki .txt reprezentujący konkretny stan cywilizacji, mogący służyć za plik wejściowy.
-\end{itemize}
+\subsection{JSON}
+%TODO: Zobaczyć czy byłoby to łatwe
+
+\subsection{XML}
+
+\section{Przybornik stanów}
+Jedną z części interfejsu użytkownika będzie przybornik pozwalający na wybór jednego ze stanów aktualnego automatu komórkowego. Po zaznaczeniu jednego ze stanów użytkownik będzie miał możliwość zamiany wybranych komórek aktualnego pokolenia na wybrany stan.
+
+\section{Wstawianie figur}
+Interfejs będzie zawierał zestaw typowych figur dla aktualnego automatu komórkowego. Możliwe będzie zaznaczenie wybranej figury oraz wstawienie jej w wybrane miejsce symulacji.
+
+\subsection{Rozszerzanie listy figur}
+%TODO: Przemyśleć Rozszerzanie listy figur do wklejenia i ich zapisywanie
+Użytkownik będzie miał możliwość dodania własnych figur do domyślnej listy.
+
+\section{Zapis stanu planszy}
+Program będzie w stanie zapisać aktualny stan planszy w formacie, który umożliwi późniejsze  wczytanie planszy.
+%TODO: Czy użytkownik będzie mógł wybrać format?
 
 \chapter{Sytuacje wyjątkowe}
+%TODO Sytuacje wyjątkowe
 Czasem działanie programu może ulec zmianie na skutek nieprawidłowych danych wejściowych, niestandardowych ustawień wprowadzonych przez użytkownik lub z przyczyn losowych. Ten rozdział opisuje jak program zachowa się w takiej sytuacji, oraz co może ją wywołać.
 
 \section{Zmiana domyślnego zachowania}

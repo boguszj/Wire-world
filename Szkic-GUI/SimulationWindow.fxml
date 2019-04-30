@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import com.gluonhq.charm.glisten.control.ToggleButtonGroup?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <tabs>
+      <Tab closable="false" text="Wirerowrld">
+         <content>
+            <SplitPane dividerPositions="0.6407035175879398" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <SplitPane dividerPositions="0.6895973154362416" layoutX="199.0" layoutY="46.0" prefHeight="251.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="219.0" fitWidth="383.0" layoutX="12.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../Downloads/Wireworld_XOR-gate.gif" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TabPane layoutX="-9.0" layoutY="25.0" prefHeight="250.0" prefWidth="182.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <tabs>
+                                        <Tab closable="false" text="Drawing tools">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </Tab>
+                                        <Tab text="Patterns">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <ToggleButtonGroup layoutX="60.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="114.0">
+                            <toggles>
+                                <ToggleButton>
+                                    <graphic>
+                                        <Icon content="ACCESS_ALARM" />
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton selected="true">
+                                    <graphic>
+                                        <Icon content="FORMAT_ALIGN_CENTER" />
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton>
+                                    <graphic>
+                                        <Icon content="FORMAT_ALIGN_RIGHT" />
+                                    </graphic>
+                                </ToggleButton>
+                              <ToggleButton mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" textAlignment="CENTER">
+                                 <graphic>
+                                    <Icon content="HELP_OUTLINE" />
+                                 </graphic>
+                              </ToggleButton>
+                            </toggles>
+                        </ToggleButtonGroup>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </content>
+      </Tab>
+      <Tab text="Game of Life">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>
