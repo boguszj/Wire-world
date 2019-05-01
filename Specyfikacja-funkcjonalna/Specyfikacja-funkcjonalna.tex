@@ -12,6 +12,7 @@
 
 \usepackage{graphicx} % Pakiet do obrazów
 \graphicspath{ {./Obrazy/} } % Folder, z którego będą brane obrazy
+\usepackage{float} % Dodatkowe pozycjonowanie obrazów - [H]
 
 % Nie twórz nowych stron
 \usepackage{etoolbox}
@@ -127,13 +128,41 @@ Interfejs pozwoli na poniższe funkcjonalności:
 
 \chapter{Działanie programu}
 
-\section{Opis komunikacja z użytkownikiem}
-Po programu zostanie wyświetlony graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny sposób, zgodny z regułami symulacji. W razie wystąpienia błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
+\section{Opis komunikacji z użytkownikiem}
+Po uruchomieniu programu zostanie wyświetlony graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny sposób, zgodny z regułami symulacji. W razie wystąpienia błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
 
 W ramach interfejsu użytkownik będzie mógł wykonywać czynności opisane w punkcie \ref{sec:opis-interfejs} oraz przełączać między automatami Game of Life i Wireworld.
 
 \section{Wygląd interfejsu użytkownika}
-Poniżej przedstawiony jest szkic interfejsu użytkownika w różnych stanach.
+Interfejs użytkownika będzie wyglądał następująco. Wyszczególnione obszary są zaznaczone numerami.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.99\columnwidth]{gui.png} %Dla 1 nie mieści się na tej samej stronie
+    \caption{Całokształt interfejsu użytkownika}
+\end{figure}
+
+%TODO: Opisać numerami co jest czym w GUI
+\section{Opis elementów}
+\paragraph{1 Podgląd aktualnego stanu symulacji} \mbox{} \\
+W tej części będzie wyświetlane bieżące pokolenie symulacji aktualnego automatu komórkowego. Po bokach panelu znajdują się \textbf{suwak} pozwalające na zminę oglądanego obszaru planszy. Będą one szczególnie przydatne po przybliżeniu obrazu.
+
+\paragraph{2 Ustawienia symulacji i planszy} \mbox{} \\
+Sekcja kontrolek umożliwiających sterowanie symulacją oraz zminę całości planszy.
+
+Po lewej stronie znajduje się grupa elementów wpływających bezpośrednio na podgląd symulacji.
+\begin{itemize}
+    \item Play -- uruchamia automatycznie przechodzenie między staniami symulacji,
+    \item Stop -- zatrzymuje automatycznie przechodzenie między staniami symulacji,
+    \item Speed -- zmienia tempo automatycznego przechodzenie między staniami symulacji,
+    \item Next generation -- ręczne przejście do następnego stanu symulacji,
+    \item Zoom -- zmienia skalę podglądu aktualnego stanu.
+\end{itemize}
+
+Po prawej stronie umieszczona jest grupa elementów pozwalających na reset całego stanu planszy.
+%TODO: Przemyśleć co robią guziki Crate i Random. Ewentualnie przenieść tu guzik do wczytywania z planszy.
+
+\section{Stany interfejsu}
+Podczas korzystania z aplikacji interfejs będzie ulegał drobnym zmianom. Głównie elementy odpowiadające za aktualnie niedostępne opcje będą zmieniać kolor na szary.
 
 \subsection{Po włączeniu programu}
 Większość kontrolek jest \textbf{wyłączonych} do momentu wczytania planszy z pliku lub wygenerowania losowej. Program domyślnie wyświetla okno symulacji automatu Wireworld.
@@ -144,8 +173,11 @@ Można zmienić tempo symulacji oraz wstrzymać generację następnych pokoleń,
 \subsection{Symulacja wstrzymana}
 Możliwe jest edytowanie komórek przy pomocy narzędzie i wstawianie figur.
 
-\subsection{Tryb automatu Game of Live}
+\section{Tryb automatu Game of Live}
+Program obsługuje również automat komórkowy Game of Live. Przełączenie między aktualnym automatem jest realizowane przy pomocy wstążki na górze interfejsu.
+Większość elementów interfejsu pozostanie taka sama jak w automacie Wireworld. Inaczej będzie wyglądał przybornik do edycji planszy, ponieważ automat ten zawiera inne stany komórek.
 
+%TODO: Usunąć lub wykorzystać ten komentarz
 %\begin{figure}[h]
 %\centering
 %\setlength{\fboxsep}{0pt} %Odstęp 0
