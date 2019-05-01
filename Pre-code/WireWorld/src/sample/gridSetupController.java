@@ -7,10 +7,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.TextFormatter;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 
 public class gridSetupController implements Initializable {
 
@@ -59,7 +62,17 @@ public class gridSetupController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Prevent user from entering non numeric size
+        UnaryOperator<TextFormatter.Change> positiveIntegerFilter = change -> {
+            String text = change.getText();
+            if (text.matches("[0-9]*")) {
+                return change;
+            }
+            return null;
+        };
 
+        gridHeight.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, positiveIntegerFilter));
+        gridWidth.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, positiveIntegerFilter));
     }
 
 }
