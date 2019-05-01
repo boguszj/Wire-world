@@ -11,6 +11,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -59,10 +60,13 @@
                            <content>
                               <AnchorPane fx:id="randomButton" layoutY="2.0" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="188.0">
                                  <children>
-                                    <RadioButton layoutX="20.0" layoutY="43.0" mnemonicParsing="false" text="Head" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
-                                    <RadioButton layoutX="20.0" layoutY="154.0" mnemonicParsing="false" text="Empty" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="140.0" />
-                                    <RadioButton layoutX="20.0" layoutY="76.0" mnemonicParsing="false" text="Tail" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" />
-                                    <RadioButton layoutX="19.0" layoutY="105.0" mnemonicParsing="false" text="Conductor" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
+                                    <RadioButton layoutX="20.0" layoutY="43.0" mnemonicParsing="false" selected="true" text="Head" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="wireWorldCells" />
+                                       </toggleGroup></RadioButton>
+                                    <RadioButton layoutX="20.0" layoutY="154.0" mnemonicParsing="false" text="Empty" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="140.0" />
+                                    <RadioButton layoutX="20.0" layoutY="76.0" mnemonicParsing="false" text="Tail" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" />
+                                    <RadioButton layoutX="19.0" layoutY="105.0" mnemonicParsing="false" text="Conductor" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="15.0" layoutX="22.0" layoutY="82.0" stroke="BLACK" strokeType="INSIDE" width="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="81.0" />
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" height="15.0" layoutX="21.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="141.0" />
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="15.0" layoutX="22.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="111.0" />
