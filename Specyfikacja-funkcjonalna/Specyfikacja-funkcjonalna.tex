@@ -13,6 +13,7 @@
 \usepackage{graphicx} % Pakiet do obrazów
 \graphicspath{ {./Obrazy/} } % Folder, z którego będą brane obrazy
 \usepackage{float} % Dodatkowe pozycjonowanie obrazów - [H]
+\usepackage{subcaption} % Kilka obrazów w jednej figurze
 
 % Nie twórz nowych stron
 \usepackage{etoolbox}
@@ -159,7 +160,37 @@ Po lewej stronie znajduje się grupa elementów wpływających bezpośrednio na 
 \end{itemize}
 
 Po prawej stronie umieszczona jest grupa elementów pozwalających na reset całego stanu planszy.
+\begin{itemize}
+    \item Grid height, Grid height -- wprowadzenie rozmiaru planszy jaka zostanie utworzona,
+    \item Create -- Tworzy plansze o podanym rozmiarze,
+    \item Random -- Nadanie wszystkim komórkom losowych stanów,
+    \item Clear -- Nadanie wszystkim komórkom stanu \textit{pustego} dla Wireworld i \textit{martwego} dla Game of Life.
+\end{itemize}
 %TODO: Przemyśleć co robią guziki Crate i Random. Ewentualnie przenieść tu guzik do wczytywania z planszy.
+
+\paragraph{3 Przybornik} \mbox{} \\
+Boczny przybornik zawierał będzie dwie zakładki, które będą pozwalały na edycje fragmentów planszy.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth]{przybornik1}
+        \caption{Przybornik Cells}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth]{przybornik2}
+        \caption{Przybornik External}
+    \end{subfigure}
+\end{figure}
+
+Zakładka \textbf{Cells} umożliwi wybranie stanu komórki, a następnie nadanie komórkom wybranego stanu poprzez klikanie myszą komórek w oknie podglądu.
+
+Zakładka \textbf{External} da dostęp do zestawu gotowych figur, które użytkownik będzie mógł wstawić w wybranym miejscu planszy. Użytkownik będzie mógł dodać własne figury do przybornika oraz zapisać i wczytać stan całej planszy przy pomocy guzików z tej zakładki.
+
+\paragraph{4 Wybór automatu} \mbox{} \\
+Wstążka pozwalająca na zmianę aktywnego automatu komórkowego.
 
 \section{Stany interfejsu}
 Podczas korzystania z aplikacji interfejs będzie ulegał drobnym zmianom. Głównie elementy odpowiadające za aktualnie niedostępne opcje będą zmieniać kolor na szary.
@@ -167,11 +198,29 @@ Podczas korzystania z aplikacji interfejs będzie ulegał drobnym zmianom. Głó
 \subsection{Po włączeniu programu}
 Większość kontrolek jest \textbf{wyłączonych} do momentu wczytania planszy z pliku lub wygenerowania losowej. Program domyślnie wyświetla okno symulacji automatu Wireworld.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gui-initial}
+    \caption{Stan interfejsu po uruchomieniu aplikacji}
+\end{figure}
+
 \subsection{W trakcie symulacji}
 Można zmienić tempo symulacji oraz wstrzymać generację następnych pokoleń, co umożliwi edycję aktualnego pokolenia.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gui-running}
+    \caption{Stan interfejsu w trakcie symulacji}
+\end{figure}
+
 \subsection{Symulacja wstrzymana}
-Możliwe jest edytowanie komórek przy pomocy narzędzie i wstawianie figur.
+Możliwe jest edytowanie komórek przy pomocy narzędzie oraz wstawianie figur.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gui-paused}
+    \caption{Stan interfejsu przy wstrzymanej symulacji}
+\end{figure}
 
 \section{Tryb automatu Game of Live}
 Program obsługuje również automat komórkowy Game of Live. Przełączenie między aktualnym automatem jest realizowane przy pomocy wstążki na górze interfejsu.
