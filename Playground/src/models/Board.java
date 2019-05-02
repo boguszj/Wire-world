@@ -51,6 +51,15 @@ public class Board {
         randomizeFields();
     }
 
+    /**
+     * Default constructor for automatic deserialization
+     */
+    public Board() {
+        width = 0;
+        height = 0;
+        states = new ArrayList<State>();
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder(getSize() + 20);
