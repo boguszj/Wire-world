@@ -243,50 +243,57 @@ Program pozwala na wczytanie całego stanu planszy (wraz z rozmiarem) z pliku. D
 
 Program będzie w stanie obsłużyć różnie formaty plików wymienione poniżej.
 
-\subsection{Pliki txt}
-Najprostszym formatem, z którego będzie można wczytać stan planszy będzie zwykły format tekstowy zapisany w plikach \texttt{.txt}. W zależności od rodzaju wybranego automatu pliki będą miały \textbf{różne formaty}
-
-\subsubsection{Kodowanie}
-Ponieważ plik powinien zawierać tylko liczby arabskie i odstępy możliwe jest dowolne kodowanie kompatybilne z ASCII. \\
-\paragraph{Sugerowane kodowania to:}
-ASCII, UTF-8, ISO 8859, Windows-1250
-
-\subsubsection{Wireworld}
-
-\begin{samepage}
-\paragraph{Przykład}\mbox{}\\
-3 6 \tab -- rozmiar (x y) \\
-3 3 2 \tab -- Wartości poszczególnych komórek \\
-0 3 2 \tab -- 0 - pusta \\
-0 1 2 \tab -- 1 - głowa elektronu \\
-1 2 1 \tab -- 2 - ogon elektronu \\
-2 3 2 \tab -- 3 - przewodnik \\
-3 0 3 \\
-\end{samepage}
-
-\paragraph{Opis formatu}\mbox{}\\
-Plik w pierwszej linii powinien zawierać 2 liczby. Pierwsza z nich oznacza rozmiar planszy w poziomie, druga w pionie.
-Następnie plik powinien zawierać liczbę linii zgodną z podanym rozmiarem w pionie. W każdej z tych linii powinno być tyle liczb ze zbioru \{0, 1, 2, 3\} ile wynosi rozmiar w poziomie.
-
-Zero oznacza komórkę pustą, jeden oznacza głowę elektronu, dwa oznacza ogon elektronu, trzy oznacza przewodnik.
-
-\subsubsection{Game of Life}
-
-\paragraph{Przykład} \mbox{} \\
-5 3 \tab -- rozmiar (x y) \\
-1 0 0 1 1 \tab -- Wartości poszczególnych komórek \\
-0 1 1 0 1 \tab -- 1 - żywa \\
-0 0 0 1 1 \tab -- 0 - martwa \\
-
-\paragraph{Opis formatu}
-Plik w pierwszej linii powinien zawierać 2 liczby. Pierwsza z nich oznacza rozmiar planszy w poziomie, druga w pionie. \\
-Następnie plik powinien zawierać tyle linii jaki został podany rozmiar w pionie. W każdej z tych linii powinno być tyle 0 lub 1 ile wynosi rozmiar w poziomie. \\
-Zero oznacz komórkę martwą, a jeden komórkę żywą.
-
 \subsection{JSON}
-%TODO: Zobaczyć czy byłoby to łatwe
+W celu nadania danym przenośności, oraz ułatwienia generacji danych przy pomocy zewnętrznych narzędzi zostanie wykorzystany format JSON. Jest to \textbf{domyślny format} zapisu planszy.
+
+\subsubsection{Przykład}
+Przykład zapisu przedstawionej planszy. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=4cm]{przyklad-planszy-wireworld}
+    \caption{Przykładowa plansza}
+\end{figure}
+
+\noindent{}Plik reprezentujący planszę:
+\begin{verbatim}
+{
+  "width" : 2,
+  "height" : 3,
+  "states" : [ "HEAD", "TAIL", "HEAD", "HEAD", "HEAD", "EMPTY" ]
+}
+\end{verbatim}
 
 \subsection{XML}
+Możliwy jest również zapis stanu planszy do pliku XML. Z uwagi na mniejszą czytelność oraz większy rozmiar plików tego typu nie jest to domyślnie używany format. Użytkownik będzie miał możliwość zmiany formatu pliku, do jakiego chce zapisać planszę przy pomocy interfejsu graficznego.
+
+\subsubsection{Przykład}
+Przykład zapisu przedstawionej planszy. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=4cm]{przyklad-planszy-wireworld}
+    \caption{Przykładowa plansza}
+\end{figure}
+
+\begin{samepage}
+\noindent{}Plik reprezentujący planszę:
+\begin{verbatim}
+<Board>
+  <width>2</width>
+  <height>3</height>
+  <states>
+    <states>CONDUCTOR</states>
+    <states>HEAD</states>
+    <states>TAIL</states>
+    <states>TAIL</states>
+    <states>CONDUCTOR</states>
+    <states>EMPTY</states>
+  </states>
+</Board>
+\end{verbatim}
+\end{samepage}
+
 
 \section{Przybornik stanów}
 Jedną z części interfejsu użytkownika będzie przybornik pozwalający na wybór jednego ze stanów aktualnego automatu komórkowego. Po zaznaczeniu jednego ze stanów użytkownik będzie miał możliwość zamiany wybranych komórek aktualnego pokolenia na wybrany stan.
