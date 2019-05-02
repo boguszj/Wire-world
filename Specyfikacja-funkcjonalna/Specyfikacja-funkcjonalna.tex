@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc} % Informuje o kodowaniu
 
 \usepackage{xcolor}% http://ctan.org/pkg/xcolor
+\definecolor{LinkColor}{HTML}{1d5cc1} % Kolor do linków
 \usepackage{hyperref}% http://ctan.org/pkg/hyperref
 
 \definecolor{LinkColor}{HTML}{1d5cc1}
@@ -31,8 +32,8 @@
 \tableofcontents{}
 
 \chapter{Cel projektu}
-Celem projektu jest implementacja automatu komórkowego Wire World w języku Java z interfejsem graficznym zaimplementowanym przy pomocy biblioteki JavaFX. Gotowy program ma pozwalać użytkownikowi przeprowadzać symulacje zgodne z określonymi zasadami. Parametrami generacji użytkownik będzie mógł sterować ręcznie z wbudowanego menu opisanego niżej [TU DAĆ LINK DO SEKCJI Z GRAFIKĄ I OPISEM CZĘŚCI].
-%TODO: Link do GUI
+Celem projektu jest implementacja automatu komórkowego Wire World w języku Java z interfejsem graficznym zaimplementowanym przy pomocy biblioteki JavaFX. Gotowy program ma pozwalać użytkownikowi przeprowadzać symulacje zgodne z określonymi zasadami. Parametrami generacji użytkownik będzie mógł sterować ręcznie przy pomocy graficznego \hyperref[sec:wyglad-gui]{\textcolor{LinkColor}{interfejsu użytkownika}}.
+
 Interfejs będzie wyświetlał na bierząco podgląd kolejnych generacji. Użytkownik będzie miał możliwość wstrzymania symulacji oraz zmianę stanu planszy przy pomocy narzędzi edycji.
 
 Ponadto będzie istnieć również możliwość przełączenia trybu symulacji z Wire World na automat komórkowy Game of life.
@@ -134,7 +135,7 @@ Po uruchomieniu programu zostanie wyświetlony graficzny interfejs, który pozwo
 
 W ramach interfejsu użytkownik będzie mógł wykonywać czynności opisane w punkcie \ref{sec:opis-interfejs} oraz przełączać między automatami Game of Life i Wireworld.
 
-\section{Wygląd interfejsu użytkownika}
+\section{Wygląd interfejsu użytkownika} \label{sec:wyglad-gui}
 Interfejs użytkownika będzie wyglądał następująco. Wyszczególnione obszary są zaznaczone numerami.
 \begin{figure}[H]
     \centering
@@ -142,7 +143,6 @@ Interfejs użytkownika będzie wyglądał następująco. Wyszczególnione obszar
     \caption{Całokształt interfejsu użytkownika}
 \end{figure}
 
-%TODO: Opisać numerami co jest czym w GUI
 \section{Opis elementów}
 \paragraph{1 Podgląd aktualnego stanu symulacji} \mbox{} \\
 W tej części będzie wyświetlane bieżące pokolenie symulacji aktualnego automatu komórkowego. Po bokach panelu znajdują się \textbf{suwak} pozwalające na zminę oglądanego obszaru planszy. Będą one szczególnie przydatne po przybliżeniu obrazu.
@@ -269,7 +269,6 @@ Plik w pierwszej linii powinien zawierać 2 liczby. Pierwsza z nich oznacza rozm
 Następnie plik powinien zawierać liczbę linii zgodną z podanym rozmiarem w pionie. W każdej z tych linii powinno być tyle liczb ze zbioru \{0, 1, 2, 3\} ile wynosi rozmiar w poziomie.
 
 Zero oznacza komórkę pustą, jeden oznacza głowę elektronu, dwa oznacza ogon elektronu, trzy oznacza przewodnik.
-%TODO: Opis znaczeń liczb (co jest głową itd.)
 
 \subsubsection{Game of Life}
 
