@@ -1,17 +1,13 @@
 package display;
 
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.geometry.Point2D;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -52,11 +48,11 @@ public class Main extends Application {
 //        String text = String.format("Mouse was clicked at: X=%f, Y=%f", mouseX, mouseY);
 //        new Alert(Alert.AlertType.INFORMATION, text).show();
 
-        Canvas canvas = (Canvas)event.getTarget();
+        Canvas canvas = (Canvas) event.getTarget();
 
         //Find out which rectangle was clicked
-        int row = (int)(mouseY / canvas.getHeight() * this.rows);
-        int column = (int)(mouseX / canvas.getWidth() * this.columns);
+        int row = (int) (mouseY / canvas.getHeight() * this.rows);
+        int column = (int) (mouseX / canvas.getWidth() * this.columns);
 
 //        new Alert(Alert.AlertType.INFORMATION, "Row: " + row + " Column: " + column).showAndWait();
 

@@ -1,12 +1,6 @@
-import board.*;
-
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import board.Board;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.cfg.MapperConfig;
-import com.fasterxml.jackson.databind.introspect.AnnotatedField;
-import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 
 import java.io.IOException;
 

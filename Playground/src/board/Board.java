@@ -1,7 +1,5 @@
 package board;
 
-import org.omg.CORBA.Environment;
-
 import java.util.*;
 
 public class Board {
@@ -64,11 +62,11 @@ public class Board {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
 //                result.append(currentState.next().toString());
-                result.append(states.get(i*width + j));
-                if (j != width-1)
+                result.append(states.get(i * width + j));
+                if (j != width - 1)
                     result.append(" ");
             }
-            if (i != height-1)
+            if (i != height - 1)
                 result.append("\n");
         }
 

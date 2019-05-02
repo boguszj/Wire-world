@@ -1,27 +1,17 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.cfg.MapperConfig;
-import com.fasterxml.jackson.databind.introspect.AnnotatedField;
-import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
+import java.util.*;
 
 public class Example {
 
     public static void main(String[] args) throws IOException, ParseException {
         ObjectMapper mapper = new ObjectMapper();
         Album album = new Album("Kind Of Blue");
-        album.setLinks(new String[] { "link1", "link2" });
+        album.setLinks(new String[]{"link1", "link2"});
         List songs = new ArrayList();
         songs.add("So What");
         songs.add("Flamenco Sketches");
