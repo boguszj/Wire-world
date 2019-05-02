@@ -1,3 +1,5 @@
+package json;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -32,15 +34,15 @@ public class Example {
 //        mapper.setPropertyNamingStrategy(new PropertyNamingStrategy() {
 //            @Override
 //            public String nameForField(MapperConfig<?> config, AnnotatedField field, String defaultName) {
-//                if (field.getFullName().equals("com.studytrails.json.jackson.Artist#name"))
-//                    return "Artist-Name";
+//                if (field.getFullName().equals("com.studytrails.json.jackson.json.Artist#name"))
+//                    return "json.Artist-Name";
 //                return super.nameForField(config, field, defaultName);
 //            }
 //
 //            @Override
 //            public String nameForGetterMethod(MapperConfig<?> config, AnnotatedMethod method, String defaultName) {
-//                if (method.getAnnotated().getDeclaringClass().equals(Album.class) && defaultName.equals("title"))
-//                    return "Album-Title";
+//                if (method.getAnnotated().getDeclaringClass().equals(json.Album.class) && defaultName.equals("title"))
+//                    return "json.Album-Title";
 //                return super.nameForGetterMethod(config, method, defaultName);
 //            }
 //        });

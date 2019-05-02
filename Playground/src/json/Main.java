@@ -1,4 +1,6 @@
-import board.Board;
+package json;
+
+import models.Board;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -21,7 +23,7 @@ public class Main {
             objectMapper.writeValue(System.out, board);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Unable to serialize board");
+            System.out.println("Unable to serialize models");
         }
     }
 }

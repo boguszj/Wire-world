@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Tests of how to display and interact wit board
+ * Tests of how to display and interact wit models
  */
 public class Main extends Application {
     final int rows = 2, columns = 3;

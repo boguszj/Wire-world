@@ -1,4 +1,4 @@
-package board;
+package models;
 
 import java.util.*;
 
@@ -38,7 +38,7 @@ public class Board {
     private static final Random random = new Random();
 
     /**
-     * Create board of given size with random fields
+     * Create models of given size with random fields
      *
      * @param sizeX
      * @param sizeY
@@ -74,7 +74,7 @@ public class Board {
     }
 
     /**
-     * Returns how many elements are on board
+     * Returns how many elements are on models
      *
      * @return Number of elements in all dimensions
      */
