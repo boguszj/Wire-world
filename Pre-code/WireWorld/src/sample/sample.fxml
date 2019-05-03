@@ -204,12 +204,12 @@
                               <Label layoutX="11.0" layoutY="51.0" text="Height:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" />
                               <Spinner fx:id="gameOfLifeWidthSpinner" editable="true" layoutX="54.0" layoutY="7.0" prefHeight="27.0" prefWidth="85.0" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="6.0">
                                  <valueFactory>
-                                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="1000"/>
+                                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="1000" initialValue="24"/>
                                  </valueFactory>
                               </Spinner>
                               <Spinner fx:id="gameOfLifeHeightSpinner" editable="true" layoutX="54.0" layoutY="51.0" prefHeight="27.0" prefWidth="85.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="54.0">
                                  <valueFactory>
-                                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="1000"/>
+                                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="1000" initialValue="10"/>
                                  </valueFactory>
                               </Spinner>
                               <Button fx:id="gameOfLifeRandomButton" layoutX="164.0" layoutY="7.0" mnemonicParsing="false" text="Random" AnchorPane.leftAnchor="164.0" AnchorPane.topAnchor="7.0" />
