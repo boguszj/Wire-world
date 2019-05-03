@@ -3,6 +3,7 @@ package controlers;
 import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import models.GameOfLife;
@@ -62,10 +63,17 @@ public class GameOfLifeController {
         cellularAutomatonView = new CellularAutomatonView(canvas, generationNumberLabel, coloring);
 //        cellularAutomatonView.randomize(); //Start with random view
 
+        canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
+
+
 
         randomButton.setOnAction(this::randomizeBoard);
         nextGenerationButton.setOnAction(this::nextGeneration);
         emptyButton.setOnAction(this::clearBoard);
+    }
+
+    private void canvasClicked(MouseEvent event) {
+        new Alert(Alert.AlertType.INFORMATION, "You clicked canvas at " + event.getX() + event.getY()).showAndWait();
     }
 
     private void randomizeBoard(Event event) {
