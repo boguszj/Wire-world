@@ -15,7 +15,7 @@ import java.util.Map;
  * It used <b>delegation</b> architecture
  */
 public class CellularAutomatonView<T extends Enum> {
-    private static final double CELL_SIZE = 50.;
+    private double cellSize;
 
     private CellularAutomaton<T> cellularAutomaton;
     private final Canvas canvas;
@@ -33,11 +33,12 @@ public class CellularAutomatonView<T extends Enum> {
      * @param generationNumberLabel
      * @param cellStateToColorMap
      */
-    public CellularAutomatonView(Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap) {
+    public CellularAutomatonView(Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap, double cellSize) {
         this.canvas = canvas;
         this.generationNumberLabel = generationNumberLabel;
 
         this.cellStateToColorMap = cellStateToColorMap;
+        this.cellSize = cellSize;
     }
 
     /**
@@ -48,8 +49,8 @@ public class CellularAutomatonView<T extends Enum> {
      * @param cellStateToColorMap
      * @param cellularAutomaton
      */
-    public CellularAutomatonView(Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap, CellularAutomaton cellularAutomaton) {
-        this(canvas, generationNumberLabel, cellStateToColorMap);
+    public CellularAutomatonView(Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap, double cellSize, CellularAutomaton cellularAutomaton) {
+        this(canvas, generationNumberLabel, cellStateToColorMap, cellSize);
 
         setCellularAutomaton(cellularAutomaton);
     }
@@ -62,6 +63,8 @@ public class CellularAutomatonView<T extends Enum> {
 
         canvas.setHeight(getHeight());
         canvas.setWidth(getWidth());
+
+        canvas.getGraphicsContext2D().clearRect(0, 0, getWidth(), getHeight());
 
         for (Cell cell : cells)
             cell.draw();
@@ -89,8 +92,8 @@ public class CellularAutomatonView<T extends Enum> {
      * @param newValue
      */
     public void setCellToValue(final double mouseX, final double mouseY, T newValue) {
-        final int row = (int) (mouseY / CELL_SIZE);
-        final int column = (int) (mouseX / CELL_SIZE);
+        final int row = (int) (mouseY / cellSize);
+        final int column = (int) (mouseX / cellSize);
         final int index = row * getColumnCount() + column;
 
         cellularAutomaton.setCell(row, column, newValue);
@@ -108,7 +111,7 @@ public class CellularAutomatonView<T extends Enum> {
             for (int c = 0; c < getColumnCount(); c++) {
                 final int index = r * getColumnCount() + c;
 
-                cells[index] = new Cell(c * CELL_SIZE, r * CELL_SIZE, cellularAutomaton.getCells()[index]);
+                cells[index] = new Cell(c * cellSize, r * cellSize, cellularAutomaton.getCells()[index]);
             }
         }
     }
@@ -147,7 +150,7 @@ public class CellularAutomatonView<T extends Enum> {
      * @return height of entire view
      */
     public double getHeight() {
-        return CELL_SIZE * getRowCount();
+        return cellSize * getRowCount();
     }
 
     /**
@@ -156,7 +159,7 @@ public class CellularAutomatonView<T extends Enum> {
      * @return width of entire view
      */
     public double getWidth() {
-        return CELL_SIZE * getColumnCount();
+        return cellSize * getColumnCount();
     }
 
     /**
@@ -178,10 +181,18 @@ public class CellularAutomatonView<T extends Enum> {
         return cellularAutomaton != null;
     }
 
+    public void setCellSize(double cellSize) {
+        this.cellSize = cellSize;
+        if (!hasCellularAutomaton())
+            return;
+        generateCells();
+        draw();
+    }
+
     private class Cell<T> {
         private final double x;
         private final double y;
-        private final double size = CELL_SIZE;
+//        private final double size = cellSize;
         //TODO: Consider removing state and use only states from cellAutomaton
         private T state;
 
@@ -195,7 +206,7 @@ public class CellularAutomatonView<T extends Enum> {
             GraphicsContext gc = canvas.getGraphicsContext2D();
 
             gc.setFill(cellStateToColorMap.get(state));
-            gc.fillRect(x, y, size, size);
+            gc.fillRect(x, y, cellSize, cellSize);
         }
 
         public void setState(T state) {
