@@ -1,5 +1,7 @@
 package controlers;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
@@ -56,8 +58,10 @@ public class GameOfLifeController {
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
         coloring.put(GameOfLife.CellStates.DEAD, Color.BLACK);
         coloring.put(GameOfLife.CellStates.ALIVE, Color.WHITE);
-        cellularAutomatonView = new CellularAutomatonView(gameOfLife, canvas, coloring);
+        cellularAutomatonView = new CellularAutomatonView(gameOfLife, canvas, generationNumberLabel, coloring);
         cellularAutomatonView.randomize(); //Start with random view
+
+
 
         randomButton.setOnAction(this::randomizeBoard);
         nextGenerationButton.setOnAction(this::nextGeneration);

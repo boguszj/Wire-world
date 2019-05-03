@@ -2,6 +2,7 @@ package views;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 import models.CellularAutomaton;
 
@@ -18,13 +19,17 @@ public class CellularAutomatonView<T extends Enum> {
     private final CellularAutomaton<T> cellularAutomaton;
     private final Canvas canvas;
     private final Map<T, Paint> cellStateToColorMap;
+    private final Label generationNumberLabel;
 
     private Cell<T>[] cells;
 
+    private int generationNumber = 0;
 
-    public CellularAutomatonView(CellularAutomaton<T> cellularAutomaton, Canvas canvas, Map<T, Paint> cellStateToColorMap) {
+
+    public CellularAutomatonView(CellularAutomaton<T> cellularAutomaton, Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap) {
         this.cellularAutomaton = cellularAutomaton;
         this.canvas = canvas;
+        this.generationNumberLabel = generationNumberLabel;
 
         if (cellularAutomaton.getPossibleCellValues().length != cellStateToColorMap.size())
             throw new IllegalArgumentException("cellStateToColorMap size should be the same as number of possible states of automaton");
@@ -42,15 +47,19 @@ public class CellularAutomatonView<T extends Enum> {
 
         for (Cell cell : cells)
             cell.draw();
+
+        generationNumberLabel.setText(Integer.toString(generationNumber));
     }
 
     public void randomize() {
         cellularAutomaton.randomize();
+        generationNumber = 0;
         draw();
     }
 
     public void nextGeneration() {
         cellularAutomaton.nextGeneration();
+        generationNumber++;
         draw();
     }
 
