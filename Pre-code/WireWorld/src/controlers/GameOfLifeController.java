@@ -61,6 +61,7 @@ public class GameOfLifeController {
 
         randomButton.setOnAction(this::randomizeBoard);
         nextGenerationButton.setOnAction(this::nextGeneration);
+        emptyButton.setOnAction(this::clearBoard);
     }
 
     private void randomizeBoard(Event event) {
@@ -79,5 +80,14 @@ public class GameOfLifeController {
 
     private void nextGeneration(Event event) {
         cellularAutomatonView.nextGeneration();
+    }
+
+    private void clearBoard(Event event) {
+        int width = (int) widthSpinner.getValue();
+        int height = (int) heightSpinner.getValue();
+
+        GameOfLife gameOfLife = new GameOfLife(width, height);
+        gameOfLife.clear();
+        cellularAutomatonView.setCellularAutomaton(gameOfLife);
     }
 }
