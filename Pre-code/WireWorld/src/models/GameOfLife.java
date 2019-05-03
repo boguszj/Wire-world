@@ -60,8 +60,9 @@ public class GameOfLife extends CellularAutomaton<GameOfLife.CellStates> {
 
     @Override
     public void randomize() {
-        for (CellStates cell : cells)
-            cell = CellStates.randomState();
+        for (int i = 0; i < getCellCount(); i++) {
+            cells[i] = CellStates.randomState();
+        }
     }
 
     @Override
