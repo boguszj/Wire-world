@@ -1,7 +1,6 @@
 package sample;
 
 import controlers.GameOfLifeController;
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -10,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.util.converter.IntegerStringConverter;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
@@ -57,6 +55,11 @@ public class gridSetupController implements Initializable {
 
     @FXML
     private Label gameOfLifeGenerationNumberLabel;
+
+    @FXML
+    private RadioButton aliveRadioButton;
+    @FXML
+    private RadioButton deadRadioButton;
 
     //-------------------- Wireworld -------------------------
 
@@ -108,7 +111,7 @@ public class gridSetupController implements Initializable {
         gridWidth.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, positiveIntegerFilter));
 
         //Pass controls to GameOfLifeController
-        gameOfLifeController = new GameOfLifeController(gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel);
+        gameOfLifeController = new GameOfLifeController(gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
     }
 
 }

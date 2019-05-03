@@ -147,7 +147,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <RadioButton mnemonicParsing="false" selected="true" GridPane.columnIndex="2">
+                                          <RadioButton fx:id="aliveRadioButton" mnemonicParsing="false" selected="true" textAlignment="RIGHT" GridPane.columnIndex="2">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>
@@ -155,7 +155,7 @@
                                                 <ToggleGroup fx:id="gameOfLifeCells" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton mnemonicParsing="false" toggleGroup="$gameOfLifeCells" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                          <RadioButton fx:id="deadRadioButton" mnemonicParsing="false" toggleGroup="$gameOfLifeCells" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <padding>
                                                 <Insets left="5.0" />
                                              </padding>

@@ -37,9 +37,12 @@ public class GameOfLifeController {
 
     private final Label generationNumberLabel;
 
+    private final RadioButton aliveRadioButton;
+    private final RadioButton deadRadioButton;
+
     private final CellularAutomatonView cellularAutomatonView;
 
-    public GameOfLifeController(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
+    public GameOfLifeController(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton) {
         this.canvas = canvas;
         this.zoomSlider = zoomSlider;
         this.autoRunToggleButton = autoRunToggleButton;
@@ -52,6 +55,8 @@ public class GameOfLifeController {
         this.saveButton = saveButton;
         this.loadButton = loadButton;
         this.generationNumberLabel = generationNumberLabel;
+        this.aliveRadioButton = aliveRadioButton;
+        this.deadRadioButton = deadRadioButton;
 
         Utils.makeSpinnerUpdateValueOnFocusLost(heightSpinner);
         Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
@@ -73,7 +78,15 @@ public class GameOfLifeController {
     }
 
     private void canvasClicked(MouseEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "You clicked canvas at " + event.getX() + event.getY()).showAndWait();
+        GameOfLife.CellStates selectedState = getSelectedState();
+        cellularAutomatonView.setCellToValue(event.getX(), event.getY(), getSelectedState());
+    }
+
+    private GameOfLife.CellStates getSelectedState() {
+        if (aliveRadioButton.isSelected())
+            return GameOfLife.CellStates.ALIVE;
+        else
+            return GameOfLife.CellStates.DEAD;
     }
 
     private void randomizeBoard(Event event) {
