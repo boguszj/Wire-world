@@ -6,9 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 import models.CellularAutomaton;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-
-//TODO: Dynamically adjust cell size
 
 /**
  * Class responsible for displaying CellularAutomaton on Canvas
@@ -21,6 +21,8 @@ public class CellularAutomatonView<T extends Enum> {
     private final Canvas canvas;
     private final Map<T, Paint> cellStateToColorMap;
     private final Label generationNumberLabel;
+
+    private final List<T[]> history = new LinkedList<>();
 
     private Cell<T>[] cells;
 
@@ -55,6 +57,12 @@ public class CellularAutomatonView<T extends Enum> {
         setCellularAutomaton(cellularAutomaton);
     }
 
+    private void resetHistory() {
+        generationNumber = 0;
+        history.clear();
+        history.add(cellularAutomaton.getCells());
+    }
+
     public void draw() {
         if (cellularAutomaton == null)
             return;
@@ -74,13 +82,43 @@ public class CellularAutomatonView<T extends Enum> {
 
     public void randomize() {
         cellularAutomaton.randomize();
-        generationNumber = 0;
+        resetHistory();
         draw();
     }
 
     public void nextGeneration() {
-        cellularAutomaton.nextGeneration();
         generationNumber++;
+        if (generationNumber < history.size()) { //Already in history
+            cellularAutomaton.setCells(history.get(generationNumber));
+        }
+        else {
+            cellularAutomaton.nextGeneration();
+            history.add(cellularAutomaton.getCells());
+        }
+        draw();
+    }
+
+    public void previousGeneration() {
+        if (generationNumber <= 0)
+            throw new IllegalStateException("No previous state exists");
+
+        generationNumber--;
+        cellularAutomaton.setCells(history.get(generationNumber));
+        draw();
+    }
+
+    /**
+     * Take new cellular automaton and draw it
+     *
+     * @param cellularAutomaton
+     */
+    public void setCellularAutomaton(CellularAutomaton cellularAutomaton) {
+        if (cellularAutomaton.getPossibleCellValues().length != cellStateToColorMap.size())
+            throw new IllegalArgumentException("cellStateToColorMap size should be the same as number of possible states of automaton");
+
+        this.cellularAutomaton = cellularAutomaton;
+
+        generateCells();
         draw();
     }
 
@@ -97,6 +135,7 @@ public class CellularAutomatonView<T extends Enum> {
         final int index = row * getColumnCount() + column;
 
         cellularAutomaton.setCell(row, column, newValue);
+        resetHistory();
         draw();
     }
 
@@ -160,21 +199,6 @@ public class CellularAutomatonView<T extends Enum> {
      */
     public double getWidth() {
         return cellSize * getColumnCount();
-    }
-
-    /**
-     * Take new cellular automaton and draw it
-     *
-     * @param cellularAutomaton
-     */
-    public void setCellularAutomaton(CellularAutomaton cellularAutomaton) {
-        if (cellularAutomaton.getPossibleCellValues().length != cellStateToColorMap.size())
-            throw new IllegalArgumentException("cellStateToColorMap size should be the same as number of possible states of automaton");
-
-        this.cellularAutomaton = cellularAutomaton;
-
-        generateCells();
-        draw();
     }
 
     public boolean hasCellularAutomaton() {
