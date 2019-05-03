@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import models.GameOfLife;
+import utils.Utils;
 import views.CellularAutomatonView;
 
 import java.util.HashMap;
@@ -50,6 +51,9 @@ public class GameOfLifeController {
         this.saveButton = saveButton;
         this.loadButton = loadButton;
         this.generationNumberLabel = generationNumberLabel;
+
+        Utils.makeSpinnerUpdateValueOnFocusLost(heightSpinner);
+        Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
 
 //        GameOfLife gameOfLife = new GameOfLife(10, 10);
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
