@@ -206,10 +206,10 @@
                                     <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
                                  </valueFactory>
                               </Spinner>
-                              <Button fx:id="gameOfLifeRandomButton" layoutX="164.0" layoutY="7.0" mnemonicParsing="false" text="Random" AnchorPane.leftAnchor="164.0" AnchorPane.topAnchor="7.0" />
+                              <Button fx:id="gameOfLifeRandomButton" layoutX="164.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Random" AnchorPane.leftAnchor="164.0" AnchorPane.topAnchor="7.0" />
                               <Button fx:id="gameOfLifeEmptyButton" layoutX="164.0" layoutY="51.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="70.0" text="Empty" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="164.0" />
                               <Button fx:id="gameOfLifeSaveButton" disable="true" layoutX="127.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="88.0" text="Save board" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
-                              <Button fx:id="gameOfLifeLoadButton" layoutX="156.0" layoutY="56.0" mnemonicParsing="false" text="Load board" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" />
+                              <Button fx:id="gameOfLifeLoadButton" layoutX="156.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Load board" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </right>
@@ -217,7 +217,7 @@
                         <AnchorPane prefHeight="83.0" prefWidth="471.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label layoutX="6.0" layoutY="6.0" text="Zoom:" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="6.0" />
-                              <Slider fx:id="gameOfLifeZoomSlider" disable="true" layoutX="63.0" layoutY="7.0" prefHeight="16.0" prefWidth="387.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="7.0" />
+                              <Slider fx:id="gameOfLifeZoomSlider" blockIncrement="5.0" layoutX="63.0" layoutY="7.0" max="60.0" min="10.0" prefHeight="16.0" prefWidth="387.0" value="50.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="7.0" />
                               <Label layoutX="48.0" layoutY="3.0" text="-" textFill="#00000084">
                                  <font>
                                     <Font size="18.0" />

@@ -1,5 +1,7 @@
 package controlers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
@@ -65,16 +67,22 @@ public class GameOfLifeController {
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
         coloring.put(GameOfLife.CellStates.DEAD, Color.BLACK);
         coloring.put(GameOfLife.CellStates.ALIVE, Color.WHITE);
-        cellularAutomatonView = new CellularAutomatonView(canvas, generationNumberLabel, coloring);
+        cellularAutomatonView = new CellularAutomatonView(canvas, generationNumberLabel, coloring, zoomSlider.getValue());
 //        cellularAutomatonView.randomize(); //Start with random view
 
         canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
-
+        zoomSlider.valueProperty().addListener(this::zoomSliderChanged);
 
 
         randomButton.setOnAction(this::randomizeBoard);
         nextGenerationButton.setOnAction(this::nextGeneration);
         emptyButton.setOnAction(this::clearBoard);
+    }
+
+    private void zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        generationNumberLabel.setText(newValue.toString());
+
+        cellularAutomatonView.setCellSize(newValue.doubleValue());
     }
 
     private void canvasClicked(MouseEvent event) {
