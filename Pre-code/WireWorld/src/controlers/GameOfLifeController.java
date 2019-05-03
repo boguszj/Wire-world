@@ -1,7 +1,5 @@
 package controlers;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
@@ -37,8 +35,7 @@ public class GameOfLifeController {
 
     private final Label generationNumberLabel;
 
-    private GameOfLife gameOfLife;
-    private CellularAutomatonView cellularAutomatonView;
+    private final CellularAutomatonView cellularAutomatonView;
 
     public GameOfLifeController(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
@@ -54,13 +51,12 @@ public class GameOfLifeController {
         this.loadButton = loadButton;
         this.generationNumberLabel = generationNumberLabel;
 
-        gameOfLife = new GameOfLife(10, 10);
+        GameOfLife gameOfLife = new GameOfLife(10, 10);
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
         coloring.put(GameOfLife.CellStates.DEAD, Color.BLACK);
         coloring.put(GameOfLife.CellStates.ALIVE, Color.WHITE);
-        cellularAutomatonView = new CellularAutomatonView(gameOfLife, canvas, generationNumberLabel, coloring);
+        cellularAutomatonView = new CellularAutomatonView(canvas, generationNumberLabel, coloring, gameOfLife);
         cellularAutomatonView.randomize(); //Start with random view
-
 
 
         randomButton.setOnAction(this::randomizeBoard);
@@ -68,6 +64,16 @@ public class GameOfLifeController {
     }
 
     private void randomizeBoard(Event event) {
+        int width = (int) widthSpinner.getValue();
+        int height = (int) heightSpinner.getValue();
+
+        if (!cellularAutomatonView.hasCellularAutomaton()
+                || cellularAutomatonView.getColumnCount() != width
+                || cellularAutomatonView.getRowCount() != height) {
+            GameOfLife gameOfLife = new GameOfLife(width, height);
+            cellularAutomatonView.setCellularAutomaton(gameOfLife);
+        }
+
         cellularAutomatonView.randomize();
     }
 

@@ -16,7 +16,7 @@ import java.util.Map;
 public class CellularAutomatonView<T extends Enum> {
     private static final double CELL_SIZE = 50.;
 
-    private final CellularAutomaton<T> cellularAutomaton;
+    private CellularAutomaton<T> cellularAutomaton;
     private final Canvas canvas;
     private final Map<T, Paint> cellStateToColorMap;
     private final Label generationNumberLabel;
@@ -25,21 +25,36 @@ public class CellularAutomatonView<T extends Enum> {
 
     private int generationNumber = 0;
 
-
-    public CellularAutomatonView(CellularAutomaton<T> cellularAutomaton, Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap) {
-        this.cellularAutomaton = cellularAutomaton;
+    /**
+     * Set up fields. <b>CellularAutomaton</b> must be set before use!
+     * @param canvas
+     * @param generationNumberLabel
+     * @param cellStateToColorMap
+     */
+    public CellularAutomatonView(Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap) {
         this.canvas = canvas;
         this.generationNumberLabel = generationNumberLabel;
 
-        if (cellularAutomaton.getPossibleCellValues().length != cellStateToColorMap.size())
-            throw new IllegalArgumentException("cellStateToColorMap size should be the same as number of possible states of automaton");
         this.cellStateToColorMap = cellStateToColorMap;
-
-        generateCells();
     }
 
+    /**
+     * Set up fields and draw given automaton
+     * @param canvas
+     * @param generationNumberLabel
+     * @param cellStateToColorMap
+     * @param cellularAutomaton
+     */
+    public CellularAutomatonView(Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap, CellularAutomaton cellularAutomaton) {
+        this(canvas, generationNumberLabel, cellStateToColorMap);
+
+        setCellularAutomaton(cellularAutomaton);
+    }
 
     public void draw() {
+        if (cellularAutomaton == null)
+            return;
+
         updateStates();
 
         canvas.setHeight(getHeight());
@@ -119,6 +134,24 @@ public class CellularAutomatonView<T extends Enum> {
      */
     public double getWidth() {
         return CELL_SIZE * getColumnCount();
+    }
+
+    /**
+     * Take new cellular automaton and draw it
+     * @param cellularAutomaton
+     */
+    public void setCellularAutomaton(CellularAutomaton cellularAutomaton) {
+        if (cellularAutomaton.getPossibleCellValues().length != cellStateToColorMap.size())
+            throw new IllegalArgumentException("cellStateToColorMap size should be the same as number of possible states of automaton");
+
+        this.cellularAutomaton = cellularAutomaton;
+
+        generateCells();
+        draw();
+    }
+
+    public boolean hasCellularAutomaton() {
+        return cellularAutomaton!=null;
     }
 
     private class Cell<T> {
