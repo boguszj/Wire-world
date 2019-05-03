@@ -8,6 +8,14 @@ package models;
 public abstract class CellularAutomaton<T extends Enum> {
     protected final int width;
     protected final int height;
+    protected T[] cells;
+
+    public CellularAutomaton(int width, int height) {
+        this.width = width;
+        this.height = height;
+
+//        this.cells = new T[getCellCount()];
+    }
 
     public T[] getCells() {
         return cells;
@@ -21,19 +29,20 @@ public abstract class CellularAutomaton<T extends Enum> {
         this.cells = cells;
     }
 
-    protected T[] cells;
-
-    public CellularAutomaton(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
-
     public int getWidth() {
         return width;
     }
 
     public int getHeight() {
         return height;
+    }
+
+    /**
+     *
+     * @return Number of cells in entire automaton
+     */
+    public int getCellCount() {
+        return height * width;
     }
 
     /**
@@ -44,11 +53,20 @@ public abstract class CellularAutomaton<T extends Enum> {
     /**
      * Sett all cell to default state
      */
-    public abstract void clear();
+    public void clear() {
+        for (T cell : cells)
+            cell = getDefaultState();
+    }
 
     /**
      * Sell all cells to random values
      */
     //TODO: Try to make it not abstract
     public abstract void randomize();
+
+    /**
+     *
+     * @return Default cell state
+     */
+    protected abstract T getDefaultState();
 }
