@@ -1,13 +1,13 @@
 package sample;
 
+import controlers.GameOfLifeController;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.TextFormatter;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.util.function.UnaryOperator;
 
 public class gridSetupController implements Initializable {
 
-
+    //-------------------- Wireworld -------------------------
     @FXML
     private TextField gridWidth; //how many cells in a single row
 
@@ -26,6 +26,36 @@ public class gridSetupController implements Initializable {
 
     @FXML
     private ScrollPane gridPane;
+
+    //------------------ Game of Life -----------------------
+    private GameOfLifeController gameOfLifeController;
+
+    @FXML
+    private Canvas gameOfLifeCanvas;
+
+    @FXML
+    private Slider gameOfLifeZoomSlider;
+    @FXML
+    private ToggleButton gameOfLifeAutoRunToggleButton;
+    @FXML
+    private Button gameOfLifePreviousGenerationButton;
+    @FXML
+    private Button gameOfLifeNextGenerationButton;
+
+    @FXML
+    private Spinner gameOfLifeWidthSpinner;
+    @FXML
+    private Spinner gameOfLifeHeightSpinner;
+    @FXML
+    private Button gameOfLifeRandomButton;
+    @FXML
+    private Button gameOfLifeEmptyButton;
+    @FXML
+    private Button gameOfLifeSaveButton;
+    @FXML
+    private Button gameOfLifeLoadButton;
+
+    //-------------------- Wireworld -------------------------
 
     public double getGridWidth(){
         return gridPane.getWidth();
@@ -73,6 +103,9 @@ public class gridSetupController implements Initializable {
 
         gridHeight.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, positiveIntegerFilter));
         gridWidth.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, positiveIntegerFilter));
+
+        //Pass controls to GameOfLifeController
+        gameOfLifeController = new GameOfLifeController(gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton);
     }
 
 }
