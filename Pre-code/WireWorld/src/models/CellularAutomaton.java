@@ -25,6 +25,12 @@ public abstract class CellularAutomaton<T extends Enum> {
         return cells;
     }
 
+    /**
+     * A little workaround for getting T.values()
+     * @return Array of all possible values that cell can have
+     */
+    public abstract T[] getPossibleCellValues();
+
     public void setCells(T[] cells) {
         if (cells.length != width * height)
             throw new IllegalArgumentException("New cells length doesn't match size of automaton board." +
