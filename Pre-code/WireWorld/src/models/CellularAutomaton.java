@@ -27,6 +27,7 @@ public abstract class CellularAutomaton<T extends Enum> {
 
     /**
      * A little workaround for getting T.values()
+     *
      * @return Array of all possible values that cell can have
      */
     public abstract T[] getPossibleCellValues();
@@ -34,7 +35,7 @@ public abstract class CellularAutomaton<T extends Enum> {
     public void setCells(T[] cells) {
         if (cells.length != width * height)
             throw new IllegalArgumentException("New cells length doesn't match size of automaton board." +
-                    " Expected size: " + width*height + " Actual size: " + cells.length);
+                    " Expected size: " + width * height + " Actual size: " + cells.length);
 
         this.cells = cells;
     }
@@ -47,8 +48,17 @@ public abstract class CellularAutomaton<T extends Enum> {
         return height;
     }
 
+    public T getCell(int row, int column) {
+        final int index = row * width + column;
+        return cells[index];
+    }
+
+    public void setCell(int row, int column, T value) {
+        final int index = row * width + column;
+        cells[index] = value;
+    }
+
     /**
-     *
      * @return Number of cells in entire automaton
      */
     public int getCellCount() {
@@ -76,7 +86,6 @@ public abstract class CellularAutomaton<T extends Enum> {
     public abstract void randomize();
 
     /**
-     *
      * @return Default cell state
      */
     protected abstract T getDefaultState();
