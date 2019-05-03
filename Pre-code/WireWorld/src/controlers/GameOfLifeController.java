@@ -51,12 +51,12 @@ public class GameOfLifeController {
         this.loadButton = loadButton;
         this.generationNumberLabel = generationNumberLabel;
 
-        GameOfLife gameOfLife = new GameOfLife(10, 10);
+//        GameOfLife gameOfLife = new GameOfLife(10, 10);
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
         coloring.put(GameOfLife.CellStates.DEAD, Color.BLACK);
         coloring.put(GameOfLife.CellStates.ALIVE, Color.WHITE);
-        cellularAutomatonView = new CellularAutomatonView(canvas, generationNumberLabel, coloring, gameOfLife);
-        cellularAutomatonView.randomize(); //Start with random view
+        cellularAutomatonView = new CellularAutomatonView(canvas, generationNumberLabel, coloring);
+//        cellularAutomatonView.randomize(); //Start with random view
 
 
         randomButton.setOnAction(this::randomizeBoard);
