@@ -28,6 +28,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.util.* ?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.* ?>
+<?import javafx.scene.layout.* ?>
+
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gridSetupController">
    <tabs>
       <Tab text="Wire World">
@@ -195,8 +202,16 @@
                            <children>
                               <Label layoutX="11.0" layoutY="12.0" text="Width:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="12.0" />
                               <Label layoutX="11.0" layoutY="51.0" text="Height:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" />
-                              <Spinner fx:id="gameOfLifeWidthSpinner" editable="true" layoutX="54.0" layoutY="7.0" prefHeight="27.0" prefWidth="85.0" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="6.0" />
-                              <Spinner fx:id="gameOfLifeHeightSpinner" editable="true" layoutX="54.0" layoutY="51.0" prefHeight="27.0" prefWidth="85.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="54.0" />
+                              <Spinner fx:id="gameOfLifeWidthSpinner" editable="true" layoutX="54.0" layoutY="7.0" prefHeight="27.0" prefWidth="85.0" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="6.0">
+                                 <valueFactory>
+                                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="1000"/>
+                                 </valueFactory>
+                              </Spinner>
+                              <Spinner fx:id="gameOfLifeHeightSpinner" editable="true" layoutX="54.0" layoutY="51.0" prefHeight="27.0" prefWidth="85.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="54.0">
+                                 <valueFactory>
+                                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="1000"/>
+                                 </valueFactory>
+                              </Spinner>
                               <Button fx:id="gameOfLifeRandomButton" layoutX="164.0" layoutY="7.0" mnemonicParsing="false" text="Random" AnchorPane.leftAnchor="164.0" AnchorPane.topAnchor="7.0" />
                               <Button fx:id="gameOfLifeEmptyButton" layoutX="164.0" layoutY="51.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="70.0" text="Empty" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="164.0" />
                               <Button fx:id="gameOfLifeSaveButton" disable="true" layoutX="127.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="88.0" text="Save board" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
