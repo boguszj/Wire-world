@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Random;
+
 /**
  * Abstraction of cellular automaton
  *
@@ -9,6 +11,8 @@ public abstract class CellularAutomaton<T extends Enum> {
     protected final int width;
     protected final int height;
     protected T[] cells;
+
+    protected static Random random = new Random();
 
     public CellularAutomaton(int width, int height) {
         this.width = width;
@@ -54,8 +58,9 @@ public abstract class CellularAutomaton<T extends Enum> {
      * Sett all cell to default state
      */
     public void clear() {
-        for (T cell : cells)
-            cell = getDefaultState();
+        for (int i = 0; i < getCellCount(); i++) {
+            cells[i] = getDefaultState();
+        }
     }
 
     /**
