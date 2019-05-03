@@ -31,6 +31,11 @@ public class GameOfLife extends CellularAutomaton<GameOfLife.CellStates> {
     }
 
     @Override
+    public CellStates[] getPossibleCellValues() {
+        return CellStates.values();
+    }
+
+    @Override
     public void nextGeneration() {
         CellStates[] nextGen = new CellStates[getCellCount()];
         int[] aliveCount = countAliveNeighbours();
