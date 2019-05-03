@@ -10,6 +10,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -27,13 +28,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.util.* ?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.* ?>
-<?import javafx.scene.layout.* ?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gridSetupController">
    <tabs>
@@ -126,9 +120,9 @@
                <children>
                   <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="14.0" prefHeight="493.0" prefWidth="1163.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="14.0">
                      <content>
-                        <Canvas fx:id="gameOfLifeCanvas" height="200.0" width="200.0" />
+                        <Canvas fx:id="gameOfLifeCanvas" />
                      </content></ScrollPane>
-                  <TabPane disable="true" layoutX="1188.0" layoutY="15.0" prefHeight="494.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="50.0" AnchorPane.bottomAnchor="108.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="15.0">
+                  <TabPane layoutX="1188.0" layoutY="15.0" prefHeight="494.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="50.0" AnchorPane.bottomAnchor="108.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="15.0">
                     <tabs>
                       <Tab text="Cells">
                          <content>
@@ -189,7 +183,7 @@
                                  </children></VBox>
                          </content>
                       </Tab>
-                      <Tab text="Figures">
+                      <Tab disable="true" text="Figures">
                          <content>
                             <VBox />
                          </content>
@@ -204,12 +198,12 @@
                               <Label layoutX="11.0" layoutY="51.0" text="Height:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" />
                               <Spinner fx:id="gameOfLifeWidthSpinner" editable="true" layoutX="54.0" layoutY="7.0" prefHeight="27.0" prefWidth="85.0" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="6.0">
                                  <valueFactory>
-                                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="1000" initialValue="24"/>
+                                    <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="24" max="1000" min="1" />
                                  </valueFactory>
                               </Spinner>
                               <Spinner fx:id="gameOfLifeHeightSpinner" editable="true" layoutX="54.0" layoutY="51.0" prefHeight="27.0" prefWidth="85.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="54.0">
                                  <valueFactory>
-                                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="1000" initialValue="10"/>
+                                    <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
                                  </valueFactory>
                               </Spinner>
                               <Button fx:id="gameOfLifeRandomButton" layoutX="164.0" layoutY="7.0" mnemonicParsing="false" text="Random" AnchorPane.leftAnchor="164.0" AnchorPane.topAnchor="7.0" />
@@ -223,7 +217,7 @@
                         <AnchorPane prefHeight="83.0" prefWidth="471.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label layoutX="6.0" layoutY="6.0" text="Zoom:" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="6.0" />
-                              <Slider fx:id="gameOfLifeZoomSlider" layoutX="63.0" layoutY="7.0" prefHeight="16.0" prefWidth="387.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="7.0" />
+                              <Slider fx:id="gameOfLifeZoomSlider" disable="true" layoutX="63.0" layoutY="7.0" prefHeight="16.0" prefWidth="387.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="7.0" />
                               <Label layoutX="48.0" layoutY="3.0" text="-" textFill="#00000084">
                                  <font>
                                     <Font size="18.0" />
@@ -235,8 +229,8 @@
                                  </font>
                               </Label>
                               <Button fx:id="gameOfLifeNextGenerationButton" layoutX="366.0" layoutY="46.0" mnemonicParsing="false" text="Next generation" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-                              <Button fx:id="gameOfLifePreviousGenerationButton" layoutX="194.0" layoutY="46.0" mnemonicParsing="false" text="Previous generation" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="136.5" />
-                              <ToggleButton fx:id="gameOfLifeAutoRunToggleButton" layoutX="6.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Auto run" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="6.0" />
+                              <Button fx:id="gameOfLifePreviousGenerationButton" disable="true" layoutX="194.0" layoutY="46.0" mnemonicParsing="false" text="Previous generation" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="136.5" />
+                              <ToggleButton fx:id="gameOfLifeAutoRunToggleButton" disable="true" layoutX="6.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Auto run" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="6.0" />
                            </children>
                         </AnchorPane>
                      </left>
