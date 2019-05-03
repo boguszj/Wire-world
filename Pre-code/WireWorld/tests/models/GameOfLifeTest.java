@@ -10,9 +10,13 @@ public class GameOfLifeTest {
         CellStates[] states = {
                 CellStates.ALIVE, CellStates.ALIVE,
                 CellStates.DEAD, CellStates.DEAD,
-                CellStates.ALIVE, CellStates.DEAD
+                CellStates.ALIVE, CellStates.ALIVE
         };
         gameOfLife.setCells(states);
+
+        System.out.println(gameOfLife);
+
+        gameOfLife.nextGeneration();
 
         System.out.println(gameOfLife);
     }
