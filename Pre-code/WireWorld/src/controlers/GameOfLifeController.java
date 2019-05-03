@@ -73,9 +73,9 @@ public class GameOfLifeController {
         canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
         zoomSlider.valueProperty().addListener(this::zoomSliderChanged);
 
-
         randomButton.setOnAction(this::randomizeBoard);
         nextGenerationButton.setOnAction(this::nextGeneration);
+        previousGenerationButton.setOnAction(this::previousGeneration);
         emptyButton.setOnAction(this::clearBoard);
     }
 
@@ -113,6 +113,10 @@ public class GameOfLifeController {
 
     private void nextGeneration(Event event) {
         cellularAutomatonView.nextGeneration();
+    }
+
+    private void previousGeneration(Event event) {
+        cellularAutomatonView.previousGeneration();
     }
 
     private void clearBoard(Event event) {
