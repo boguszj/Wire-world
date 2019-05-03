@@ -323,32 +323,47 @@ Opis błędów, które mogą wystąpić w trakcie działania programu.
 \subsection{Błędy pliku wejściowego}
 
 \paragraph{Podany plik nie istnieje}
-Jeśli ścieżka podana przez użytkownika jest błędna program wyświetli komunikat o braku możliwości otwarcia wskazanego pliku i zakończy pracę. \\
+Jeśli ścieżka podana przez użytkownika jest błędna program wyświetli komunikat o braku możliwości otwarcia wskazanego pliku i nie wczyta planszy. \\
 Treść komunikatu: ,,Nie udało się otworzyć wskazanego pliku.''
 
 \paragraph{Pusty plik}
-W przypadku gdy plik wskazany przez użytkownika będzie pusty program powiadomi o tym i zakończy pracę. \\
+W przypadku gdy plik wskazany przez użytkownika będzie pusty program powiadomi o tym i nie wczyta planszy. \\
 Treść komunikatu: ,,Wskazany plik wejściowy jest pusty.''
 
 \paragraph{Rozmiar planszy nie będący liczbą}
-Jeśli w pierwszej lini pliku znajdować się będą wartości inne niż liczby program nie będzie w stanie wczytać rozmiaru planszy. W takiej sytuacji wyświetli odpowiedni komunikat i zakończy pracę. \\
+Jeśli w pierwszej lini pliku znajdować się będą wartości inne niż liczby program nie będzie w stanie wczytać rozmiaru planszy. W takiej sytuacji wyświetli odpowiedni komunikat i nie wczyta planszy. \\
  Treść komunikatu: ,,Nie udało się wczytać rozmiaru planszy.''
  
  \paragraph{Niedodatni rozmiar planszy}
- Jeśli jeden z wymiarów planszy nie będzie dodatnią liczbą całkowitą program zasygnalizuje błąd i zakończy pracę. \\
+ Jeśli jeden z wymiarów planszy nie będzie dodatnią liczbą całkowitą program zasygnalizuje błąd i nie wczyta planszy. \\
  Przykładowy komunikat: ,,Szerokość musi być większa od 0. Podana szerokość to -5.''
  
+  \paragraph{Zbyt duży rozmiar planszy}
+  Jeśli ilość komórek będzie przekraczać 100 000 program 
+ 
  \paragraph{Brak nowej linii po rozmiarze planszy}
- W przypadku gdy po wysokości planszy w pliku będzie inny znak niż przejście do nowej lini program zasygnalizuje błąd i zakończy pracę. \\
+ W przypadku gdy po wysokości planszy w pliku będzie inny znak niż przejście do nowej lini program zasygnalizuje błąd i nie wczyta planszy. \\
  Treść komunikatu: ,,Spodziewany koniec lini po wymiarze planszy.''
  
  \paragraph{Błąd przy wczytywaniu stanu komórki}
- Jeśli nie uda się wczytać stanu komórki, na przykład ponieważ w pliku jest za mało linii lub jedna z linii jest zbyt krótka, program wypisze, w którym miejscu pliku wystąpił błąd i zakończy pracę. \\
+ Jeśli nie uda się wczytać stanu komórki, na przykład ponieważ w pliku jest za mało linii lub jedna z linii jest zbyt krótka, program wypisze, w którym miejscu pliku wystąpił błąd i nie wczyta planszy. \\
  Przykładowy komunikat: ,,Wystąpił błąd przy próbie przeczytania znaku w lini: 3 kolumnie: 8.''
  
  \paragraph{Nieprawidłowy znak w pliku}
  Jeśli podczas czytania pliku program napotka nieprawidłowy znak wypisze na jakiej pozycji w pliku napotkany został nieprawidłowy znak, jaki to znak, oraz czego spodziewał się program. \\
  Przykładowy komunikat: ,,Niewspierany znak napotkany w lini: 2 kolumnie: 1. Spodziewana wartość: 0 lub 1. Napotkana wartość: T''
+ 
+\subsection{Błędy podczas używania GUI}
+\paragraph{Zły rozmiar planszy}
+Jeśli użytkownik w polu przeznaczonym na rozmiar planszy poda:
+\begin{itemize}
+	\item znaki nie będące cyframi,
+	\item wartość mniejszą lub równą 0,
+	\item wartości zbyt duże (ilość komórek przekraczająca 100 000)
+\end{itemize}
+to program poinformuję o rodzaju problemu wyświetlając odpowiedni komunikat.
+\paragraph{Zły format wczytywanego pliku}
+Jeśli program nie obsługuję wczytywania wybranego formatu pliku to powiadomi o tym użytkownika odpowiednim komunikatem w którym również przedstawi mu obsługiwane typy plików wejściowych.
 
 \subsection{Błędy losowe}
 \paragraph{Brak pamięci operacyjnej}
