@@ -125,7 +125,7 @@ Interfejs pozwoli na poniższe funkcjonalności:
     \item Zapis aktualnego pokolenia do pliku
     \item Wyczytanie pokolenia z pliku
     \item Edycje poszczególnych komórek w trakcie symulacji
-    \item Wstawianie figur wybranch z przybornika
+    \item Wstawianie figur wybranych z przybornika
 \end{itemize}
 
 \chapter{Działanie programu}
@@ -318,40 +318,24 @@ W przypadku gdy użytkownik włączy wyświetlanie kolejnych stanów w konsoli a
 Treść komunikatu: ,,Wybrana szerokość planszy jest zbyt duża by możliwe było wyświetlenie kolejnych pokoleń w oknie konsoli.''
 
 \section{Błędy}
-Opis błędów, które mogą wystąpić w trakcie działania programu.
+Opis błędów, które mogą wystąpić w trakcie działania programu. Komunikaty ich dotyczące będą wyświetlane w nowych oknach zawierających ich treść.
 
 \subsection{Błędy pliku wejściowego}
 
-\paragraph{Podany plik nie istnieje}
-Jeśli ścieżka podana przez użytkownika jest błędna program wyświetli komunikat o braku możliwości otwarcia wskazanego pliku i nie wczyta planszy. \\
-Treść komunikatu: ,,Nie udało się otworzyć wskazanego pliku.''
-
 \paragraph{Pusty plik}
-W przypadku gdy plik wskazany przez użytkownika będzie pusty program powiadomi o tym i nie wczyta planszy. \\
-Treść komunikatu: ,,Wskazany plik wejściowy jest pusty.''
+W przypadku gdy plik wskazany przez użytkownika będzie pusty program powiadomi go o tym i nie wczyta planszy. \\
 
 \paragraph{Rozmiar planszy nie będący liczbą}
-Jeśli w pierwszej lini pliku znajdować się będą wartości inne niż liczby program nie będzie w stanie wczytać rozmiaru planszy. W takiej sytuacji wyświetli odpowiedni komunikat i nie wczyta planszy. \\
- Treść komunikatu: ,,Nie udało się wczytać rozmiaru planszy.''
+Jeśli w miejscu rozmiaru planszy (szerokości lub wysokości) znajdować się będą wartości inne niż liczby, liczby ujemne lub liczby których iloczyn jest większy niż 100 000 program nie wczyta rozmiaru planszy. W takiej sytuacji wyświetli odpowiedni komunikat i nie wczyta planszy. \\
  
- \paragraph{Niedodatni rozmiar planszy}
- Jeśli jeden z wymiarów planszy nie będzie dodatnią liczbą całkowitą program zasygnalizuje błąd i nie wczyta planszy. \\
- Przykładowy komunikat: ,,Szerokość musi być większa od 0. Podana szerokość to -5.''
- 
-  \paragraph{Zbyt duży rozmiar planszy}
-  Jeśli ilość komórek będzie przekraczać 100 000 program 
- 
- \paragraph{Brak nowej linii po rozmiarze planszy}
- W przypadku gdy po wysokości planszy w pliku będzie inny znak niż przejście do nowej lini program zasygnalizuje błąd i nie wczyta planszy. \\
- Treść komunikatu: ,,Spodziewany koniec lini po wymiarze planszy.''
- 
- \paragraph{Błąd przy wczytywaniu stanu komórki}
- Jeśli nie uda się wczytać stanu komórki, na przykład ponieważ w pliku jest za mało linii lub jedna z linii jest zbyt krótka, program wypisze, w którym miejscu pliku wystąpił błąd i nie wczyta planszy. \\
- Przykładowy komunikat: ,,Wystąpił błąd przy próbie przeczytania znaku w lini: 3 kolumnie: 8.''
+ \paragraph{Niezgodności rozmiaru planszy z faktycznym stanem}
+ Jeśli podany rozmiar planszy nie będzie się zgadzać z ilością podanych w nim stanów komórek, program wyświetli odpowiedni komunikat i nie wczyta planszy.
  
  \paragraph{Nieprawidłowy znak w pliku}
- Jeśli podczas czytania pliku program napotka nieprawidłowy znak wypisze na jakiej pozycji w pliku napotkany został nieprawidłowy znak, jaki to znak, oraz czego spodziewał się program. \\
- Przykładowy komunikat: ,,Niewspierany znak napotkany w lini: 2 kolumnie: 1. Spodziewana wartość: 0 lub 1. Napotkana wartość: T''
+ Jeśli podczas czytania pliku program napotka nierozpoznawany znak, wyświetli odpowiedni komunikat i nie wczyta planszy.
+ 
+ \paragraph{Błąd składniowy}
+ Jeśli plik będzie zawierał błąd składniowy (w formatowaniu JSON lub XML), program wyświetli odpowiedni komunikat i nie wczyta planszy.
  
 \subsection{Błędy podczas używania GUI}
 \paragraph{Zły rozmiar planszy}
@@ -367,7 +351,6 @@ Jeśli program nie obsługuję wczytywania wybranego formatu pliku to powiadomi 
 
 \subsection{Błędy losowe}
 \paragraph{Brak pamięci operacyjnej}
-Gdyby w systemie zabrakło pamięci program nie będzie w stanie funkcjonować poprawnie. Program wyświetli komunikat o błędzie i przerwie pracę. \\
-Treść komunikatu: ,,Program nie uzyskał pamięci od systemu operacyjnego. Spróbuj uruchomić program ponownie za pewien czas.''
+Gdyby w systemie zabrakło pamięci program nie będzie w stanie funkcjonować poprawnie. Program wyświetli komunikat o błędzie i przerwie poprosi o próbę wczytania mniejszej planszy lub uruchomienia programu później.
 
 \end{document}
