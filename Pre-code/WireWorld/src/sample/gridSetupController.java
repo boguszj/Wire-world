@@ -55,6 +55,9 @@ public class gridSetupController implements Initializable {
     @FXML
     private Button gameOfLifeLoadButton;
 
+    @FXML
+    private Label gameOfLifeGenerationNumberLabel;
+
     //-------------------- Wireworld -------------------------
 
     public double getGridWidth(){
@@ -105,7 +108,7 @@ public class gridSetupController implements Initializable {
         gridWidth.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, positiveIntegerFilter));
 
         //Pass controls to GameOfLifeController
-        gameOfLifeController = new GameOfLifeController(gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton);
+        gameOfLifeController = new GameOfLifeController(gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel);
     }
 
 }

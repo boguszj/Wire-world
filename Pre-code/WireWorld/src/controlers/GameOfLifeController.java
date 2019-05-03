@@ -1,11 +1,8 @@
 package controlers;
 
+import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import models.GameOfLife;
@@ -36,10 +33,12 @@ public class GameOfLifeController {
     private final Button saveButton;
     private final Button loadButton;
 
+    private final Label generationNumberLabel;
+
     private GameOfLife gameOfLife;
     private CellularAutomatonView cellularAutomatonView;
 
-    public GameOfLifeController(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton) {
+    public GameOfLifeController(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
         this.zoomSlider = zoomSlider;
         this.autoRunToggleButton = autoRunToggleButton;
@@ -51,26 +50,24 @@ public class GameOfLifeController {
         this.emptyButton = emptyButton;
         this.saveButton = saveButton;
         this.loadButton = loadButton;
+        this.generationNumberLabel = generationNumberLabel;
 
-        test();
-    }
-
-    private void test() {
-//        final GraphicsContext gc = canvas.getGraphicsContext2D();
-//
-//
-//        gc.setFill(Color.BLUE);
-//        gc.fillRect(0, 0, 100, 100);
-//        gc.fillRect(50, 0, 400, 400);
-        gameOfLife = new GameOfLife(6, 6);
-        gameOfLife.randomize();
+        gameOfLife = new GameOfLife(10, 10);
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
         coloring.put(GameOfLife.CellStates.DEAD, Color.BLACK);
         coloring.put(GameOfLife.CellStates.ALIVE, Color.WHITE);
-
-
         cellularAutomatonView = new CellularAutomatonView(gameOfLife, canvas, coloring);
+        cellularAutomatonView.randomize(); //Start with random view
 
-        cellularAutomatonView.draw();
+        randomButton.setOnAction(this::randomizeBoard);
+        nextGenerationButton.setOnAction(this::nextGeneration);
+    }
+
+    private void randomizeBoard(Event event) {
+        cellularAutomatonView.randomize();
+    }
+
+    private void nextGeneration(Event event) {
+        cellularAutomatonView.nextGeneration();
     }
 }

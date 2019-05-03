@@ -7,12 +7,13 @@ import models.CellularAutomaton;
 
 import java.util.Map;
 
+//TODO: Dynamically adjust cell size
 /**
  * Class responsible for displaying CellularAutomaton on Canvas
  * It used <b>delegation</b> architecture
  */
 public class CellularAutomatonView<T extends Enum> {
-    private static final double CELL_SIZE = 60.;
+    private static final double CELL_SIZE = 50.;
 
     private final CellularAutomaton<T> cellularAutomaton;
     private final Canvas canvas;
@@ -34,14 +35,23 @@ public class CellularAutomatonView<T extends Enum> {
 
 
     public void draw() {
-        double w = getWidth();
-        double h = getHeight();
-        boolean r = canvas.isResizable();
-        canvas.setHeight(h);
-        canvas.setWidth(w);
+        updateStates();
+
+        canvas.setHeight(getHeight());
+        canvas.setWidth(getWidth());
 
         for (Cell cell : cells)
             cell.draw();
+    }
+
+    public void randomize() {
+        cellularAutomaton.randomize();
+        draw();
+    }
+
+    public void nextGeneration() {
+        cellularAutomaton.nextGeneration();
+        draw();
     }
 
     /**
