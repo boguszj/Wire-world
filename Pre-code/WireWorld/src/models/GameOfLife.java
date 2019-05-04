@@ -41,13 +41,13 @@ public class GameOfLife extends CellularAutomaton<GameOfLife.CellStates> {
         int[] aliveCount = countAliveNeighbours();
 
         for (int i = 0; i < getCellCount(); i++) {
-            CellStates cell = cells[i];
+            CellStates oldClell = cells[i];
 
             CellStates newState = getDefaultState();
-            if (cell == CellStates.DEAD) {
-                newState = aliveCount[i] == 4 ? CellStates.ALIVE : CellStates.DEAD;
+            if (oldClell == CellStates.DEAD) {
+                newState = aliveCount[i] == 3 ? CellStates.ALIVE : CellStates.DEAD;
             }
-            else if (cell == CellStates.ALIVE) {
+            else if (oldClell == CellStates.ALIVE) {
                 Set<Integer> stillAlive = new HashSet<>(Arrays.asList(2, 3));
                 newState = stillAlive.contains(aliveCount[i]) ? CellStates.ALIVE : CellStates.DEAD;
             }
