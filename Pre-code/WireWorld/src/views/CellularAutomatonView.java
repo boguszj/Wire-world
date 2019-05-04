@@ -1,5 +1,7 @@
 package views;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -20,24 +22,21 @@ public class CellularAutomatonView<T extends Enum> {
     private CellularAutomaton<T> cellularAutomaton;
     private final Canvas canvas;
     private final Map<T, Paint> cellStateToColorMap;
-    private final Label generationNumberLabel;
 
     private final List<T[]> history = new LinkedList<>();
 
     private Cell<T>[] cells;
 
-    private int generationNumber = 0;
+    private IntegerProperty generationNumber = new SimpleIntegerProperty(0);
 
     /**
      * Set up fields. <b>CellularAutomaton</b> must be set before use!
      *
      * @param canvas
-     * @param generationNumberLabel
      * @param cellStateToColorMap
      */
-    public CellularAutomatonView(Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap, double cellSize) {
+    public CellularAutomatonView(Canvas canvas, Map<T, Paint> cellStateToColorMap, double cellSize) {
         this.canvas = canvas;
-        this.generationNumberLabel = generationNumberLabel;
 
         this.cellStateToColorMap = cellStateToColorMap;
         this.cellSize = cellSize;
@@ -52,13 +51,13 @@ public class CellularAutomatonView<T extends Enum> {
      * @param cellularAutomaton
      */
     public CellularAutomatonView(Canvas canvas, Label generationNumberLabel, Map<T, Paint> cellStateToColorMap, double cellSize, CellularAutomaton cellularAutomaton) {
-        this(canvas, generationNumberLabel, cellStateToColorMap, cellSize);
+        this(canvas, cellStateToColorMap, cellSize);
 
         setCellularAutomaton(cellularAutomaton);
     }
 
     private void resetHistory() {
-        generationNumber = 0;
+        setGenerationNumber(0);
         history.clear();
         history.add(cellularAutomaton.getCells());
     }
@@ -76,8 +75,6 @@ public class CellularAutomatonView<T extends Enum> {
 
         for (Cell cell : cells)
             cell.draw();
-
-        generationNumberLabel.setText(Integer.toString(generationNumber));
     }
 
     public void randomize() {
@@ -87,9 +84,9 @@ public class CellularAutomatonView<T extends Enum> {
     }
 
     public void nextGeneration() {
-        generationNumber++;
-        if (generationNumber < history.size()) { //Already in history
-            cellularAutomaton.setCells(history.get(generationNumber));
+        setGenerationNumber(getGenerationNumber() + 1);
+        if (getGenerationNumber() < history.size()) { //Already in history
+            cellularAutomaton.setCells(history.get(getGenerationNumber()));
         }
         else {
             cellularAutomaton.nextGeneration();
@@ -99,11 +96,11 @@ public class CellularAutomatonView<T extends Enum> {
     }
 
     public void previousGeneration() {
-        if (generationNumber <= 0)
+        if (getGenerationNumber() <= 0)
             throw new IllegalStateException("No previous state exists");
 
-        generationNumber--;
-        cellularAutomaton.setCells(history.get(generationNumber));
+        setGenerationNumber(getGenerationNumber() - 1);
+        cellularAutomaton.setCells(history.get(getGenerationNumber()));
         draw();
     }
 
@@ -159,6 +156,18 @@ public class CellularAutomatonView<T extends Enum> {
         for (int i = 0; i < getCellCount(); i++) {
             cells[i].setState(cellularAutomaton.getCells()[i]);
         }
+    }
+
+    public int getGenerationNumber() {
+        return generationNumber.get();
+    }
+
+    public IntegerProperty generationNumberProperty() {
+        return generationNumber;
+    }
+
+    private void setGenerationNumber(int generationNumber) {
+        this.generationNumber.set(generationNumber);
     }
 
     public int getCellCount() {

@@ -67,8 +67,13 @@ public class GameOfLifeController {
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
         coloring.put(GameOfLife.CellStates.DEAD, Color.BLACK);
         coloring.put(GameOfLife.CellStates.ALIVE, Color.WHITE);
-        cellularAutomatonView = new CellularAutomatonView(canvas, generationNumberLabel, coloring, zoomSlider.getValue());
+        cellularAutomatonView = new CellularAutomatonView(canvas, coloring, zoomSlider.getValue());
 //        cellularAutomatonView.randomize(); //Start with random view
+
+        //Listen for change in generation number
+        cellularAutomatonView.generationNumberProperty().addListener(this::generationNumberChanged);
+        //Bind it's value to the label
+        generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
 
         canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
         zoomSlider.valueProperty().addListener(this::zoomSliderChanged);
@@ -80,9 +85,16 @@ public class GameOfLifeController {
     }
 
     private void zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        generationNumberLabel.setText(newValue.toString());
-
         cellularAutomatonView.setCellSize(newValue.doubleValue());
+    }
+
+    private void generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        if (newValue.intValue() <= 0) {
+            previousGenerationButton.setDisable(true);
+        }
+        else {
+            previousGenerationButton.setDisable(false);
+        }
     }
 
     private void canvasClicked(MouseEvent event) {
