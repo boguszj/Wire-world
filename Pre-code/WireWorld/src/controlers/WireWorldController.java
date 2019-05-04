@@ -2,6 +2,7 @@ package controlers;
 
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
@@ -16,8 +17,7 @@ import views.CellularAutomatonView;
 import java.util.HashMap;
 import java.util.Map;
 
-import static javafx.scene.paint.Color.BLACK;
-import static javafx.scene.paint.Color.BLUE;
+import static javafx.scene.paint.Color.*;
 
 //TODO: States for GUI (Simulation paused, played, ...)
 
@@ -25,87 +25,54 @@ import static javafx.scene.paint.Color.BLUE;
  * Sub controller used by gridSetupController
  * It controls Game of Life tab of the main view
  */
-public class WireWorldController {
-    private final Canvas canvas;
+public class WireWorldController extends Controller {
 
-    private final Slider zoomSlider;
-    private final ToggleButton autoRunToggleButton;
-    private final Button previousGenerationButton;
-    private final Button nextGenerationButton;
-
-    private final Spinner widthSpinner;
-
-    private final Spinner heightSpinner;
-    private final Button randomButton;
-    private final Button emptyButton;
-    private final Button saveButton;
-    private final Button loadButton;
-
-    private final Label generationNumberLabel;
-
+    @FXML
     private final RadioButton emptyRadioButton;
+    @FXML
     private final RadioButton tailRadioButton;
+    @FXML
     private final RadioButton headRadioButton;
+    @FXML
     private final RadioButton conductorRadioButton;
 
-    private final CellularAutomatonView cellularAutomatonView;
+    private Map<WireWorld.CellStates, Paint> coloring;
+
 
     public WireWorldController(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton emptyRadioButton, RadioButton tailRadioButton, RadioButton headRadioButton, RadioButton conductorRadioButton) {
-        this.canvas = canvas;
-        this.zoomSlider = zoomSlider;
-        this.autoRunToggleButton = autoRunToggleButton;
-        this.previousGenerationButton = previousGenerationButton;
-        this.nextGenerationButton = nextGenerationButton;
-        this.widthSpinner = widthSpinner;
-        this.heightSpinner = heightSpinner;
-        this.randomButton = randomButton;
-        this.emptyButton = emptyButton;
-        this.saveButton = saveButton;
-        this.loadButton = loadButton;
-        this.generationNumberLabel = generationNumberLabel;
+        super(canvas, zoomSlider,  autoRunToggleButton,  previousGenerationButton,  nextGenerationButton,  widthSpinner,  heightSpinner,  randomButton,  emptyButton,  saveButton,  loadButton,  generationNumberLabel);
+
         this.emptyRadioButton = emptyRadioButton;
         this.headRadioButton = headRadioButton;
         this.tailRadioButton = tailRadioButton;
         this.conductorRadioButton = conductorRadioButton;
+        this.coloring = new HashMap<>();
 
-        Utils.makeSpinnerUpdateValueOnFocusLost(heightSpinner);
-        Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
+        super.cellularAutomatonView = new CellularAutomatonView(canvas, coloring, zoomSlider.getValue());
 
-//        GameOfLife gameOfLife = new GameOfLife(10, 10);
-        Map<WireWorld.CellStates, Paint> coloring = new HashMap<>();
         coloring.put(WireWorld.CellStates.EMPTY, Color.BLACK);
         coloring.put(WireWorld.CellStates.HEAD, BLUE);
         coloring.put(WireWorld.CellStates.TAIL, Color.RED);
         coloring.put(WireWorld.CellStates.CONDUCTOR, Color.YELLOW);
-        cellularAutomatonView = new CellularAutomatonView(canvas, coloring, zoomSlider.getValue());
-//        cellularAutomatonView.randomize(); //Start with random view
-
-        //Listen for change in generation number
-        cellularAutomatonView.generationNumberProperty().addListener(this::generationNumberChanged);
-        //Bind it's value to the label
-        generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
 
         canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
-        zoomSlider.valueProperty().addListener(this::zoomSliderChanged);
-
         randomButton.setOnAction(this::randomizeBoard);
-        nextGenerationButton.setOnAction(this::nextGeneration);
-        previousGenerationButton.setOnAction(this::previousGeneration);
-        emptyButton.setOnAction(this::clearBoard);
 
     }
 
-    private void zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        cellularAutomatonView.setCellSize(newValue.doubleValue());
-    }
+    private void randomizeBoard(Event event) {
+        int width = (int) widthSpinner.getValue();
+        int height = (int) heightSpinner.getValue();
 
-    private void generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        if (newValue.intValue() <= 0) {
-            previousGenerationButton.setDisable(true);
+
+        if (!cellularAutomatonView.hasCellularAutomaton()
+                || cellularAutomatonView.getColumnCount() != width
+                || cellularAutomatonView.getRowCount() != height) {
+            WireWorld wireWorld = new WireWorld(width, height);
+            cellularAutomatonView.setCellularAutomaton(wireWorld);
         }
-        else {
-            previousGenerationButton.setDisable(false);
-        }
+
+        cellularAutomatonView.randomize();
     }
 
     private void canvasClicked(MouseEvent event) {
@@ -124,36 +91,4 @@ public class WireWorldController {
             return WireWorld.CellStates.CONDUCTOR;
     }
 
-    private void randomizeBoard(Event event) {
-        int width = (int) widthSpinner.getValue();
-        int height = (int) heightSpinner.getValue();
-
-
-        if (!cellularAutomatonView.hasCellularAutomaton()
-                || cellularAutomatonView.getColumnCount() != width
-                || cellularAutomatonView.getRowCount() != height) {
-            WireWorld wireWorld = new WireWorld(width, height);
-            cellularAutomatonView.setCellularAutomaton(wireWorld);
-        }
-
-        cellularAutomatonView.randomize();
-    }
-
-    private void nextGeneration(Event event) {
-        cellularAutomatonView.nextGeneration();
-    }
-
-    private void previousGeneration(Event event) {
-        cellularAutomatonView.previousGeneration();
-    }
-
-    private void clearBoard(Event event) {
-        int width = (int) widthSpinner.getValue();
-        int height = (int) heightSpinner.getValue();
-
-        WireWorld wireWorld = new WireWorld(width, height);
-        wireWorld.clear();
-        cellularAutomatonView.setCellularAutomaton(wireWorld);
-
-    }
 }
