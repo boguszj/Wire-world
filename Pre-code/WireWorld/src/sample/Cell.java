@@ -18,7 +18,6 @@ public class Cell {
     }
 
     public static void drawCell(GraphicsContext gc, int x, int y){
-        System.out.println("drawing cell...");
         gc.strokeRect(x, y, SIZE, SIZE);
     }
 

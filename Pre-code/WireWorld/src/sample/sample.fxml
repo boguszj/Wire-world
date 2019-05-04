@@ -14,7 +14,6 @@
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
@@ -36,32 +35,53 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <!--<fx:include fx:id="gridPane" source="scrollPane.fxml" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0" />-->
-                  <ScrollPane fx:id="gridPane" hbarPolicy="ALWAYS" layoutX="10.0" layoutY="10.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="10.0" />
+                  <ScrollPane hbarPolicy="ALWAYS" layoutX="10.0" layoutY="10.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="10.0">
+                     <content>
+                        <Canvas fx:id="wireWorldCanvas" />
+                     </content></ScrollPane>
                   <ToolBar layoutX="14.0" layoutY="493.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="106.0" prefWidth="1325.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="535.0">
                      <items>
-                        <Pane prefHeight="50.0" prefWidth="500.0">
+                        <Pane prefHeight="60.0" prefWidth="455.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Play">
-                              </Button>
-                              <Button layoutX="63.0" mnemonicParsing="false" text="Stop">
-                              </Button>
-                              <Label layoutX="129.0" layoutY="5.0" text="Speed" />
-                              <Slider layoutX="173.0" layoutY="6.0" />
-                              <Button layoutX="317.0" mnemonicParsing="false" text="Next generation">
+                              <Label layoutX="79.0" layoutY="5.0" text="Speed" />
+                              <Slider layoutX="126.0" layoutY="6.0" />
+                              <Button fx:id="wireWorldNextGenerationButton" layoutX="273.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Next generation">
                               </Button>
                               <Label layoutX="13.0" layoutY="40.0" text="Zoom:" />
-                              <Slider layoutX="69.0" layoutY="41.0" prefHeight="15.0" prefWidth="370.0" />
+                              <Slider fx:id="wireWorldZoomSlider" layoutX="69.0" layoutY="41.0" prefHeight="15.0" prefWidth="370.0" value="50.0" />
+                              <ToggleButton fx:id="wireWorldAutoRunToggleButton" layoutX="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" text="Play" />
+                              <Button fx:id="wireWorldPreviousGenerationButton" layoutX="365.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="39.0" text="Previous generation" />
                            </children>
                         </Pane>
-                        <Pane prefHeight="60.0" prefWidth="811.0">
+                        <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="60.0" prefWidth="853.0">
                            <children>
-                              <Button layoutX="662.0" layoutY="2.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="79.0" text="Random" />
+                              <Spinner fx:id="wireWorldHeightSpinner" editable="true" layoutX="390.0" layoutY="2.0" prefHeight="10.0" prefWidth="65.0">
+                                 <valueFactory>
+                                    <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
+                                 </valueFactory>
+                              </Spinner>
+                              <Spinner fx:id="wireWorldWidthSpinner" editable="true" layoutX="530.0" layoutY="2.0" prefHeight="10.0" prefWidth="65.0">
+                                 <valueFactory>
+                                    <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="24" max="1000" min="1" />
+                                 </valueFactory>
+                              </Spinner>
+                              <Button fx:id="wireWorldRandomButton" layoutX="675.0" layoutY="2.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="79.0" text="Random" />
                               <Label layoutX="460.0" layoutY="8.0" text="Grid width:" />
-                              <TextField fx:id="gridWidth" layoutX="534.0" layoutY="2.0" prefHeight="27.0" prefWidth="50.0" />
-                              <Button fx:id="createButton" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="2.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#createGrid" prefHeight="27.0" prefWidth="61.0" text="Create" />
-                              <Button fx:id="clearButton" alignment="CENTER" layoutX="745.0" layoutY="2.0" mnemonicParsing="false" text="Clear" />
-                              <Label layoutX="321.0" layoutY="8.0" text="Grid height:" />
-                              <TextField fx:id="gridHeight" layoutX="395.0" layoutY="2.0" prefHeight="27.0" prefWidth="50.0" />
+                              <Button fx:id="wireWorldEmptyButton" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="2.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="27.0" prefWidth="61.0" text="Empty" />
+                              <Label layoutX="305.0" layoutY="8.0" text="Grid height:" />
+                              <HBox alignment="CENTER" layoutX="50.0" layoutY="-36.0" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Generation number:" />
+                                    <Label fx:id="wireWorldGenerationNumberLabel">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
                            </children>
                         </Pane>
                      </items>
@@ -72,13 +92,13 @@
                            <content>
                               <AnchorPane fx:id="randomButton" layoutY="2.0" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="188.0">
                                  <children>
-                                    <RadioButton layoutX="20.0" layoutY="43.0" mnemonicParsing="false" selected="true" text="Head" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
+                                    <RadioButton fx:id="headRadioButton" layoutX="20.0" layoutY="43.0" mnemonicParsing="false" selected="true" text="Head" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="wireWorldCells" />
                                        </toggleGroup></RadioButton>
-                                    <RadioButton layoutX="20.0" layoutY="154.0" mnemonicParsing="false" text="Empty" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="140.0" />
-                                    <RadioButton layoutX="20.0" layoutY="76.0" mnemonicParsing="false" text="Tail" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" />
-                                    <RadioButton layoutX="19.0" layoutY="105.0" mnemonicParsing="false" text="Conductor" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
+                                    <RadioButton fx:id="emptyRadioButton" layoutX="20.0" layoutY="154.0" mnemonicParsing="false" text="Empty" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="140.0" />
+                                    <RadioButton fx:id="tailRadioButton" layoutX="20.0" layoutY="76.0" mnemonicParsing="false" text="Tail" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" />
+                                    <RadioButton fx:id="conductorRadioButton" layoutX="19.0" layoutY="105.0" mnemonicParsing="false" text="Conductor" toggleGroup="$wireWorldCells" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="15.0" layoutX="22.0" layoutY="82.0" stroke="BLACK" strokeType="INSIDE" width="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="81.0" />
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" height="15.0" layoutX="21.0" layoutY="140.0" stroke="BLACK" strokeType="INSIDE" width="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="141.0" />
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="15.0" layoutX="22.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="111.0" />
@@ -91,13 +111,13 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="134.0">
                                  <children>
-                                    <Button contentDisplay="CENTER" layoutX="30.0" layoutY="38.0" mnemonicParsing="false" text="Load board" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                                    <Button fx:id="wireWorldLoadButton" contentDisplay="CENTER" layoutX="30.0" layoutY="38.0" mnemonicParsing="false" text="Load board" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
                                     <ScrollPane layoutX="5.0" layoutY="83.0" prefHeight="200.0" prefWidth="132.0" vbarPolicy="ALWAYS" AnchorPane.topAnchor="125.0">
                                        <content>
                                           <ListView prefHeight="200.0" prefWidth="125.0" />
                                        </content>
                                     </ScrollPane>
-                                    <Button layoutX="40.0" layoutY="48.0" mnemonicParsing="false" text="Save board" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="65.0" />
+                                    <Button fx:id="wireWorldSaveButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" text="Save board" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="65.0" />
                                     <SplitMenuButton layoutX="-4.0" layoutY="367.0" mnemonicParsing="false" text="Draw Pattern" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                       <items>
                                         <MenuItem mnemonicParsing="false" text="Save pattern" />
@@ -237,7 +257,7 @@
                      <center>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label text="Generation numer:" />
+                              <Label text="Generation number:" />
                               <Label fx:id="gameOfLifeGenerationNumberLabel">
                                  <padding>
                                     <Insets left="5.0" />
