@@ -1,6 +1,7 @@
 package sample;
 
 import controlers.GameOfLifeController;
+import controlers.WireWorldController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -16,14 +17,47 @@ import java.util.function.UnaryOperator;
 public class gridSetupController implements Initializable {
 
     //-------------------- Wireworld -------------------------
-    @FXML
-    private TextField gridWidth; //how many cells in a single row
+    private WireWorldController wireWorldController;
 
     @FXML
-    private TextField gridHeight; //how many cells in a single row
+    private Canvas wireWorldCanvas;
 
     @FXML
-    private ScrollPane gridPane;
+    private Slider wireWorldZoomSlider;
+    @FXML
+    private ToggleButton wireWorldAutoRunToggleButton;
+    @FXML
+    private Button wireWorldPreviousGenerationButton;
+    @FXML
+    private Button wireWorldNextGenerationButton;
+
+    @FXML
+    private Spinner wireWorldWidthSpinner;
+    @FXML
+    private Spinner wireWorldHeightSpinner;
+    @FXML
+    private Button wireWorldRandomButton;
+    @FXML
+    private Button wireWorldEmptyButton;
+    @FXML
+    private Button wireWorldSaveButton;
+    @FXML
+    private Button wireWorldLoadButton;
+
+    @FXML
+    private Label wireWorldGenerationNumberLabel;
+
+    @FXML
+    private RadioButton emptyRadioButton;
+    @FXML
+    private RadioButton headRadioButton;
+    @FXML
+    private RadioButton tailRadioButton;
+    @FXML
+    private RadioButton conductorRadioButton;
+
+
+
 
     //------------------ Game of Life -----------------------
     private GameOfLifeController gameOfLifeController;
@@ -56,6 +90,9 @@ public class gridSetupController implements Initializable {
     @FXML
     private Label gameOfLifeGenerationNumberLabel;
 
+
+
+
     @FXML
     private RadioButton aliveRadioButton;
     @FXML
@@ -63,37 +100,8 @@ public class gridSetupController implements Initializable {
 
     //-------------------- Wireworld -------------------------
 
-    public double getGridWidth(){
-        return gridPane.getWidth();
-    }
 
-    public int getHeight(){
-        return Integer.parseInt(gridHeight.getText());
-    }
 
-    public int getWidth(){
-        return Integer.parseInt(gridWidth.getText());
-    }
-
-    public void addCanvas(int width, int height) {
-        Board board = new Board(width, height);
-        board.drawBoard();
-        gridPane.setContent(board.canvas);
-    }
-
-    public void createGrid(ActionEvent event){
-        try {
-        System.out.println(getWidth());
-        System.out.println(getHeight());
-            if (getWidth() > 0) {
-                addCanvas(getWidth(), getHeight());
-            } else {
-                System.out.println("0 or less");
-            }
-        }catch(NumberFormatException e){
-            System.out.println("Empty string");
-        }
-    }
 
 
     @Override
@@ -107,11 +115,11 @@ public class gridSetupController implements Initializable {
             return null;
         };
 
-        gridHeight.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, positiveIntegerFilter));
-        gridWidth.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), null, positiveIntegerFilter));
 
         //Pass controls to GameOfLifeController
         gameOfLifeController = new GameOfLifeController(gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
+        wireWorldController = new WireWorldController(wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
+
     }
 
 }

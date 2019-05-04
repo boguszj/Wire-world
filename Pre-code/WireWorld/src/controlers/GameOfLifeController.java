@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -63,6 +64,7 @@ public class GameOfLifeController {
         Utils.makeSpinnerUpdateValueOnFocusLost(heightSpinner);
         Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
 
+
 //        GameOfLife gameOfLife = new GameOfLife(10, 10);
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
         coloring.put(GameOfLife.CellStates.DEAD, Color.BLACK);
@@ -82,6 +84,9 @@ public class GameOfLifeController {
         nextGenerationButton.setOnAction(this::nextGeneration);
         previousGenerationButton.setOnAction(this::previousGeneration);
         emptyButton.setOnAction(this::clearBoard);
+
+
+
     }
 
     private void zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {

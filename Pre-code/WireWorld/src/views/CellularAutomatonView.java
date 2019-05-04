@@ -148,6 +148,7 @@ public class CellularAutomatonView<T extends Enum> {
                 final int index = r * getColumnCount() + c;
 
                 cells[index] = new Cell(c * cellSize, r * cellSize, cellularAutomaton.getCells()[index]);
+
             }
         }
     }
