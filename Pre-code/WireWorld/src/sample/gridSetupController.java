@@ -100,6 +100,9 @@ public class gridSetupController implements Initializable {
 
     //-------------------- Wireworld -------------------------
 
+    @FXML
+    private Slider speedSlider;
+
 
 
 
@@ -117,8 +120,8 @@ public class gridSetupController implements Initializable {
 
 
         //Pass controls to GameOfLifeController
-        gameOfLifeController = new GameOfLifeController(gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
-        wireWorldController = new WireWorldController(wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
+        gameOfLifeController = new GameOfLifeController(speedSlider, gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
+        wireWorldController = new WireWorldController(speedSlider, wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
 
     }
 

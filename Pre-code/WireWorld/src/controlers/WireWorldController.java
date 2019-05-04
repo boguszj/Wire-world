@@ -39,8 +39,8 @@ public class WireWorldController extends Controller {
     private Map<WireWorld.CellStates, Paint> coloring;
 
 
-    public WireWorldController(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton emptyRadioButton, RadioButton tailRadioButton, RadioButton headRadioButton, RadioButton conductorRadioButton) {
-        super(canvas, zoomSlider,  autoRunToggleButton,  previousGenerationButton,  nextGenerationButton,  widthSpinner,  heightSpinner,  randomButton,  emptyButton,  saveButton,  loadButton,  generationNumberLabel);
+    public WireWorldController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton emptyRadioButton, RadioButton tailRadioButton, RadioButton headRadioButton, RadioButton conductorRadioButton) {
+        super(speedSlider, canvas, zoomSlider,  autoRunToggleButton,  previousGenerationButton,  nextGenerationButton,  widthSpinner,  heightSpinner,  randomButton,  emptyButton,  saveButton,  loadButton,  generationNumberLabel);
 
         this.emptyRadioButton = emptyRadioButton;
         this.headRadioButton = headRadioButton;
@@ -57,6 +57,7 @@ public class WireWorldController extends Controller {
 
         canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
         randomButton.setOnAction(this::randomizeBoard);
+        emptyButton.setOnAction(this::clearBoard);
 
     }
 
@@ -73,6 +74,15 @@ public class WireWorldController extends Controller {
         }
 
         cellularAutomatonView.randomize();
+    }
+
+    private void clearBoard(Event event) {
+        int width = (int) widthSpinner.getValue();
+        int height = (int) heightSpinner.getValue();
+
+        WireWorld wireWorld = new WireWorld(width, height);
+        wireWorld.clear();
+        cellularAutomatonView.setCellularAutomaton(wireWorld);
     }
 
     private void canvasClicked(MouseEvent event) {

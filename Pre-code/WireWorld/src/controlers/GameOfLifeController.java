@@ -31,9 +31,9 @@ public class GameOfLifeController extends Controller{
 
     private Map<GameOfLife.CellStates, Paint> coloring;
 
-    public GameOfLifeController(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton) {
+    public GameOfLifeController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton) {
 
-        super(canvas, zoomSlider,  autoRunToggleButton,  previousGenerationButton,  nextGenerationButton,  widthSpinner,  heightSpinner,  randomButton,  emptyButton,  saveButton,  loadButton,  generationNumberLabel);
+        super(speedSlider, canvas, zoomSlider,  autoRunToggleButton,  previousGenerationButton,  nextGenerationButton,  widthSpinner,  heightSpinner,  randomButton,  emptyButton,  saveButton,  loadButton,  generationNumberLabel);
 
         this.aliveRadioButton = aliveRadioButton;
         this.deadRadioButton = deadRadioButton;
@@ -46,6 +46,7 @@ public class GameOfLifeController extends Controller{
 
         canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
         randomButton.setOnAction(this::randomizeBoard);
+        emptyButton.setOnAction(this::clearBoard);
 
     }
 
@@ -62,6 +63,15 @@ public class GameOfLifeController extends Controller{
         }
 
         cellularAutomatonView.randomize();
+    }
+
+    private void clearBoard(Event event) {
+        int width = (int) widthSpinner.getValue();
+        int height = (int) heightSpinner.getValue();
+
+        GameOfLife gameOfLife = new GameOfLife(width, height);
+        gameOfLife.clear();
+        cellularAutomatonView.setCellularAutomaton(gameOfLife);
     }
 
     private void canvasClicked(MouseEvent event) {
