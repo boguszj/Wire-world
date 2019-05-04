@@ -26,6 +26,7 @@ public class Controller {
     protected Canvas canvas;
 
     protected Slider zoomSlider;
+    protected Slider speedSlider;
     protected ToggleButton autoRunToggleButton;
     protected Button previousGenerationButton;
     protected Button nextGenerationButton;
@@ -42,10 +43,15 @@ public class Controller {
 
     protected CellularAutomatonView cellularAutomatonView;
 
+    private boolean running;
+    private Thread t;
+    private long delay;
+
     public Controller(){};
 
-    public Controller(Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
+    public Controller(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
+        this.speedSlider = speedSlider;
         this.zoomSlider = zoomSlider;
         this.autoRunToggleButton = autoRunToggleButton;
         this.previousGenerationButton = previousGenerationButton;
@@ -57,6 +63,10 @@ public class Controller {
         this.saveButton = saveButton;
         this.loadButton = loadButton;
         this.generationNumberLabel = generationNumberLabel;
+        this.running = false;
+        this.delay = (long)speedSlider.getValue();
+
+        createThread();
 
         Utils.makeSpinnerUpdateValueOnFocusLost(heightSpinner);
         Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
@@ -65,14 +75,35 @@ public class Controller {
         //generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
 
         zoomSlider.valueProperty().addListener(this::zoomSliderChanged);
+        speedSlider.valueProperty().addListener(this::speedSliderChanged);
         nextGenerationButton.setOnAction(this::nextGeneration);
         previousGenerationButton.setOnAction(this::previousGeneration);
-        emptyButton.setOnAction(this::clearBoard);
+        autoRunToggleButton.setOnAction(this::play);
 
     }
 
-    protected void zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+    private void createThread(){
+        t = new Thread() {
+            public void run(){
+                while(running) {
+                    cellularAutomatonView.nextGeneration();
+                    System.out.println(delay);
+                    try {
+                        Thread.sleep(1000 / delay);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+    }
+
+    private void zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
         cellularAutomatonView.setCellSize(newValue.doubleValue());
+    }
+
+    private void speedSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        delay = newValue.longValue();
     }
 
     private void generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -92,13 +123,20 @@ public class Controller {
         cellularAutomatonView.previousGeneration();
     }
 
-    private void clearBoard(Event event) {
-        int width = (int) widthSpinner.getValue();
-        int height = (int) heightSpinner.getValue();
-
-        WireWorld wireWorld = new WireWorld(width, height);
-        wireWorld.clear();
-        cellularAutomatonView.setCellularAutomaton(wireWorld);
+    private void play(Event event) {
+        if(!running){
+            running = true;
+            t.start();
+        }
+        else{
+            running = false;
+            try {
+                t.join(); // wait for the thread to stop
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            createThread();
+        }
     }
 
     public void setCanvas(Canvas canvas){
