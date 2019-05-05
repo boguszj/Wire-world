@@ -54,6 +54,7 @@ public class GameOfLifeController extends Controller{
         int width = (int) widthSpinner.getValue();
         int height = (int) heightSpinner.getValue();
 
+        enableButtons();
 
         if (!cellularAutomatonView.hasCellularAutomaton()
                 || cellularAutomatonView.getColumnCount() != width
@@ -68,6 +69,8 @@ public class GameOfLifeController extends Controller{
     private void clearBoard(Event event) {
         int width = (int) widthSpinner.getValue();
         int height = (int) heightSpinner.getValue();
+
+        enableButtons();
 
         GameOfLife gameOfLife = new GameOfLife(width, height);
         gameOfLife.clear();

@@ -82,6 +82,11 @@ public class Controller {
 
     }
 
+    protected void enableButtons(){
+        nextGenerationButton.setDisable(false);
+        autoRunToggleButton.setDisable(false);
+    }
+
     private void createThread(){
         t = new Thread() {
             public void run(){
@@ -103,7 +108,7 @@ public class Controller {
     }
 
     private void speedSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        delay = newValue.longValue();
+        this.delay = newValue.longValue();
     }
 
     private void generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
