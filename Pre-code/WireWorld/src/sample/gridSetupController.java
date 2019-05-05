@@ -25,6 +25,8 @@ public class gridSetupController implements Initializable {
     @FXML
     private Slider wireWorldZoomSlider;
     @FXML
+    private Slider wireWorldSpeedSlider;
+    @FXML
     private ToggleButton wireWorldAutoRunToggleButton;
     @FXML
     private Button wireWorldPreviousGenerationButton;
@@ -67,6 +69,8 @@ public class gridSetupController implements Initializable {
 
     @FXML
     private Slider gameOfLifeZoomSlider;
+    @FXML
+    private Slider gameOfLifeSpeedSlider;
     @FXML
     private ToggleButton gameOfLifeAutoRunToggleButton;
     @FXML
@@ -120,8 +124,8 @@ public class gridSetupController implements Initializable {
 
 
         //Pass controls to GameOfLifeController
-        gameOfLifeController = new GameOfLifeController(speedSlider, gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
-        wireWorldController = new WireWorldController(speedSlider, wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
+        gameOfLifeController = new GameOfLifeController(gameOfLifeSpeedSlider, gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
+        wireWorldController = new WireWorldController(wireWorldSpeedSlider, wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
 
     }
 

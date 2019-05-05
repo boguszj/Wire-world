@@ -65,6 +65,7 @@ public class WireWorldController extends Controller {
         int width = (int) widthSpinner.getValue();
         int height = (int) heightSpinner.getValue();
 
+        enableButtons();
 
         if (!cellularAutomatonView.hasCellularAutomaton()
                 || cellularAutomatonView.getColumnCount() != width
@@ -79,6 +80,8 @@ public class WireWorldController extends Controller {
     private void clearBoard(Event event) {
         int width = (int) widthSpinner.getValue();
         int height = (int) heightSpinner.getValue();
+
+        enableButtons();
 
         WireWorld wireWorld = new WireWorld(width, height);
         wireWorld.clear();

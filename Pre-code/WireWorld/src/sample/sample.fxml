@@ -44,13 +44,13 @@
                         <Pane prefHeight="60.0" prefWidth="455.0">
                            <children>
                               <Label layoutX="79.0" layoutY="5.0" text="Speed" />
-                              <Slider fx:id="speedSlider" blockIncrement="1.0" layoutX="126.0" layoutY="6.0" max="10.0" min="0.5" value="3.0" />
-                              <Button fx:id="wireWorldNextGenerationButton" layoutX="273.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Next generation">
+                              <Slider fx:id="wireWorldSpeedSlider" blockIncrement="1.0" layoutX="126.0" layoutY="6.0" max="10.0" min="0.5" value="3.0" />
+                              <Button fx:id="wireWorldNextGenerationButton" disable="true" layoutX="273.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" text="Next generation">
                               </Button>
                               <Label layoutX="13.0" layoutY="40.0" text="Zoom:" />
                               <Slider fx:id="wireWorldZoomSlider" layoutX="69.0" layoutY="41.0" prefHeight="15.0" prefWidth="370.0" value="50.0" />
-                              <ToggleButton fx:id="wireWorldAutoRunToggleButton" layoutX="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" text="Play" />
-                              <Button fx:id="wireWorldPreviousGenerationButton" layoutX="365.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="39.0" text="Previous generation" />
+                              <ToggleButton fx:id="wireWorldAutoRunToggleButton" disable="true" layoutX="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" text="Play" />
+                              <Button fx:id="wireWorldPreviousGenerationButton" disable="true" layoutX="365.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" text="Previous generation" />
                            </children>
                         </Pane>
                         <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="60.0" prefWidth="853.0">
@@ -248,7 +248,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="gameOfLifeNextGenerationButton" layoutX="366.0" layoutY="46.0" mnemonicParsing="false" text="Next generation" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                              <Button fx:id="gameOfLifeNextGenerationButton" disable="true" layoutX="366.0" layoutY="46.0" mnemonicParsing="false" text="Next generation" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                               <Button fx:id="gameOfLifePreviousGenerationButton" disable="true" layoutX="194.0" layoutY="46.0" mnemonicParsing="false" text="Previous generation" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="136.5" />
                               <ToggleButton fx:id="gameOfLifeAutoRunToggleButton" disable="true" layoutX="6.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Auto run" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="6.0" />
                            </children>
@@ -270,7 +270,7 @@
                         </HBox>
                      </center>
                   </BorderPane>
-                  <Slider fx:id="speedSlider" layoutX="10.0" layoutY="10.0" max="10.0" min="0.5" value="3.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="570.0" />
+                  <Slider fx:id="gameOfLifeSpeedSlider" layoutX="10.0" layoutY="10.0" max="10.0" min="0.5" value="3.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="570.0" />
                </children></AnchorPane>
          </content>
       </Tab>
