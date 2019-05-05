@@ -312,21 +312,16 @@ Program będzie w stanie zapisać aktualny stan planszy w formacie, który umoż
 %TODO Sytuacje wyjątkowe
 Czasem działanie programu może ulec zmianie na skutek nieprawidłowych danych wejściowych, niestandardowych ustawień wprowadzonych przez użytkownik lub z przyczyn losowych. Ten rozdział opisuje jak program zachowa się w takiej sytuacji, oraz co może ją wywołać.
 
-\section{Zmiana domyślnego zachowania}
-\paragraph{Zbyt szeroka plansza}
-W przypadku gdy użytkownik włączy wyświetlanie kolejnych stanów w konsoli ale rozmiar planszy będzie zbyt szeroki by możliwe było jej wyświetlenie bez zawijania wierszy program wyświetli komunikat o niemożliwości wyświetlenia planszy w konsoli. Kolejne pokolenia nie będą wyświetlanie oknie wiersza poleceń ale generacja plików wynikowych nie ulegnie zmianie. \\
-Treść komunikatu: ,,Wybrana szerokość planszy jest zbyt duża by możliwe było wyświetlenie kolejnych pokoleń w oknie konsoli.''
-
 \section{Błędy}
 Opis błędów, które mogą wystąpić w trakcie działania programu. Komunikaty ich dotyczące będą wyświetlane w nowych oknach zawierających ich treść.
 
 \subsection{Błędy pliku wejściowego}
 
 \paragraph{Pusty plik}
-W przypadku gdy plik wskazany przez użytkownika będzie pusty program powiadomi go o tym i nie wczyta planszy. \\
+W przypadku gdy plik wskazany przez użytkownika będzie pusty program powiadomi go o tym i nie wczyta planszy.
 
 \paragraph{Rozmiar planszy nie będący liczbą}
-Jeśli w miejscu rozmiaru planszy (szerokości lub wysokości) znajdować się będą wartości inne niż liczby, liczby ujemne lub liczby których iloczyn jest większy niż 100 000 program nie wczyta rozmiaru planszy. W takiej sytuacji wyświetli odpowiedni komunikat i nie wczyta planszy. \\
+Jeśli w miejscu rozmiaru planszy (szerokości lub wysokości) znajdować się będą wartości inne niż liczby, liczby ujemne lub liczby których iloczyn jest większy niż 100 000 program nie wczyta rozmiaru planszy. W takiej sytuacji wyświetli odpowiedni komunikat i nie wczyta planszy.
  
  \paragraph{Niezgodności rozmiaru planszy z faktycznym stanem}
  Jeśli podany rozmiar planszy nie będzie się zgadzać z ilością podanych w nim stanów komórek, program wyświetli odpowiedni komunikat i nie wczyta planszy.
