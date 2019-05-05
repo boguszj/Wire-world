@@ -71,8 +71,8 @@ public class Controller {
         Utils.makeSpinnerUpdateValueOnFocusLost(heightSpinner);
         Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
 
-        //cellularAutomatonView.generationNumberProperty().addListener(this::generationNumberChanged);
-        //generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
+//        cellularAutomatonView.generationNumberProperty().addListener(this::generationNumberChanged);
+//        generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
 
         zoomSlider.valueProperty().addListener(this::zoomSliderChanged);
         speedSlider.valueProperty().addListener(this::speedSliderChanged);
@@ -106,7 +106,7 @@ public class Controller {
         delay = newValue.longValue();
     }
 
-    private void generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+    protected void generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
         if (newValue.intValue() <= 0) {
             previousGenerationButton.setDisable(true);
         }

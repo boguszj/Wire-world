@@ -44,6 +44,9 @@ public class GameOfLifeController extends Controller{
 
         super.cellularAutomatonView = new CellularAutomatonView(canvas, coloring, zoomSlider.getValue());
 
+        cellularAutomatonView.generationNumberProperty().addListener(this::generationNumberChanged);
+        generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
+
         canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
         randomButton.setOnAction(this::randomizeBoard);
         emptyButton.setOnAction(this::clearBoard);
