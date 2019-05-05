@@ -48,12 +48,14 @@ public class WireWorldController extends Controller {
         this.conductorRadioButton = conductorRadioButton;
         this.coloring = new HashMap<>();
 
-        super.cellularAutomatonView = new CellularAutomatonView(canvas, coloring, zoomSlider.getValue());
-
         coloring.put(WireWorld.CellStates.EMPTY, Color.BLACK);
         coloring.put(WireWorld.CellStates.HEAD, BLUE);
         coloring.put(WireWorld.CellStates.TAIL, Color.RED);
         coloring.put(WireWorld.CellStates.CONDUCTOR, Color.YELLOW);
+
+        super.cellularAutomatonView = new CellularAutomatonView(canvas, coloring, zoomSlider.getValue());
+        cellularAutomatonView.generationNumberProperty().addListener(this::generationNumberChanged);
+        generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
 
         canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
         randomButton.setOnAction(this::randomizeBoard);
