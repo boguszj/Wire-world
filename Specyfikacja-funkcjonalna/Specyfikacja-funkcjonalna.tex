@@ -309,8 +309,15 @@ Program będzie w stanie zapisać aktualny stan planszy w formacie, który umoż
 %TODO: Czy użytkownik będzie mógł wybrać format?
 
 \chapter{Sytuacje wyjątkowe}
-%TODO Sytuacje wyjątkowe
 Czasem działanie programu może ulec zmianie na skutek nieprawidłowych danych wejściowych, niestandardowych ustawień wprowadzonych przez użytkownik lub z przyczyn losowych. Ten rozdział opisuje jak program zachowa się w takiej sytuacji, oraz co może ją wywołać.
+
+\section{Zmiana działania programu}
+W wyjątkowych sytuacjach działanie programu może ulec drobnym zmianom.
+
+\paragraph{Nieoptymalna postać liczby}
+Jeśli użytkownik wprowadzi liczbę o dłuższej postaci niż jest to koniecznie, po zatwierdzeniu pola liczba zostanie skrócona do optymalnej długości.
+
+Na przykład po wprowadzeniu 00034 jako wysokość planszy, po zakończeniu edycji pola wartość ta zostanie zmieniona na 34.
 
 \section{Błędy}
 Opis błędów, które mogą wystąpić w trakcie działania programu. Komunikaty ich dotyczące będą wyświetlane w nowych oknach zawierających ich treść.
@@ -334,18 +341,21 @@ Jeśli w miejscu rozmiaru planszy (szerokości lub wysokości) znajdować się b
  
 \subsection{Błędy podczas używania GUI}
 \paragraph{Zły rozmiar planszy}
-Jeśli użytkownik w polu przeznaczonym na rozmiar planszy poda:
+Jeśli użytkownik w polu przeznaczonym na rozmiar planszy spróbuje wpisać:
 \begin{itemize}
 	\item znaki nie będące cyframi,
 	\item wartość mniejszą lub równą 0,
 	\item wartości zbyt duże (ilość komórek przekraczająca 100 000)
 \end{itemize}
-to program poinformuję o rodzaju problemu wyświetlając odpowiedni komunikat.
+to pole nie zmieni wartości.
+
+Na przykład po próbie wpisania znaków znaków 5, 2, e, 4 jako szerokość planszy pole będzie zawierało kolejno wartości: 5, 52, 52, 524. Nieprawidłowy znak zostanie zignorowany.
+
 \paragraph{Zły format wczytywanego pliku}
 Jeśli program nie obsługuję wczytywania wybranego formatu pliku to powiadomi o tym użytkownika odpowiednim komunikatem w którym również przedstawi mu obsługiwane typy plików wejściowych.
 
 \subsection{Błędy losowe}
 \paragraph{Brak pamięci operacyjnej}
-Gdyby w systemie zabrakło pamięci program nie będzie w stanie funkcjonować poprawnie. Program wyświetli komunikat o błędzie i przerwie poprosi o próbę wczytania mniejszej planszy lub uruchomienia programu później.
+Gdyby w systemie zabrakło pamięci program nie będzie w stanie funkcjonować poprawnie. Program wyświetli komunikat o błędzie i przerwie symulację. Następnie poprosi o próbę wczytania mniejszej planszy lub uruchomienia programu później.
 
 \end{document}
