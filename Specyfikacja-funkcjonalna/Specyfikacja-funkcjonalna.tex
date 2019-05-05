@@ -165,7 +165,6 @@ Po prawej stronie umieszczona jest grupa elementów pozwalających na reset cał
     \item Create -- Tworzy plansze o podanym rozmiarze, gdy plansza już istnieje i podany rozmiar jest równy planszy już istniejącej, opis 			przycisku zamienia się na "Clear", i wciśnięcie go zmienia stan wszystkich komórek na "Pusty" w przypadku WireWorld lub "Martwy" w 		przypadku Game of Life,
     \item Random -- Nadanie wszystkim komórkom losowych stanów,
 \end{itemize}
-%TODO: Przemyśleć co robią guziki Crate i Random. Ewentualnie przenieść tu guzik do wczytywania z planszy.
 
 \paragraph{3 Przybornik} \mbox{} \\
 Boczny przybornik zawierał będzie dwie zakładki, które będą pozwalały na edycje fragmentów planszy.
@@ -224,15 +223,6 @@ Możliwe jest edytowanie komórek przy pomocy narzędzie oraz wstawianie figur.
 \section{Tryb automatu Game of Live}
 Program obsługuje również automat komórkowy Game of Live. Przełączenie między aktualnym automatem jest realizowane przy pomocy wstążki na górze interfejsu.
 Większość elementów interfejsu pozostanie taka sama jak w automacie Wireworld. Inaczej będzie wyglądał przybornik do edycji planszy, ponieważ automat ten zawiera inne stany komórek.
-
-%TODO: Usunąć lub wykorzystać ten komentarz
-%\begin{figure}[h]
-%\centering
-%\setlength{\fboxsep}{0pt} %Odstęp 0
-%\setlength{\fboxrule}{1pt} %Grubość ramki 1p
-%\fbox{\includegraphics[width=13cm]{Obrazy/gui.png}}
-%\caption{Przykłady struktur}
-%\end{figure}
 
 \chapter{Edycja planszy}
 Użytkownik ma kilka możliwości na wgranie planszy do programu lub edycję już istniejącej. Są one wymienione poniżej.
@@ -305,8 +295,10 @@ Interfejs będzie zawierał zestaw typowych figur dla aktualnego automatu komór
 Użytkownik będzie miał możliwość dodania własnych figur do domyślnej listy.
 
 \section{Zapis stanu planszy}
-Program będzie w stanie zapisać aktualny stan planszy w formacie, który umożliwi późniejsze  wczytanie planszy.
-%TODO: Czy użytkownik będzie mógł wybrać format?
+Program będzie w stanie zapisać aktualny stan planszy w formacie, który umożliwi późniejsze wczytanie planszy. Użytkownik będzie miał możliwość wyboru formatu pliku do jakiego chce zapisać stan.
+
+\section{Wczytanie stanu planszy}
+Program będzie w stanie wczytać stan planszy z pliku wskazanego przez użytkownika. Typ pliku zostanie rozpoznany po rozszerzeniu zapisanemu na końcu nazwy pliku (znaki po ostatniej kropce).
 
 \chapter{Sytuacje wyjątkowe}
 Czasem działanie programu może ulec zmianie na skutek nieprawidłowych danych wejściowych, niestandardowych ustawień wprowadzonych przez użytkownik lub z przyczyn losowych. Ten rozdział opisuje jak program zachowa się w takiej sytuacji, oraz co może ją wywołać.
