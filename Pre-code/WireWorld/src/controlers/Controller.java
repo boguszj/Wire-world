@@ -1,5 +1,6 @@
 package controlers;
 
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
@@ -88,11 +89,15 @@ public class Controller {
     }
 
     private void createThread(){
-        t = new Thread() {
+        t = new Thread(new Runnable() {
             public void run(){
                 while(running) {
-                    cellularAutomatonView.nextGeneration();
-                    System.out.println(delay);
+                    Platform.runLater(new Runnable() {
+                        @Override public void run() {
+                            cellularAutomatonView.nextGeneration();
+                            System.out.println(delay);
+                        }
+                    });
                     try {
                         Thread.sleep(1000 / delay);
                     } catch (InterruptedException e) {
@@ -100,7 +105,8 @@ public class Controller {
                     }
                 }
             }
-        };
+        });
+        t.setDaemon(true);
     }
 
     private void zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
