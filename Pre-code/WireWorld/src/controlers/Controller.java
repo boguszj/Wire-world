@@ -15,7 +15,9 @@ import views.CellularAutomatonView;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Math.min;
 import static javafx.scene.paint.Color.BLUE;
+import static jdk.nashorn.internal.objects.NativeMath.max;
 
 //TODO: States for GUI (Simulation paused, played, ...)
 
@@ -81,6 +83,13 @@ public class Controller {
         previousGenerationButton.setOnAction(this::previousGeneration);
         autoRunToggleButton.setOnAction(this::play);
 
+    }
+
+    protected void shrinkSlider(){
+        double max = min(100, 8000 / max(widthSpinner.getValue(), heightSpinner.getValue()));
+        zoomSlider.setMax(max);
+        if(zoomSlider.getValue() > max)
+            zoomSlider.setValue(max);
     }
 
     protected void enableButtons(){
