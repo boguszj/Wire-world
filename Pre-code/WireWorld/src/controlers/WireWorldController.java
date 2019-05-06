@@ -56,8 +56,12 @@ public class WireWorldController extends Controller {
         super.cellularAutomatonView = new CellularAutomatonView(canvas, coloring, zoomSlider.getValue());
         cellularAutomatonView.generationNumberProperty().addListener(this::generationNumberChanged);
         generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
-
-        canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
+        canvas.setOnMouseDragged((MouseEvent event) -> {
+            canvasClicked(event);
+        });
+        canvas.setOnMouseClicked((MouseEvent event) -> {
+            canvasClicked(event);
+        });
         randomButton.setOnAction(this::randomizeBoard);
         emptyButton.setOnAction(this::clearBoard);
 
