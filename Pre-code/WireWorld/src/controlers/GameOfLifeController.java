@@ -6,6 +6,7 @@ import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -46,8 +47,12 @@ public class GameOfLifeController extends Controller{
 
         cellularAutomatonView.generationNumberProperty().addListener(this::generationNumberChanged);
         generationNumberLabel.textProperty().bind(cellularAutomatonView.generationNumberProperty().asString());
-
-        canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, this::canvasClicked);
+        canvas.setOnMouseDragged((MouseEvent event) -> {
+            canvasClicked(event);
+        });
+        canvas.setOnMouseClicked((MouseEvent event) -> {
+            canvasClicked(event);
+        });
         randomButton.setOnAction(this::randomizeBoard);
         emptyButton.setOnAction(this::clearBoard);
 
