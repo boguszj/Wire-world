@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
+import javafx.scene.paint.Color;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
@@ -18,6 +19,9 @@ public class gridSetupController implements Initializable {
 
     //-------------------- Wireworld -------------------------
     private WireWorldController wireWorldController;
+
+    @FXML
+    private Button wireWorldPowerOffButton;
 
     @FXML
     private Canvas wireWorldCanvas;
@@ -34,9 +38,9 @@ public class gridSetupController implements Initializable {
     private Button wireWorldNextGenerationButton;
 
     @FXML
-    private Spinner wireWorldWidthSpinner;
+    private Spinner<Integer> wireWorldWidthSpinner;
     @FXML
-    private Spinner wireWorldHeightSpinner;
+    private Spinner<Integer> wireWorldHeightSpinner;
     @FXML
     private Button wireWorldRandomButton;
     @FXML
@@ -79,9 +83,9 @@ public class gridSetupController implements Initializable {
     private Button gameOfLifeNextGenerationButton;
 
     @FXML
-    private Spinner gameOfLifeWidthSpinner;
+    private Spinner<Integer> gameOfLifeWidthSpinner;
     @FXML
-    private Spinner gameOfLifeHeightSpinner;
+    private Spinner<Integer> gameOfLifeHeightSpinner;
     @FXML
     private Button gameOfLifeRandomButton;
     @FXML
@@ -125,7 +129,7 @@ public class gridSetupController implements Initializable {
 
         //Pass controls to GameOfLifeController
         gameOfLifeController = new GameOfLifeController(gameOfLifeSpeedSlider, gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
-        wireWorldController = new WireWorldController(wireWorldSpeedSlider, wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
+        wireWorldController = new WireWorldController(wireWorldPowerOffButton ,wireWorldSpeedSlider, wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
 
     }
 
