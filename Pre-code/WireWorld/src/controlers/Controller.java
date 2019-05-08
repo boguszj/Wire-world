@@ -84,16 +84,25 @@ public class Controller {
 
     }
 
+    private double myMax(double a, double b){
+        if(a > b) return a;
+        return b;
+    }
+
+    private double myMin(double a, double b){
+        if(a < b) return a;
+        return b;
+    }
+
     protected void shrinkSlider(){
-        double max = min(8000, 8000 / max(widthSpinner.getValue(), heightSpinner.getValue()));
-        double min = 1150.0 / widthSpinner.getValue();
-        System.out.println(min);
-        System.out.println(max);
-        zoomSlider.setMax(max);
-        if(zoomSlider.getValue() > max)
-            zoomSlider.setValue(max);
-        if(min < max) {
-            zoomSlider.setValue(min);
+        double Max = myMin(8000, 8000 / myMax(widthSpinner.getValue(), heightSpinner.getValue()));
+        double Min = myMax(500.0 / heightSpinner.getValue(), 1150.0 / widthSpinner.getValue());
+        System.out.println(Min);
+        System.out.println(Max);
+        zoomSlider.setValue(Max);
+        zoomSlider.setMax(Max);
+        if(Min < Max) {
+            zoomSlider.setValue(Min);
         }
     }
 
