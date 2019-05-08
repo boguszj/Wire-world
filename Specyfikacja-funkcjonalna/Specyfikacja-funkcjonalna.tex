@@ -232,7 +232,7 @@ Program pozwala na wczytanie całego stanu planszy (wraz z rozmiarem) z pliku. D
 
 Program będzie w stanie obsłużyć różnie formaty plików wymienione poniżej.
 
-\subsection{JSON}
+\subsection{Plansza w formacie JSON}
 W celu nadania danym przenośności, oraz ułatwienia generacji danych przy pomocy zewnętrznych narzędzi zostanie wykorzystany format JSON. Jest to \textbf{domyślny format} zapisu planszy.
 
 \subsubsection{Przykład}
@@ -253,7 +253,10 @@ Przykład zapisu przedstawionej planszy.
 }
 \end{verbatim}
 
-\subsection{XML}
+Wartości \texttt{width} i \texttt{height} określają wymiary planszy.
+\texttt{states} zawiera tablicę reprezentującą poszczególne stany komórek w kolejności od lewej do prawej oraz od góry do dołu. Element są najpierw jest pierwszy wiersz, potem drugi i tak aż do ostatniego.
+
+\subsection{Plansza w formacie XML}
 Możliwy jest również zapis stanu planszy do pliku XML. Z uwagi na mniejszą czytelność oraz większy rozmiar plików tego typu nie jest to domyślnie używany format. Użytkownik będzie miał możliwość zmiany formatu pliku, do jakiego chce zapisać planszę przy pomocy interfejsu graficznego.
 
 \subsubsection{Przykład}
@@ -282,6 +285,8 @@ Przykład zapisu przedstawionej planszy.
 </Board>
 \end{verbatim}
 \end{samepage}
+Wartości \texttt{width} i \texttt{height} określają wymiary planszy.
+\texttt{states} zawiera tablicę reprezentującą poszczególne stany komórek w kolejności od lewej do prawej oraz od góry do dołu. Element są najpierw jest pierwszy wiersz, potem drugi i tak aż do ostatniego.
 
 
 \section{Przybornik stanów}
