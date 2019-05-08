@@ -34,9 +34,8 @@ public class Controller {
     protected Button previousGenerationButton;
     protected Button nextGenerationButton;
 
-    protected Spinner widthSpinner;
-
-    protected Spinner heightSpinner;
+    protected Spinner<Integer> widthSpinner;
+    protected Spinner<Integer> heightSpinner;
     protected Button randomButton;
     protected Button emptyButton;
     protected Button saveButton;
@@ -86,10 +85,16 @@ public class Controller {
     }
 
     protected void shrinkSlider(){
-        double max = min(100, 8000 / max(widthSpinner.getValue(), heightSpinner.getValue()));
+        double max = min(8000, 8000 / max(widthSpinner.getValue(), heightSpinner.getValue()));
+        double min = 1150.0 / widthSpinner.getValue();
+        System.out.println(min);
+        System.out.println(max);
         zoomSlider.setMax(max);
         if(zoomSlider.getValue() > max)
             zoomSlider.setValue(max);
+        if(min < max) {
+            zoomSlider.setValue(min);
+        }
     }
 
     protected void enableButtons(){

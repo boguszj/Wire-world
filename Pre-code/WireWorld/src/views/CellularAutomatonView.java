@@ -19,6 +19,10 @@ import java.util.Map;
 public class CellularAutomatonView<T extends Enum> {
     private double cellSize;
 
+    public CellularAutomaton<T> getCellularAutomaton() {
+        return cellularAutomaton;
+    }
+
     private CellularAutomaton<T> cellularAutomaton;
     private final Canvas canvas;
     private final Map<T, Paint> cellStateToColorMap;
@@ -26,6 +30,8 @@ public class CellularAutomatonView<T extends Enum> {
     private final List<T[]> history = new LinkedList<>();
 
     private Cell<T>[] cells;
+
+
 
     private IntegerProperty generationNumber = new SimpleIntegerProperty(0);
 

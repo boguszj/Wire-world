@@ -127,4 +127,12 @@ public class WireWorld extends CellularAutomaton<WireWorld.CellStates> {
 
         return result;
     }
+
+    public void killElectrons() {
+        for (int i = 0; i < getCellCount(); i++) {
+            if (cells[i] != CellStates.EMPTY)
+                cells[i] = CellStates.CONDUCTOR;
+        }
+    }
+
 }

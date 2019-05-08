@@ -27,26 +27,26 @@ import static javafx.scene.paint.Color.*;
  */
 public class WireWorldController extends Controller {
 
-    @FXML
+    private final Button powerOffButton;
     private final RadioButton emptyRadioButton;
-    @FXML
     private final RadioButton tailRadioButton;
-    @FXML
     private final RadioButton headRadioButton;
-    @FXML
     private final RadioButton conductorRadioButton;
+
 
     private Map<WireWorld.CellStates, Paint> coloring;
 
 
-    public WireWorldController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton emptyRadioButton, RadioButton tailRadioButton, RadioButton headRadioButton, RadioButton conductorRadioButton) {
+    public WireWorldController(Button powerOffButton, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton emptyRadioButton, RadioButton tailRadioButton, RadioButton headRadioButton, RadioButton conductorRadioButton) {
         super(speedSlider, canvas, zoomSlider,  autoRunToggleButton,  previousGenerationButton,  nextGenerationButton,  widthSpinner,  heightSpinner,  randomButton,  emptyButton,  saveButton,  loadButton,  generationNumberLabel);
 
+        this.powerOffButton = powerOffButton;
         this.emptyRadioButton = emptyRadioButton;
         this.headRadioButton = headRadioButton;
         this.tailRadioButton = tailRadioButton;
         this.conductorRadioButton = conductorRadioButton;
         this.coloring = new HashMap<>();
+
 
         coloring.put(WireWorld.CellStates.EMPTY, Color.BLACK);
         coloring.put(WireWorld.CellStates.HEAD, BLUE);
@@ -64,6 +64,7 @@ public class WireWorldController extends Controller {
         });
         randomButton.setOnAction(this::randomizeBoard);
         emptyButton.setOnAction(this::clearBoard);
+        powerOffButton.setOnAction(this::powerOff);
 
     }
 
@@ -110,6 +111,11 @@ public class WireWorldController extends Controller {
             return WireWorld.CellStates.TAIL;
         else
             return WireWorld.CellStates.CONDUCTOR;
+    }
+
+    private void powerOff(Event event){
+        ((WireWorld) cellularAutomatonView.getCellularAutomaton()).killElectrons();
+        cellularAutomatonView.nextGeneration();
     }
 
 }

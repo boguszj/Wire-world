@@ -82,6 +82,7 @@
                                     </Label>
                                  </children>
                               </HBox>
+                              <Button fx:id="wireWorldPowerOffButton" layoutY="17.0" mnemonicParsing="false" text="Power Off" />
                            </children>
                         </Pane>
                      </items>
