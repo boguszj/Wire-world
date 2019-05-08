@@ -34,14 +34,14 @@
 \chapter{Cel projektu}
 Celem projektu jest implementacja automatu komórkowego Wire World w języku Java z interfejsem graficznym zaimplementowanym przy pomocy biblioteki JavaFX. Gotowy program ma pozwalać użytkownikowi przeprowadzać symulacje zgodne z określonymi zasadami. Parametrami generacji użytkownik będzie mógł sterować ręcznie przy pomocy graficznego \hyperref[sec:wyglad-gui]{\textcolor{LinkColor}{interfejsu użytkownika}}.
 
-Interfejs będzie wyświetlał na bierząco podgląd kolejnych generacji. Użytkownik będzie miał możliwość wstrzymania symulacji oraz zmianę stanu planszy przy pomocy narzędzi edycji.
+Interfejs będzie wyświetlał na bieżąco podgląd kolejnych generacji. Użytkownik będzie miał możliwość wstrzymania symulacji oraz zmianę stanu planszy przy pomocy narzędzi edycji.
 
 Ponadto będzie istnieć również możliwość przełączenia trybu symulacji z Wire World na automat komórkowy Game of life.
 
 \chapter{Opis ogólny problemu}
 
 \section{Wstęp}
-Projektu skupia się na realizacji 3 głównych aspektów problemu. Są to odpowiednio automaty komórkowe ,,Game of Life'' i ,,Wireworld'' oraz wizualna prezentacja działania tych automatów. 
+Projekt skupia się na realizacji 3 głównych aspektów problemu. Będą to odpowiednio automaty komórkowe ,,Game of Life'' i ,,Wireworld'' oraz wizualna prezentacja działania tych automatów. 
 
 \section{Wire World}
 
@@ -120,12 +120,12 @@ Realizowana aplikacja będzie obsługiwana poprzez graficzny interfejs użytkown
 
 Interfejs pozwoli na poniższe funkcjonalności:
 \begin{itemize}
-    \item Bieżący podgląd stanu symulacji
-    \item Możliwość dostosowania prędkości symulacji
-    \item Zapis aktualnego pokolenia do pliku
-    \item Wyczytanie pokolenia z pliku
-    \item Edycje poszczególnych komórek w trakcie symulacji
-    \item Wstawianie figur wybranych z przybornika
+    \item Bieżący podgląd stanu symulacji,
+    \item Możliwość dostosowania prędkości symulacji,
+    \item Zapis aktualnego pokolenia do pliku,
+    \item Wyczytanie pokolenia z pliku,
+    \item Edycje poszczególnych komórek w trakcie symulacji,
+    \item Wstawianie figur wybranych z przybornika.
 \end{itemize}
 
 \chapter{Działanie programu}
@@ -133,10 +133,10 @@ Interfejs pozwoli na poniższe funkcjonalności:
 \section{Opis komunikacji z użytkownikiem}
 Po uruchomieniu programu zostanie wyświetlony graficzny interfejs, który pozwoli użytkownikowi sterować parametrami w dowolny sposób, zgodny z regułami symulacji. W razie wystąpienia błędów program będzie informować użytkownika wyświetlając nowe okno zawierające opis błędu.
 
-W ramach interfejsu użytkownik będzie mógł wykonywać czynności opisane w punkcie \ref{sec:opis-interfejs} oraz przełączać między automatami Game of Life i Wireworld.
+W ramach interfejsu użytkownik będzie mógł wykonywać czynności opisane w punkcie \ref{sec:opis-interfejs}{} oraz przełączać między automatami Game of Life i Wire World.
 
 \section{Wygląd interfejsu użytkownika} \label{sec:wyglad-gui}
-Interfejs użytkownika będzie wyglądał następująco. Wyszczególnione obszary są zaznaczone numerami.
+Interfejs użytkownika będzie wyglądał jak poniżej. Wyszczególnione obszary są zaznaczone numerami.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.99\columnwidth]{gui.png} %Dla 1 nie mieści się na tej samej stronie
@@ -145,10 +145,10 @@ Interfejs użytkownika będzie wyglądał następująco. Wyszczególnione obszar
 
 \section{Opis elementów}
 \paragraph{1 Podgląd aktualnego stanu symulacji} \mbox{} \\
-W tej części będzie wyświetlane bieżące pokolenie symulacji aktualnego automatu komórkowego. Po bokach panelu znajdują się \textbf{suwak} pozwalające na zminę oglądanego obszaru planszy. Będą one szczególnie przydatne po przybliżeniu obrazu.
+W tej części będzie wyświetlane bieżące pokolenie symulacji aktualnego automatu komórkowego. Po bokach panelu znajduje się \textbf{suwak} pozwalające na zmianę oglądanego obszaru planszy.
 
 \paragraph{2 Ustawienia symulacji i planszy} \mbox{} \\
-Sekcja kontrolek umożliwiających sterowanie symulacją oraz zminę całości planszy.
+Sekcja kontrolek umożliwiających sterowanie symulacją oraz zmianę całości planszy.
 
 Po lewej stronie znajduje się grupa elementów wpływających bezpośrednio na podgląd symulacji.
 \begin{itemize}
@@ -156,7 +156,8 @@ Po lewej stronie znajduje się grupa elementów wpływających bezpośrednio na 
     \item Stop -- zatrzymuje automatycznie przechodzenie między staniami symulacji,
     \item Speed -- zmienia tempo automatycznego przechodzenie między staniami symulacji,
     \item Next generation -- ręczne przejście do następnego stanu symulacji,
-    \item Zoom -- zmienia skalę podglądu aktualnego stanu.
+    \item Zoom -- zmienia skalę podglądu aktualnego stanu,
+    \item Speed -- zmienia prędkość przechodzenia między kolejnymi stanami symulacji.
 \end{itemize}
 
 Po prawej stronie umieszczona jest grupa elementów pozwalających na reset całego stanu planszy.
@@ -191,10 +192,10 @@ Zakładka \textbf{External} da dostęp do zestawu gotowych figur, które użytko
 Wstążka pozwalająca na zmianę aktywnego automatu komórkowego.
 
 \section{Stany interfejsu}
-Podczas korzystania z aplikacji interfejs będzie ulegał drobnym zmianom. Głównie elementy odpowiadające za aktualnie niedostępne opcje będą zmieniać kolor na szary.
+Podczas korzystania z aplikacji interfejs będzie ulegał drobnym zmianom (głównie elementy odpowiadające za aktualnie niedostępne opcje będą zmieniać kolor na szary).
 
 \subsection{Po włączeniu programu}
-Większość kontrolek jest \textbf{wyłączonych} do momentu wczytania planszy z pliku lub wygenerowania losowej. Program domyślnie wyświetla okno symulacji automatu Wireworld.
+Większość kontrolek jest \textbf{wyłączonych} do momentu wczytania planszy z pliku lub wygenerowania losowej. Program domyślnie wyświetla okno symulacji automatu Wire World.
 
 \begin{figure}[H]
     \centering
@@ -203,7 +204,7 @@ Większość kontrolek jest \textbf{wyłączonych} do momentu wczytania planszy 
 \end{figure}
 
 \subsection{W trakcie symulacji}
-Można zmienić tempo symulacji oraz wstrzymać generację następnych pokoleń, co umożliwi edycję aktualnego pokolenia.
+Można zmienić tempo symulacji oraz wstrzymać generację następnych pokoleń.
 
 \begin{figure}[H]
     \centering
@@ -212,7 +213,7 @@ Można zmienić tempo symulacji oraz wstrzymać generację następnych pokoleń,
 \end{figure}
 
 \subsection{Symulacja wstrzymana}
-Możliwe jest edytowanie komórek przy pomocy narzędzie oraz wstawianie figur.
+Możliwe jest edytowanie komórek przy pomocy narzędzia oraz wstawianie figur.
 
 \begin{figure}[H]
     \centering
@@ -221,8 +222,8 @@ Możliwe jest edytowanie komórek przy pomocy narzędzie oraz wstawianie figur.
 \end{figure}
 
 \section{Tryb automatu Game of Live}
-Program obsługuje również automat komórkowy Game of Live. Przełączenie między aktualnym automatem jest realizowane przy pomocy wstążki na górze interfejsu.
-Większość elementów interfejsu pozostanie taka sama jak w automacie Wireworld. Inaczej będzie wyglądał przybornik do edycji planszy, ponieważ automat ten zawiera inne stany komórek.
+Program obsługuje również automat komórkowy Game of Life. Przełączenie między aktualnym automatem jest realizowane przy pomocy wstążki na górze interfejsu.
+Większość elementów interfejsu pozostanie taka sama jak w automacie Wire World. Inaczej będzie wyglądał przybornik do edycji planszy, ponieważ automat ten zawiera inne stany komórek.
 
 \chapter{Edycja planszy}
 Użytkownik ma kilka możliwości na wgranie planszy do programu lub edycję już istniejącej. Są one wymienione poniżej.
@@ -254,10 +255,10 @@ Przykład zapisu przedstawionej planszy.
 \end{verbatim}
 
 Wartości \texttt{width} i \texttt{height} określają wymiary planszy.
-\texttt{states} zawiera tablicę reprezentującą poszczególne stany komórek w kolejności od lewej do prawej oraz od góry do dołu. Element są najpierw jest pierwszy wiersz, potem drugi i tak aż do ostatniego.
+\texttt{states} zawiera tablicę reprezentującą poszczególne stany komórek w kolejności od lewej do prawej oraz od góry do dołu. 
 
 \subsection{Plansza w formacie XML}
-Możliwy jest również zapis stanu planszy do pliku XML. Z uwagi na mniejszą czytelność oraz większy rozmiar plików tego typu nie jest to domyślnie używany format. Użytkownik będzie miał możliwość zmiany formatu pliku, do jakiego chce zapisać planszę przy pomocy interfejsu graficznego.
+Możliwy jest również zapis stanu planszy do pliku XML. Z uwagi na mniejszą czytelność oraz większy rozmiar plików tego typu, nie jest to domyślnie używany format. Użytkownik będzie miał możliwość zmiany formatu pliku, do jakiego chce zapisać planszę przy pomocy interfejsu graficznego.
 
 \subsubsection{Przykład}
 Przykład zapisu przedstawionej planszy. 
@@ -286,14 +287,13 @@ Przykład zapisu przedstawionej planszy.
 \end{verbatim}
 \end{samepage}
 Wartości \texttt{width} i \texttt{height} określają wymiary planszy.
-\texttt{states} zawiera tablicę reprezentującą poszczególne stany komórek w kolejności od lewej do prawej oraz od góry do dołu. Element są najpierw jest pierwszy wiersz, potem drugi i tak aż do ostatniego.
-
+\texttt{states} zawiera tablicę reprezentującą poszczególne stany komórek w kolejności od lewej do prawej oraz od góry do dołu.
 
 \section{Przybornik stanów}
 Jedną z części interfejsu użytkownika będzie przybornik pozwalający na wybór jednego ze stanów aktualnego automatu komórkowego. Po zaznaczeniu jednego ze stanów użytkownik będzie miał możliwość zamiany wybranych komórek aktualnego pokolenia na wybrany stan.
 
 \section{Wstawianie figur}
-Interfejs będzie zawierał zestaw typowych figur dla aktualnego automatu komórkowego. Możliwe będzie zaznaczenie wybranej figury oraz wstawienie jej w wybrane miejsce symulacji.
+Interfejs będzie zawierał zestaw typowych figur dla aktualnego automatu komórkowego. Możliwe będzie zaznaczenie wybranej figury oraz wstawienie jej w wybrane miejsce symulacji planszy.
 
 Użytkownik będzie mógł wybrać figurę z listy figur. Następnie po kliknięciu wybranego pola planszy figura zostanie wstawiona w to miejsce, tak by lewy górny róg figury znalazł się w wybranym miejscu.
 
@@ -306,10 +306,10 @@ Figury rozszerzające podstawową listę będą zapisywanie w pliku konfiguracyj
 Program będzie w stanie zapisać aktualny stan planszy w formacie, który umożliwi późniejsze wczytanie planszy. Użytkownik będzie miał możliwość wyboru formatu pliku do jakiego chce zapisać stan.
 
 \section{Wczytanie stanu planszy}
-Program będzie w stanie wczytać stan planszy z pliku wskazanego przez użytkownika. Typ pliku zostanie rozpoznany po rozszerzeniu zapisanemu na końcu nazwy pliku (znaki po ostatniej kropce).
+Program będzie w stanie wczytać stan planszy z pliku wskazanego przez użytkownika. Typ pliku zostanie rozpoznany po rozszerzeniu pliku.
 
 \chapter{Sytuacje wyjątkowe}
-Czasem działanie programu może ulec zmianie na skutek nieprawidłowych danych wejściowych, niestandardowych ustawień wprowadzonych przez użytkownik lub z przyczyn losowych. Ten rozdział opisuje jak program zachowa się w takiej sytuacji, oraz co może ją wywołać.
+Czasem działanie programu może ulec zmianie na skutek nieprawidłowych danych wejściowych, niestandardowych ustawień wprowadzonych przez użytkownika lub z przyczyn losowych. Ten rozdział opisuje jak program zachowa się w takiej sytuacji, oraz co może ją wywołać.
 
 \section{Zmiana działania programu}
 W wyjątkowych sytuacjach działanie programu może ulec drobnym zmianom.
@@ -328,7 +328,7 @@ Opis błędów, które mogą wystąpić w trakcie działania programu. Komunikat
 W przypadku gdy plik wskazany przez użytkownika będzie pusty program powiadomi go o tym i nie wczyta planszy.
 
 \paragraph{Rozmiar planszy nie będący liczbą}
-Jeśli w miejscu rozmiaru planszy (szerokości lub wysokości) znajdować się będą wartości inne niż liczby, liczby ujemne lub liczby których iloczyn jest większy niż 100 000 program nie wczyta rozmiaru planszy. W takiej sytuacji wyświetli odpowiedni komunikat i nie wczyta planszy.
+Jeśli w miejscu rozmiaru planszy (szerokości lub wysokości) znajdować się będą wartości inne niż liczby, liczby ujemne lub liczby których iloczyn jest większy niż 1 000 000 program nie wczyta rozmiaru planszy. W takiej sytuacji wyświetli odpowiedni komunikat i nie wczyta planszy.
  
  \paragraph{Niezgodności rozmiaru planszy z faktycznym stanem}
  Jeśli podany rozmiar planszy nie będzie się zgadzać z ilością podanych w nim stanów komórek, program wyświetli odpowiedni komunikat i nie wczyta planszy.
@@ -345,14 +345,14 @@ Jeśli użytkownik w polu przeznaczonym na rozmiar planszy spróbuje wpisać:
 \begin{itemize}
 	\item znaki nie będące cyframi,
 	\item wartość mniejszą lub równą 0,
-	\item wartości zbyt duże (ilość komórek przekraczająca 100 000)
+	\item wartości zbyt duże (liczba komórek przekraczająca 1 000 000)
 \end{itemize}
 to pole nie zmieni wartości.
 
-Na przykład po próbie wpisania znaków znaków 5, 2, e, 4 jako szerokość planszy pole będzie zawierało kolejno wartości: 5, 52, 52, 524. Nieprawidłowy znak zostanie zignorowany.
+Na przykład po próbie wpisania ciągu znaków znaków ,,52e4'' jako szerokość planszy pole będzie zawierało kolejno wartości: 5, 52, 52, 524. Nieprawidłowy znak zostanie zignorowany.
 
 \paragraph{Zły format wczytywanego pliku}
-Jeśli program nie obsługuję wczytywania wybranego formatu pliku to powiadomi o tym użytkownika odpowiednim komunikatem w którym również przedstawi mu obsługiwane typy plików wejściowych.
+Jeśli program nie obsługuję wczytywania wybranego formatu pliku to powiadomi o tym użytkownika odpowiednim komunikatem w którym  przedstawi mu również obsługiwane typy plików wejściowych.
 
 \paragraph{Brak miejsca na figurę}
 Jeśli użytkownik spróbuje wstawić figurę w miejsce na planszy, tak, że cała figura nie zmieści się na aktualnej planszy figura nie zostanie wstawiona oraz zostanie wyświetlony komunikat o błędzie.
