@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  * Abstraction of cellular automaton
@@ -11,6 +11,10 @@ public abstract class CellularAutomaton<T extends Enum> {
     protected final int width;
     protected final int height;
     protected T[] cells;
+
+    private List<T[]> history = new ArrayList<>();
+    //Number of generation that automaton is currently in. Used for lazy generation.
+    private int currentGeneration = 0;
 
     protected static Random random = new Random();
 
@@ -38,6 +42,7 @@ public abstract class CellularAutomaton<T extends Enum> {
                     " Expected size: " + width * height + " Actual size: " + cells.length);
 
         this.cells = cells;
+        clearHistory();
     }
 
     public int getWidth() {
@@ -56,6 +61,8 @@ public abstract class CellularAutomaton<T extends Enum> {
     public void setCell(int row, int column, T value) {
         final int index = row * width + column;
         cells[index] = value;
+
+        clearHistory();
     }
 
     /**
@@ -68,7 +75,35 @@ public abstract class CellularAutomaton<T extends Enum> {
     /**
      * Cellular automaton moves to the next generation
      */
-    public abstract void nextGeneration();
+    public final void nextGeneration() {
+        currentGeneration++;
+        if (currentGeneration < history.size()) {
+            cells = history.get(currentGeneration);
+        } else {
+            cells = generateNextGeneration();
+            history.add(cells);
+        }
+    }
+
+    /**
+     * Cellular automaton moves to the previous generation
+     */
+    public final void previousGeneration() {
+        currentGeneration--;
+        if (currentGeneration < 0) {
+            currentGeneration = 0;
+            throw new IllegalStateException("Cannot go back in history below state 0");
+        }
+
+        cells = history.get(currentGeneration);
+    }
+
+    /**
+     * Cellular automaton generates cells of the next generation
+     *
+     * @return Cells that make up next generation
+     */
+    protected abstract T[] generateNextGeneration();
 
     /**
      * Sett all cell to default state
@@ -77,6 +112,8 @@ public abstract class CellularAutomaton<T extends Enum> {
         for (int i = 0; i < getCellCount(); i++) {
             cells[i] = getDefaultState();
         }
+
+        clearHistory();
     }
 
     /**
@@ -89,4 +126,13 @@ public abstract class CellularAutomaton<T extends Enum> {
      * @return Default cell state
      */
     protected abstract T getDefaultState();
+
+    /**
+     * Set current state as only one in history
+     */
+    private void clearHistory() {
+        currentGeneration = 0;
+        history.clear();
+        history.add(cells);
+    }
 }

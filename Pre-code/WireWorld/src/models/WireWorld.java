@@ -41,7 +41,7 @@ public class WireWorld extends CellularAutomaton<WireWorld.CellStates> {
     }
 
     @Override
-    public void nextGeneration() {
+    protected CellStates[] generateNextGeneration() {
         CellStates[] nextGen = new CellStates[getCellCount()];
         int[] headsCounter = countHeads();
 
@@ -52,7 +52,7 @@ public class WireWorld extends CellularAutomaton<WireWorld.CellStates> {
             else nextGen[i] = cells[i];
         }
 
-        this.cells = nextGen;
+        return nextGen;
     }
 
     @Override
