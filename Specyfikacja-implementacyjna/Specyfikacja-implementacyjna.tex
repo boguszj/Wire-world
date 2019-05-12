@@ -165,11 +165,53 @@ public enum CellStates {
 
 \paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
 \begin{itemize}
-    \item \texttt{CellStates[] getPossibleCellValues()}
-    \item \texttt{protected CellStates[] generateNextGeneration()}
-    \item \texttt{public void randomize()}
-    \item \texttt{protected CellStates getDefaultState()}
+    \item \texttt{CellStates[] getPossibleCellValues()},
+    \item \texttt{protected CellStates[] generateNextGeneration()},
+    \item \texttt{public void randomize()},
+    \item \texttt{protected CellStates getDefaultState()}.
 \end{itemize}
 Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[subsec:cellularAutomaton]{CellularAutomaton}.
 
+\subsection{WireWorld}
+\texttt{public class WireWorld extends CellularAutomaton<WireWorld.CellStates>}
+
+Klasa jest konkretną implementacja automatu komórkowego \textit{WireWorld}.
+
+\paragraph{Klasy wewnętrzne:} \mbox{} \\
+Typ wyliczeniowy reprezentujący możliwe stany komórki.
+\begin{verbatim}
+public enum CellStates {
+    EMPTY,
+    HEAD,
+    TAIL,
+    CONDUCTOR;
+
+    public static CellStates randomState() - Zwraca losowy stan komórki.
+}
+\end{verbatim}
+
+\paragraph{Konstruktory:}
+\begin{itemize}
+	\item \texttt{public WireWorld(int width, int height)} -- Tworzy automat o podanym rozmiarze z komórkami o domyślnym stanie.
+\end{itemize}
+
+\paragraph{Metody publiczne:}
+\begin{itemize}
+    \item \texttt{public void killElectrons()} -- Zamienia wszystkie głowy elektronów i ogony elektronów na przewodniki.
+\end{itemize}
+
+\paragraph{Metody prywatne:}
+\begin{itemize}
+    \item \texttt{private int countHeads(final int cellX, final int cellY)} -- Oblicza ilość sąsiadów konkretnej komórki będących głową elektronu,
+    \item \texttt{private int[] countHeads()} -- Dla każdej komórki oblicza ilość sąsiadów będących głową elektronu.
+\end{itemize}
+
+\paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
+\begin{itemize}
+    \item \texttt{CellStates[] getPossibleCellValues()},
+    \item \texttt{protected CellStates[] generateNextGeneration()},
+    \item \texttt{public void randomize()},
+    \item \texttt{protected CellStates getDefaultState()}.
+\end{itemize}
+Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[subsec:cellularAutomaton]{CellularAutomaton}.
 \end{document}
