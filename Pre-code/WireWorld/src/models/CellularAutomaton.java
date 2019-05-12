@@ -1,5 +1,8 @@
 package models;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.util.*;
 
 /**
@@ -14,7 +17,7 @@ public abstract class CellularAutomaton<T extends Enum> {
 
     private List<T[]> history = new ArrayList<>();
     //Number of generation that automaton is currently in. Used for lazy generation.
-    private int currentGeneration = 0;
+    private IntegerProperty currentGeneration = new SimpleIntegerProperty(0);
 
     protected static Random random = new Random();
 
@@ -76,9 +79,9 @@ public abstract class CellularAutomaton<T extends Enum> {
      * Cellular automaton moves to the next generation
      */
     public final void nextGeneration() {
-        currentGeneration++;
-        if (currentGeneration < history.size()) {
-            cells = history.get(currentGeneration);
+        currentGeneration.add(1);
+        if (currentGeneration.getValue() < history.size()) {
+            cells = history.get(currentGeneration.getValue());
         } else {
             cells = generateNextGeneration();
             history.add(cells);
@@ -89,13 +92,13 @@ public abstract class CellularAutomaton<T extends Enum> {
      * Cellular automaton moves to the previous generation
      */
     public final void previousGeneration() {
-        currentGeneration--;
-        if (currentGeneration < 0) {
-            currentGeneration = 0;
+        currentGeneration.subtract(1);
+        if (currentGeneration.getValue() < 0) {
+            currentGeneration.setValue(0);
             throw new IllegalStateException("Cannot go back in history below state 0");
         }
 
-        cells = history.get(currentGeneration);
+        cells = history.get(currentGeneration.getValue());
     }
 
     /**
@@ -131,8 +134,16 @@ public abstract class CellularAutomaton<T extends Enum> {
      * Set current state as only one in history
      */
     private void clearHistory() {
-        currentGeneration = 0;
+        currentGeneration.setValue(0);
         history.clear();
         history.add(cells);
+    }
+
+    public int getCurrentGeneration() {
+        return currentGeneration.getValue();
+    }
+
+    public IntegerProperty currentGenerationProperty() {
+        return currentGeneration;
     }
 }
