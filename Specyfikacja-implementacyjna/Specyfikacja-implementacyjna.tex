@@ -44,7 +44,7 @@ Package składający się z klas mających na celu połączenie graficznego inte
 	\item \texttt{protected ToggleButton autoRunToggleButton} - przycisk włączający i wyłączający tryb automatyczny,
 	\item \texttt{protected Button nextGeneration} - przycisk służący do stworzenia i wyświetlenia kolejnej generacji,
 	\item \texttt{protected Button previousGeneration}  - przycisk służący do  wyświetlenia poprzedniej generacji,
-	\item \texttt{protected Spinner$<$Integer$>$  widhtSpinner} - pole reprezentujące szerokość generowanej planszy,
+	\item \texttt{protected Spinner$<$Integer$>$  widthSpinner} - pole reprezentujące szerokość generowanej planszy,
 	\item \texttt{protected Spinner$<$Integer$>$ heightSpinner} - pole reprezentujące wysokość generowanej planszy,
 	\item \texttt{protected Button RandomButton} - przycisk służący do wygenerowania i wyświetlenia losowej planszy początkowej,
 	\item \texttt{protected Button EmptyButton} - przycisk służący do wygenerowania i wyświetlenia pustej planszy początkowej,
@@ -88,7 +88,7 @@ Package składający się z klas mających na celu połączenie graficznego inte
 \section{Package ,,Models''}
 Package składający się z klas reprezentujących odpowiednie automaty komórkowe, odpowiedzialnych za przechowywanie ich zasad, przeprowadzanie symulacji i generowanie kolejnych pokoleń. Będzie on zawierać 3 klasy, jedną ogólną \texttt{CellularAutomaton}, łączącą w sobie cechy wspólne wszystkich automatów komórkowych oraz 2 klasy dziedziczące z poprzedniej, opisujące działanie konkretnych automatów (\texttt{GameOfLife} oraz \texttt{WireWorld}).
 
-\subsection{CellularAutomaton}
+\subsection{CellularAutomaton} \label{subsec:cellularAutomaton}
 \texttt{public abstract class CellularAutomaton<T extends Enum>}
 
 Klasa abstrakcyjna reprezentująca dowolny automat komórkowy.
@@ -135,5 +135,41 @@ Typ \texttt{T} jest typem wyliczeniowym możliwych stanów komórki automatu.
 \begin{itemize}
 	\item \texttt{private void clearHistory()} -- Ustawia aktualny stan automatu jako jedyny stan w historii.
 \end{itemize}
+
+\subsection{GameOfLife}
+\texttt{public class GameOfLife extends CellularAutomaton<GameOfLife.CellStates>}
+
+Klasa jest konkretną implementacja automatu komórkowego \textit{Game of Life}.
+
+\paragraph{Klasy wewnętrzne:} \mbox{} \\
+Typ wyliczeniowy reprezentujący możliwe stany komórki.
+\begin{verbatim}
+public enum CellStates {
+    DEAD,
+    ALIVE;
+
+    public static CellStates randomState() - Zwraca losowy stan komórki.
+}
+\end{verbatim}
+
+\paragraph{Konstruktory:}
+\begin{itemize}
+	\item \texttt{public GameOfLife(int width, int height)} -- Tworzy automat o podanym rozmiarze z komórkami o domyślnym stanie.
+\end{itemize}
+
+\paragraph{Metody prywatne:}
+\begin{itemize}
+    \item \texttt{private int[] countAliveNeighbours()} -- Oblicza ilość żywych sąsiadów dla każdej komórki automatu,
+    \item private int countAliveNeighbours(final int cellX, final int cellY) -- Oblicza ilość żywych sąsiadów dla konkretnej komórki automatu.
+\end{itemize}
+
+\paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
+\begin{itemize}
+    \item \texttt{CellStates[] getPossibleCellValues()}
+    \item \texttt{protected CellStates[] generateNextGeneration()}
+    \item \texttt{public void randomize()}
+    \item \texttt{protected CellStates getDefaultState()}
+\end{itemize}
+Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[subsec:cellularAutomaton]{CellularAutomaton}.
 
 \end{document}
