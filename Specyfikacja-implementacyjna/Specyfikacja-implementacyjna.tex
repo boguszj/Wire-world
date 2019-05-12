@@ -31,6 +31,60 @@
 
 \chapter{Opis klas}
 
+\section{Package ,,Controllers''}
+Package składający się z klas mających na celu połączenie graficznego interfejsu użytkownika z logiką działania automatów komórkowych. Będzie zawierać 3 klasy, jedną ogólna "CellularAutomatonController", łączącą w sobie cechy wspólne obsługi interfejsu obydwu automatów, oraz z dwóch klas dziedziczących z poprzedniej, zawierających elementu różne dla GameOfLife i WireWorld.
+
+\subsection{CellularAutomatonController}
+\subsubsection{Pola}
+\paragraph{Pola chronione:}
+\begin{itemize}
+	\item \texttt{protected Canvas canvas} - płótno na którym rysowana będzie plansza,
+	\item \texttt{protected Slider zoomSlider} - suwak reprezentujący przybliżenie planszy \label{sec:zoomSlider},
+	\item \texttt{protected Slider speedSlider} - suwak reprezentujący prędkość wyświetlania kolejnych generacji w trybie automatycznym\label{sec:speedSlider},
+	\item \texttt{protected ToggleButton autoRunToggleButton} - przycisk włączający i wyłączający tryb automatyczny,
+	\item \texttt{protected Button nextGeneration} - przycisk służący do stworzenia i wyświetlenia kolejnej generacji,
+	\item \texttt{protected Button previousGeneration}  - przycisk służący do  wyświetlenia poprzedniej generacji,
+	\item \texttt{protected Spinner$<$Integer$>$  widhtSpinner} - pole reprezentujące szerokość generowanej planszy,
+	\item \texttt{protected Spinner$<$Integer$>$ heightSpinner} - pole reprezentujące wysokość generowanej planszy,
+	\item \texttt{protected Button RandomButton} - przycisk służący do wygenerowania i wyświetlenia losowej planszy początkowej,
+	\item \texttt{protected Button EmptyButton} - przycisk służący do wygenerowania i wyświetlenia pustej planszy początkowej,
+	\item \texttt{protected Button saveButton} - przycisk służący do zapisania aktualnego stanu planszy,
+	\item \texttt{protected Button loadButton} - przycisk służący do wczytania planszy,
+	\item \texttt{protected MenuButton menuButton} - przycisk służący do zapisania części planszy lub narysowania i zapisania wzoru,
+	\item \texttt{protected Label generationLabel} -  napis reprezentujący numer aktualnie wyświetlanej generacji,
+	\item \texttt{protected CellularAutomatonView cellularAutmatonView} - obiekt odpowiedzialny za narysowanie planszy.
+\end{itemize}
+
+\paragraph{Pola prywatne:}
+\begin{itemize}
+	\item \texttt{private Boolean running} - zmienna typu prawda/fałsz, określająca czy tryb automatyczny jest włączony,
+	\item \texttt{private Thread t} - wątek w którym generowane i wyświetlane są kolejne pokolenia w trybie automatycznym\label{sec:thread},
+	\item \texttt{private long delay} - odstęp czasowy między wyświetlaniem kolejnych generacji w trybie automatycznym.
+\end{itemize}
+\subsubsection{Funkcje}
+\paragraph{Funkcje publiczne:}
+\begin{itemize}
+ 	\item \texttt{public Controller(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel)} - funkcja odpowiedzialna za zainicjowanie wszystkich zmiennych, połączenie elementów graficznym z odpowiednimi funkcjami,
+ 	\item \texttt{public void setCanvas} - funkcja dostępowa pozwalająca ustawić wartość pola \texttt{canvas} funkcjom spoza tego pakietu.
+\end{itemize}
+\paragraph{Funkcje chronione:}
+\begin{itemize}
+ 	\item \texttt{protected void shrinkSlider()} - funkcja odpowiedzialna za dopasowanie maksymalnej wartość suwaka przybliżenia, tak aby 		wielkość wyświetlanego obrazu mieściła się w maksymalnym rozmiarze płótna,
+ 	\item \texttt{protected void enableButtons()} - funkcja odpowiedzialna za aktywowanie przycisków, które przy starcie programu były 			nieaktywne ze względu na brak funkcjonalności,
+ 	\item \texttt{protected generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - funkcja odpowiedzialna za aktywowanie i dezaktywowanie przycisku 							\texttt{previousGeneration}, gdy wyświetlenie poprzedniej generacji jest nie możliwe.
+\end{itemize}
+\paragraph{Funkcje prywatne:}
+\begin{itemize}
+ 	\item \texttt{private createThread()} - funkcja odpowiedzialna za stworzenie nowego wątku \hyperref[sec:thread]{t},
+ 	\item \texttt{private zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - funkcja odpowiedzialna za zmianę rozmiaru rysowanych komórek, na podstawie wartości \hyperref[sec:zoomSlider]{suwaka przybliżenia},
+ 	\item \texttt{private speedSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - funkcja odpowiedzialna za zmianę prędkości generowania i wyświetlania kolejnych generacji, na podstawie wartości \hyperref[sec:speedSlider]{suwaka prędkości},
+ 	\item \texttt{private void nextGeneration(Event event)} - funkcja odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy wygenerować następne pokolenie,
+ 	\item \texttt{private void previousGeneration(Event event)} - funkcja odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy wygenerować poprzednie pokolenie,
+ 	\item \texttt{private play()} - funkcja odpowiedzialna za uruchomienie tryb automatycznego.
+\end{itemize}
+
+\subsection{GameOfLifeController}
+
 \section{Package ,,Models''}
 Package składający się z klas reprezentujących odpowiednie automaty komórkowe, odpowiedzialnych za przechowywanie ich zasad, przeprowadzanie symulacji i generowanie kolejnych pokoleń. Będzie on zawierać 3 klasy, jedną ogólną \texttt{CellularAutomaton}, łączącą w sobie cechy wspólne wszystkich automatów komórkowych oraz 2 klasy dziedziczące z poprzedniej, opisujące działanie konkretnych automatów (\texttt{GameOfLife} oraz \texttt{WireWorld}).
 
