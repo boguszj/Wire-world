@@ -1,0 +1,41 @@
+\documentclass{report}
+
+\usepackage{polski} % Pozwala na użycie polskiego. Ustawia między innymi fontenc na T1
+\usepackage[utf8]{inputenc} % Informuje o kodowaniu
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xcolor}% http://ctan.org/pkg/xcolor
+\usepackage{hyperref}% http://ctan.org/pkg/hyperref
+
+\definecolor{LinkColor}{HTML}{1d5cc1}
+
+\usepackage{tabto}
+
+\usepackage{graphicx} % Pakiet do obrazów
+\graphicspath{ {./Obrazy/} } % Folder, z którego będą brane obrazy
+
+% Nie twórz nowych stron
+\usepackage{etoolbox}
+\makeatletter
+% \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+\title{Specyfikacja implementacyjna -- Gra w życie}
+\author{Krzysztof Dąbrowski i Jakub Bogusz}
+\date{\today}
+
+\begin{document}
+\maketitle{}
+
+\tableofcontents{}
+
+\chapter{Opis klas}
+
+\section{Package ,,Models''}
+Package składający się z klas reprezentujących odpowiednie automaty komórkowe, odpowiedzialnych za przechowywanie ich zasad, przeprowadzanie symulacji i generowanie kolejnych pokoleń. Będzie on zawierać 3 klasy, jedną ogólną \texttt{CellularAutomaton}, łączącą w sobie cechy wspólne wszystkich automatów komórkowych oraz 2 klasy dziedziczące z poprzedniej, opisujące działanie konkretnych automatów (\texttt{GameOfLife} oraz \texttt{WireWorld}).
+
+\subsection{CellularAutomaton}
+
+
+
+\end{document}
