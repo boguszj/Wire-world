@@ -62,9 +62,12 @@ Package składający się z klas mających na celu połączenie graficznego inte
 	\item \texttt{private long delay} - odstęp czasowy między wyświetlaniem kolejnych generacji w trybie automatycznym.
 \end{itemize}
 \subsubsection{Metody}
-\paragraph{Metody publiczne:}
+\paragraph{Konstruktory:}
 \begin{itemize}
  	\item \texttt{public Controller(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel)} - metoda odpowiedzialna za zainicjowanie wszystkich zmiennych, połączenie elementów graficznym z odpowiednimi metodami,
+\end{itemize}
+\paragraph{Metody publiczne:}
+\begin{itemize}
  	\item \texttt{public void setCanvas} - metoda dostępowa pozwalająca ustawić wartość pola \texttt{canvas} funkcjom spoza tego pakietu.
 \end{itemize}
 \paragraph{Metody chronione:}
@@ -86,25 +89,63 @@ Package składający się z klas mających na celu połączenie graficznego inte
 \subsection{GameOfLifeController}
 \subsubsection{Pola}
 \paragraph{Pola chronione:}
-\begin{itemize}
+\begin{itemize}	\label{sec:checkbox}
 	\item \texttt{private RadioButton aliveRadioButton} - checkbox oznaczający, że rysowane komórki będą żywe,
 	\item \texttt{private RadioButton deadRadioButton} - checkbox oznaczający, że rysowane komórki będą martwe.
 \end{itemize}
 
 \paragraph{Pola prywatne:}
 \begin{itemize}
-	\item \texttt{private Map<GameOfLife.CellStates, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor.
+	\item \texttt{private Map<GameOfLife.CellStates, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor (czarny - martwa komórka, biały - żywa komórka).
 \end{itemize}
 \subsubsection{Funkcje}
-\paragraph{Funkcje publiczne:}
+\paragraph{Konstruktory:}
 \begin{itemize}
- 	\item \texttt{public GameOfLifeController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton)} - funkcja odpowiedzialna za zainicjowanie wszystkich zmiennych, połączenie elementów graficznym z odpowiednimi funkcjami.
- 	\item \texttt{public Map<GameOfLife.CellStates, Paint> getColoring()} - funkcja dostępowa pozwalająca ustawić wartość pola \texttt{coloring} funkcjom spoza tego pakietu.
+\item \texttt{public GameOfLifeController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
 \end{itemize}
-\paragraph{Funkcje prywatne:}
+\paragraph{Metody publiczne:}
 \begin{itemize}
- 	\item \texttt{ private void randomizeBoard(Event event)} - funkcja odpowiedzialna za stworzenie modelu GameOfLife z losowo wygenerowaną planszą początkową,
- 	\item \texttt{ private void clearBoard(Event event)} - funkcja odpowiedzialna za stworzenie modelu GameOfLife z pustą planszą początkową,
+ 	\item \texttt{public Map<GameOfLife.CellStates, Paint> getColoring()} - metoda dostępowa pozwalająca ustawić wartość pola \texttt{coloring} funkcjom spoza tego pakietu.
+\end{itemize}
+\paragraph{Metody prywatne:}
+\begin{itemize}
+ 	\item \texttt{ private void randomizeBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu GameOfLife z losowo wygenerowaną planszą początkową,
+ 	\item \texttt{ private void clearBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu GameOfLife z pustą planszą początkową,
+ 	\item \texttt{private void canvasClicked(Event event)} metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy na podstawie zaznaczonych \hyperref[sec:checkbox]{checkbox'ów} należy zmienić stan odpowiedniej komórki oraz ją narysować,
+ 	\item \texttt{private GameOfLife.CellStates getSelectedState()} - metoda odpowiedzialna za pobranie aktualnie wybranego stanu na podstawie zaznaczonych  zaznaczonych \hyperref[sec:checkbox]{checkbox'ów}.
+\end{itemize}
+
+\subsection{WireWorldController}
+\subsubsection{Pola}
+\paragraph{Pola chronione:}
+\begin{itemize}	\label{sec:checkbox}
+	\item \texttt{private RadioButton emptyRadioButton} - checkbox oznaczający, że rysowane komórki będą puste,
+	\item \texttt{private RadioButton headRadioButton} - checkbox oznaczający, że rysowane komórki będą głowami elektronu,
+	\item \texttt{private RadioButton tailRadioButton} - checkbox oznaczający, że rysowane komórki będą ogonami elektronu,
+	\item \texttt{private RadioButton conductorRadioButton} - checkbox oznaczający, że rysowane komórki będą przewodnikami,
+	\item \texttt{private Button powerOff} - przycisk zamieniający wszystkie komórki będące głowami lub ogonami elektronu na przewodniki.
+\end{itemize}
+
+\paragraph{Pola prywatne:}
+\begin{itemize}
+	\item \texttt{private Map<WireWorld.CellStates, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor (czerwony - głowa elektronu, niebieski - ogon elektronu, żółty - przewodnik, czarny - pusta komórka).
+\end{itemize}
+\subsubsection{Funkcje}
+\paragraph{Konstruktory:}
+\begin{itemize}
+\item \texttt{public WireWorld(Button powerOff, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton emptyRadioButton, RadioButton tailRadioButton, , RadioButton headRadioButton, , RadioButton conductorRadioButton)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
+\end{itemize}
+\paragraph{Metody publiczne:}
+\begin{itemize}
+ 	\item \texttt{public Map<WireWorld.CellStates, Paint> getColoring()} - metoda dostępowa pozwalająca ustawić wartość pola \texttt{coloring} funkcjom spoza tego pakietu.
+\end{itemize}
+\paragraph{Metody prywatne:}
+\begin{itemize}
+ 	\item \texttt{ private void randomizeBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu WireWorld z losowo wygenerowaną planszą początkową,
+ 	\item \texttt{ private void clearBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu WireWorld z pustą planszą początkową,
+ 	\item \texttt{private void canvasClicked(Event event)} metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy na podstawie zaznaczonych \hyperref[sec:checkbox]{checkbox'ów} należy zmienić stan odpowiedniej komórki oraz ją narysować,
+ 	\item \texttt{private GameOfLife.CellStates getSelectedState()} - metoda odpowiedzialna za pobranie aktualnie wybranego stanu na podstawie zaznaczonych  zaznaczonych \hyperref[sec:checkbox]{checkbox'ów},
+ 	\item \texttt{private void powerOff(Event event)} - metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego o tym, że należy zamienić wszystkie komórki będące głowami i ogonami elektronu na przewodniki.
 \end{itemize}
 
 
