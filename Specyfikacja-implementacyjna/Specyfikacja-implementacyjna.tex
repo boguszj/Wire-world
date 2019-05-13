@@ -84,6 +84,29 @@ Package składający się z klas mających na celu połączenie graficznego inte
 \end{itemize}
 
 \subsection{GameOfLifeController}
+\subsubsection{Pola}
+\paragraph{Pola chronione:}
+\begin{itemize}
+	\item \texttt{private RadioButton aliveRadioButton} - checkbox oznaczający, że rysowane komórki będą żywe,
+	\item \texttt{private RadioButton deadRadioButton} - checkbox oznaczający, że rysowane komórki będą martwe.
+\end{itemize}
+
+\paragraph{Pola prywatne:}
+\begin{itemize}
+	\item \texttt{private Map<GameOfLife.CellStates, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor.
+\end{itemize}
+\subsubsection{Funkcje}
+\paragraph{Funkcje publiczne:}
+\begin{itemize}
+ 	\item \texttt{public GameOfLifeController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton)} - funkcja odpowiedzialna za zainicjowanie wszystkich zmiennych, połączenie elementów graficznym z odpowiednimi funkcjami.
+ 	\item \texttt{public Map<GameOfLife.CellStates, Paint> getColoring()} - funkcja dostępowa pozwalająca ustawić wartość pola \texttt{coloring} funkcjom spoza tego pakietu.
+\end{itemize}
+\paragraph{Funkcje prywatne:}
+\begin{itemize}
+ 	\item \texttt{ private void randomizeBoard(Event event)} - funkcja odpowiedzialna za stworzenie modelu GameOfLife z losowo wygenerowaną planszą początkową,
+ 	\item \texttt{ private void clearBoard(Event event)} - funkcja odpowiedzialna za stworzenie modelu GameOfLife z pustą planszą początkową,
+\end{itemize}
+
 
 \section{Package ,,Models''}
 Package składający się z klas reprezentujących odpowiednie automaty komórkowe, odpowiedzialnych za przechowywanie ich zasad, przeprowadzanie symulacji i generowanie kolejnych pokoleń. Będzie on zawierać 3 klasy, jedną ogólną \texttt{CellularAutomaton}, łączącą w sobie cechy wspólne wszystkich automatów komórkowych oraz 2 klasy dziedziczące z poprzedniej, opisujące działanie konkretnych automatów (\texttt{GameOfLife} oraz \texttt{WireWorld}).
