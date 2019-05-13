@@ -44,7 +44,7 @@ Package składający się z klas mających na celu połączenie graficznego inte
 	\item \texttt{protected ToggleButton autoRunToggleButton} - przycisk włączający i wyłączający tryb automatyczny,
 	\item \texttt{protected Button nextGeneration} - przycisk służący do stworzenia i wyświetlenia kolejnej generacji,
 	\item \texttt{protected Button previousGeneration}  - przycisk służący do  wyświetlenia poprzedniej generacji,
-	\item \texttt{protected Spinner$<$Integer$>$  widhtSpinner} - pole reprezentujące szerokość generowanej planszy,
+	\item \texttt{protected Spinner$<$Integer$>$  widthSpinner} - pole reprezentujące szerokość generowanej planszy,
 	\item \texttt{protected Spinner$<$Integer$>$ heightSpinner} - pole reprezentujące wysokość generowanej planszy,
 	\item \texttt{protected Button RandomButton} - przycisk służący do wygenerowania i wyświetlenia losowej planszy początkowej,
 	\item \texttt{protected Button EmptyButton} - przycisk służący do wygenerowania i wyświetlenia pustej planszy początkowej,
@@ -61,26 +61,26 @@ Package składający się z klas mających na celu połączenie graficznego inte
 	\item \texttt{private Thread t} - wątek w którym generowane i wyświetlane są kolejne pokolenia w trybie automatycznym\label{sec:thread},
 	\item \texttt{private long delay} - odstęp czasowy między wyświetlaniem kolejnych generacji w trybie automatycznym.
 \end{itemize}
-\subsubsection{Funkcje}
-\paragraph{Funkcje publiczne:}
+\subsubsection{Metody}
+\paragraph{Metody publiczne:}
 \begin{itemize}
- 	\item \texttt{public Controller(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel)} - funkcja odpowiedzialna za zainicjowanie wszystkich zmiennych, połączenie elementów graficznym z odpowiednimi funkcjami,
- 	\item \texttt{public void setCanvas} - funkcja dostępowa pozwalająca ustawić wartość pola \texttt{canvas} funkcjom spoza tego pakietu.
+ 	\item \texttt{public Controller(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel)} - metoda odpowiedzialna za zainicjowanie wszystkich zmiennych, połączenie elementów graficznym z odpowiednimi metodami,
+ 	\item \texttt{public void setCanvas} - metoda dostępowa pozwalająca ustawić wartość pola \texttt{canvas} funkcjom spoza tego pakietu.
 \end{itemize}
-\paragraph{Funkcje chronione:}
+\paragraph{Metody chronione:}
 \begin{itemize}
- 	\item \texttt{protected void shrinkSlider()} - funkcja odpowiedzialna za dopasowanie maksymalnej wartość suwaka przybliżenia, tak aby 		wielkość wyświetlanego obrazu mieściła się w maksymalnym rozmiarze płótna,
- 	\item \texttt{protected void enableButtons()} - funkcja odpowiedzialna za aktywowanie przycisków, które przy starcie programu były 			nieaktywne ze względu na brak funkcjonalności,
- 	\item \texttt{protected generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - funkcja odpowiedzialna za aktywowanie i dezaktywowanie przycisku 							\texttt{previousGeneration}, gdy wyświetlenie poprzedniej generacji jest nie możliwe.
+ 	\item \texttt{protected void shrinkSlider()} - metoda odpowiedzialna za dopasowanie maksymalnej wartość suwaka przybliżenia, tak aby 		wielkość wyświetlanego obrazu mieściła się w maksymalnym rozmiarze płótna,
+ 	\item \texttt{protected void enableButtons()} - metoda odpowiedzialna za aktywowanie przycisków, które przy starcie programu były 			nieaktywne ze względu na brak funkcjonalności,
+ 	\item \texttt{protected generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - metoda odpowiedzialna za aktywowanie i dezaktywowanie przycisku 							\texttt{previousGeneration}, gdy wyświetlenie poprzedniej generacji jest nie możliwe.
 \end{itemize}
-\paragraph{Funkcje prywatne:}
+\paragraph{Metody prywatne:}
 \begin{itemize}
- 	\item \texttt{private createThread()} - funkcja odpowiedzialna za stworzenie nowego wątku \hyperref[sec:thread]{t},
- 	\item \texttt{private zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - funkcja odpowiedzialna za zmianę rozmiaru rysowanych komórek, na podstawie wartości \hyperref[sec:zoomSlider]{suwaka przybliżenia},
- 	\item \texttt{private speedSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - funkcja odpowiedzialna za zmianę prędkości generowania i wyświetlania kolejnych generacji, na podstawie wartości \hyperref[sec:speedSlider]{suwaka prędkości},
- 	\item \texttt{private void nextGeneration(Event event)} - funkcja odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy wygenerować następne pokolenie,
- 	\item \texttt{private void previousGeneration(Event event)} - funkcja odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy wygenerować poprzednie pokolenie,
- 	\item \texttt{private play()} - funkcja odpowiedzialna za uruchomienie tryb automatycznego.
+ 	\item \texttt{private createThread()} - metoda odpowiedzialna za stworzenie nowego wątku \hyperref[sec:thread]{t},
+ 	\item \texttt{private zoomSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - metoda odpowiedzialna za zmianę rozmiaru rysowanych komórek, na podstawie wartości \hyperref[sec:zoomSlider]{suwaka przybliżenia},
+ 	\item \texttt{private speedSliderChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - metoda odpowiedzialna za zmianę prędkości generowania i wyświetlania kolejnych generacji, na podstawie wartości \hyperref[sec:speedSlider]{suwaka prędkości},
+ 	\item \texttt{private void nextGeneration(Event event)} - metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy wygenerować następne pokolenie,
+ 	\item \texttt{private void previousGeneration(Event event)} - metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy wygenerować poprzednie pokolenie,
+ 	\item \texttt{private play()} - metoda odpowiedzialna za uruchomienie tryb automatycznego.
 \end{itemize}
 
 \subsection{GameOfLifeController}
@@ -111,8 +111,130 @@ Package składający się z klas mających na celu połączenie graficznego inte
 \section{Package ,,Models''}
 Package składający się z klas reprezentujących odpowiednie automaty komórkowe, odpowiedzialnych za przechowywanie ich zasad, przeprowadzanie symulacji i generowanie kolejnych pokoleń. Będzie on zawierać 3 klasy, jedną ogólną \texttt{CellularAutomaton}, łączącą w sobie cechy wspólne wszystkich automatów komórkowych oraz 2 klasy dziedziczące z poprzedniej, opisujące działanie konkretnych automatów (\texttt{GameOfLife} oraz \texttt{WireWorld}).
 
-\subsection{CellularAutomaton}
+\subsection{CellularAutomaton} \label{subsec:cellularAutomaton}
+\texttt{public abstract class CellularAutomaton<T extends Enum>}
 
+Klasa abstrakcyjna reprezentująca dowolny automat komórkowy.
+Typ \texttt{T} jest typem wyliczeniowym możliwych stanów komórki automatu.
 
+\paragraph{Konstruktory:}
+\begin{itemize}
+	\item \texttt{public CellularAutomaton(int width, int height)} -- Tworzy automat o podanym rozmiarze z komórkami o domyślnym stanie.
+\end{itemize}
 
+\paragraph{Pola chronione:}
+\begin{itemize}
+	\item \texttt{protected final int width} -- Liczba kolumn planszy automatu,
+	\item \texttt{protected final int height} -- Liczba wierszy planszy automatu,
+	\item \texttt{protected T[] cells} -- Tablica wszystkich komórek automatu,
+	\item \texttt{protected static Random random} -- Zmienna używana do losowania stanów.
+\end{itemize}
+
+\paragraph{Pola prywatne:}
+\begin{itemize}
+	\item \texttt{private List<T[]> history} -- Lista poprzednich stanów automatu. \\ Umożliwia przejście od poprzedniego stanu,
+	\item \texttt{private IntegerProperty currentGeneration} -- Liczba reprezentująca number aktualnego pokolenia automatu.
+\end{itemize}
+
+\paragraph{Metody publiczne:}
+\begin{itemize}
+	\item \texttt{public abstract T[] getPossibleCellValues()} -- Zwraca tablicę możliwych stanów komórki automatu,
+	\item \texttt{public void setCells(T[] cells)} -- Ustawia wszystkie komórki automatu na nowe wartości,
+	\item \texttt{public T getCell(int row, int column)} -- Zwraca wartość konkretnej komórki,
+	\item \texttt{public int getCellCount()} -- Zwraca ilość komórek w automacie,
+	\item \texttt{public void nextGeneration()} -- Przeprowadza automat do następnego stanu,
+	\item \texttt{public void previousGeneration()} -- Przeprowadza automat do poprzedniego stanu
+	\item \texttt{public void clear()} -- Ustawia stan wszystkich komórek na domyślny,
+	\item \texttt{public abstract void randomize()} -- Ustawia stan wszystkich komórek na losowy.
+\end{itemize}
+
+\paragraph{Metody chronione:}
+\begin{itemize}
+	\item \texttt{protected abstract T[] generateNextGeneration()} -- Zwraca stany komórek następnej generacji,
+	\item \texttt{protected abstract T getDefaultState()} -- Zwraca domyślny stan dla danego automatu.
+\end{itemize}
+
+\paragraph{Metody prywatne:}
+\begin{itemize}
+	\item \texttt{private void clearHistory()} -- Ustawia aktualny stan automatu jako jedyny stan w historii.
+\end{itemize}
+
+\subsection{GameOfLife}
+\texttt{public class GameOfLife extends CellularAutomaton<GameOfLife.CellStates>}
+
+Klasa jest konkretną implementacja automatu komórkowego \textit{Game of Life}.
+
+\paragraph{Klasy wewnętrzne:} \mbox{} \\
+Typ wyliczeniowy reprezentujący możliwe stany komórki.
+\begin{verbatim}
+public enum CellStates {
+    DEAD,
+    ALIVE;
+
+    public static CellStates randomState() - Zwraca losowy stan komórki.
+}
+\end{verbatim}
+
+\paragraph{Konstruktory:}
+\begin{itemize}
+	\item \texttt{public GameOfLife(int width, int height)} -- Tworzy automat o podanym rozmiarze z komórkami o domyślnym stanie.
+\end{itemize}
+
+\paragraph{Metody prywatne:}
+\begin{itemize}
+    \item \texttt{private int[] countAliveNeighbours()} -- Oblicza ilość żywych sąsiadów dla każdej komórki automatu,
+    \item private int countAliveNeighbours(final int cellX, final int cellY) -- Oblicza ilość żywych sąsiadów dla konkretnej komórki automatu.
+\end{itemize}
+
+\paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
+\begin{itemize}
+    \item \texttt{CellStates[] getPossibleCellValues()},
+    \item \texttt{protected CellStates[] generateNextGeneration()},
+    \item \texttt{public void randomize()},
+    \item \texttt{protected CellStates getDefaultState()}.
+\end{itemize}
+Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[subsec:cellularAutomaton]{CellularAutomaton}.
+
+\subsection{WireWorld}
+\texttt{public class WireWorld extends CellularAutomaton<WireWorld.CellStates>}
+
+Klasa jest konkretną implementacja automatu komórkowego \textit{WireWorld}.
+
+\paragraph{Klasy wewnętrzne:} \mbox{} \\
+Typ wyliczeniowy reprezentujący możliwe stany komórki.
+\begin{verbatim}
+public enum CellStates {
+    EMPTY,
+    HEAD,
+    TAIL,
+    CONDUCTOR;
+
+    public static CellStates randomState() - Zwraca losowy stan komórki.
+}
+\end{verbatim}
+
+\paragraph{Konstruktory:}
+\begin{itemize}
+	\item \texttt{public WireWorld(int width, int height)} -- Tworzy automat o podanym rozmiarze z komórkami o domyślnym stanie.
+\end{itemize}
+
+\paragraph{Metody publiczne:}
+\begin{itemize}
+    \item \texttt{public void killElectrons()} -- Zamienia wszystkie głowy elektronów i ogony elektronów na przewodniki.
+\end{itemize}
+
+\paragraph{Metody prywatne:}
+\begin{itemize}
+    \item \texttt{private int countHeads(final int cellX, final int cellY)} -- Oblicza ilość sąsiadów konkretnej komórki będących głową elektronu,
+    \item \texttt{private int[] countHeads()} -- Dla każdej komórki oblicza ilość sąsiadów będących głową elektronu.
+\end{itemize}
+
+\paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
+\begin{itemize}
+    \item \texttt{CellStates[] getPossibleCellValues()},
+    \item \texttt{protected CellStates[] generateNextGeneration()},
+    \item \texttt{public void randomize()},
+    \item \texttt{protected CellStates getDefaultState()}.
+\end{itemize}
+Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[subsec:cellularAutomaton]{CellularAutomaton}.
 \end{document}
