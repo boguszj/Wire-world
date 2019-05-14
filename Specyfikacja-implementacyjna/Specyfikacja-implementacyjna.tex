@@ -29,10 +29,32 @@
 
 \tableofcontents{}
 
+\chapter{Projekt systemu}
+
+\section{Graficzny interfejs użytkownika}
+Graficzny interfejs użytkownika zawarty będzie w pliku \texttt{.fxml}, napisanym ręcznie lub wygenerowanym przez służący do tego program. Następnie zostanie połączony z logiką działania programu przez klasę \texttt{setupController}. \\
+Główne okno programu zawierać będzie 2 zakładki. Każda z nich będzie obsługiwała i przedstawiała działanie jednego automatu komórkowego.
+\section{Digram klas}
+%TODO: Diagram klas UML
+
+\section{Wzorce projektowe}
+%TODO: Opisać zastosowane wzorce
+
+\section{Przepływ sterowania}
+%TODO: Opis przepływu sterowania
+
+%TODO: Diagram sekwencji UML
+
+\section{Zastosowane algorytmy}
+%TODO: Opisać algorytmy generacji pokoleń
+
 \chapter{Opis klas}
 
 \section{Package ,,Controllers''}
-Package składający się z klas mających na celu połączenie graficznego interfejsu użytkownika z logiką działania automatów komórkowych. Będzie zawierać 3 klasy, jedną ogólna "CellularAutomatonController", łączącą w sobie cechy wspólne obsługi interfejsu obydwu automatów, oraz z dwóch klas dziedziczących z poprzedniej, zawierających elementu różne dla GameOfLife i WireWorld.
+Package składający się z klas mających na celu połączenie graficznego interfejsu użytkownika z logiką działania automatów komórkowych. Będzie zawierać 4 klasy, jedną ogólna "CellularAutomatonController", łączącą w sobie cechy wspólne obsługi interfejsu obydwu automatów, oraz z dwóch klas dziedziczących z poprzedniej, zawierających elementu różne dla GameOfLife i WireWorld. Ostatnia z klas będzie pełniła rolę pośrednika między resztą klas a widokiem z pliku \texttt{.fxml}.
+
+\subsection{setupController}
+Klasa będąca punktem startowym programu. Jej zadaniem będzie przekazanie referencji do elementów interfejsu kontrolerom konkretnych zakładek.
 
 \subsection{CellularAutomatonController}
 Klasa łącząca w sobie wspólne cechy kontrolerów obydwu automatów skończonych - opisująca powtarzające się elementy graficznego interfejsu użytkownika i ich funkcjonalności.
@@ -282,21 +304,34 @@ public enum CellStates {
 \end{itemize}
 Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[subsec:cellularAutomaton]{CellularAutomaton}.
 
-\chapter{Projekt systemu}
+\section{Pakiet ,,Views''}
+Pakiet składający się z interfejsu generalizującego wyświetlanie planszy, który umożliwia dołączanie do projektu nowych implementacji wizualizacji automatu komórkowego oraz z klasy implementującej ten interfejs, renderującej widok 2D przy użyciu obiektu Canvas z biblioteki JavaFX.
+\subsection{CellularAutomatonView}
+Interfejs generalizujący wizualizacje planszy.
+\paragraph{Metody publiczne:}
+\begin{itemize}
+	\item \texttt{public void drawCell(T CellState, final int x, final int y, final double cellSize)} - metoda rysująca pojedynczą komórkę,
+	\item \texttt{public void draw(CellularAutoamaton ca, final double cellSize)} - metoda rysująca całą planszę, na podstawie tablicy komórek.
+\end{itemize}
+\subsection{FXCellularAutomatonView}
+Implementacja interfejsu \texttt{CellularAutomatonView} przy użyciu obiektu Canvas z biblioteki JavaFX. Wizualizacja 2D automatu komórkowego.
+\subsubsection{Pola}
+\paragraph{Pola prywatne:}
+\begin{itemize}
+	\item \texttt{private final Canvas canvas} - płótno, na którym rysowana będzie plansza z aktualnym stanem automatu komórkowego,
+	\item \texttt{private final Map<T, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor.
+\end{itemize}
+\paragraph{Konstruktory:}
+\begin{itemize}
+	\item \texttt{public FXCellularAutomatonView(Canvas canvas, Map<T, Paint> coloring )} - inicjacja pól.
+\end{itemize}
+\paragraph{Metody publiczne:}
+\begin{itemize}
+	\item \texttt{public void drawCell(T CellState, final int x, final int y, final double cellSize)} - metoda rysująca pojedynczą komórkę,
+	\item \texttt{public void draw(CellularAutoamaton ca, final double cellSize)} - metoda rysująca całą planszę, na podstawie tablicy komórek.
+\end{itemize}
 
-\section{Digram klas}
-%TODO: Diagram klas UML
 
-\section{Wzorce projektowe}
-%TODO: Opisać zastosowane wzorce
-
-\section{Przepływ sterowania}
-%TODO: Opis przepływu sterowania
-
-%TODO: Diagram sekwencji UML
-
-\section{Zastosowane algorytmy}
-%TODO: Opisać algorytmy generacji pokoleń
 
 \chapter{Testy}
 %TODO: Opis testów
