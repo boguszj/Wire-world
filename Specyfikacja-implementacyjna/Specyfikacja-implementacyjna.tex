@@ -53,7 +53,7 @@ Klasa łącząca w sobie wspólne cechy kontrolerów obydwu automatów skończon
 	\item \texttt{protected Button loadButton} - przycisk służący do wczytania planszy,
 	\item \texttt{protected MenuButton menuButton} - przycisk służący do zapisania części planszy lub narysowania i zapisania wzoru,
 	\item \texttt{protected Label generationLabel} -  napis reprezentujący numer aktualnie wyświetlanej generacji,
-	\item \texttt{protected CellularAutomatonView cellularAutmatonView} - obiekt odpowiedzialny za narysowanie planszy.
+	\item \texttt{protected CellularAutomatonView cellularAutomatonView} - obiekt odpowiedzialny za narysowanie planszy.
 \end{itemize}
 
 \paragraph{Pola prywatne:}
@@ -226,8 +226,8 @@ public enum CellStates {
 
 \paragraph{Metody prywatne:}
 \begin{itemize}
-    \item \texttt{private int[] countAliveNeighbours()} -- Oblicza ilość żywych sąsiadów dla każdej komórki automatu,
-    \item private int countAliveNeighbours(final int cellX, final int cellY) -- Oblicza ilość żywych sąsiadów dla konkretnej komórki automatu.
+    \item \texttt{private int[] countAliveNeighbors()} -- Oblicza ilość żywych sąsiadów dla każdej komórki automatu,
+    \item private int countAliveNeighbors(final int cellX, final int cellY) -- Oblicza ilość żywych sąsiadów dla konkretnej komórki automatu.
 \end{itemize}
 
 \paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
