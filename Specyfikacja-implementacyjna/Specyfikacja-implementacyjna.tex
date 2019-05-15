@@ -6,6 +6,7 @@
 \usepackage{xcolor}
 \usepackage{xcolor}% http://ctan.org/pkg/xcolor
 \usepackage{hyperref}% http://ctan.org/pkg/hyperref
+\usepackage{indentfirst}
 
 \definecolor{LinkColor}{HTML}{1d5cc1}
 
@@ -50,7 +51,11 @@ Główne okno programu zawierać będzie 2 zakładki. Każda z nich będzie obs�
 %TODO: Diagram sekwencji UML
 
 \section{Zastosowane algorytmy}
-%TODO: Opisać algorytmy generacji pokoleń
+
+Obydwa algorytmy muszą przejść przez całą plansze i sprawdzić całe otoczenie (8 komórek) do o koła tej aktualnie rozpatrywanej, co daje nam złożoność 8*n*m, gdzie n to wysokość planszy, m to szerokość planszy, czyli działają w czasie $\Theta$(n*m).
+
+Podczas przeglądania otoczenia komórki, automat przepisuje komórki do tablicy wynikowej lub zmienia ich wartość, zgodnie z zasadami opisanymi w \href{https://github.com/boguszj/Wire-world/blob/master/Specyfikacja-funkcjonalna/Specyfikacja-funkcjonalna.pdf}{Specyfikacji funkcjonalnej}.
+
 
 \chapter{Opis klas}
 
