@@ -1,5 +1,7 @@
 package controlers;
 
+import static utils.Utils.*;
+
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -49,7 +51,8 @@ public class Controller {
     private Thread t;
     private long delay;
 
-    public Controller(){};
+    public Controller() {
+    }
 
     public Controller(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
@@ -66,7 +69,7 @@ public class Controller {
         this.loadButton = loadButton;
         this.generationNumberLabel = generationNumberLabel;
         this.running = false;
-        this.delay = (long)speedSlider.getValue();
+        this.delay = (long) speedSlider.getValue();
 
         createThread();
 
@@ -84,39 +87,30 @@ public class Controller {
 
     }
 
-    private double myMax(double a, double b){
-        if(a > b) return a;
-        return b;
-    }
-
-    private double myMin(double a, double b){
-        if(a < b) return a;
-        return b;
-    }
-
-    protected void shrinkSlider(){
+    protected void shrinkSlider() {
         double Max = myMin(8000, 8000 / myMax(widthSpinner.getValue(), heightSpinner.getValue()));
         double Min = myMax(500.0 / heightSpinner.getValue(), 1150.0 / widthSpinner.getValue());
         System.out.println(Min);
         System.out.println(Max);
         zoomSlider.setValue(Max);
         zoomSlider.setMax(Max);
-        if(Min < Max) {
+        if (Min < Max) {
             zoomSlider.setValue(Min);
         }
     }
 
-    protected void enableButtons(){
+    protected void enableButtons() {
         nextGenerationButton.setDisable(false);
         autoRunToggleButton.setDisable(false);
     }
 
-    private void createThread(){
+    private void createThread() {
         t = new Thread(new Runnable() {
-            public void run(){
-                while(running) {
+            public void run() {
+                while (running) {
                     Platform.runLater(new Runnable() {
-                        @Override public void run() {
+                        @Override
+                        public void run() {
                             cellularAutomatonView.nextGeneration();
                             System.out.println(delay);
                         }
@@ -143,8 +137,7 @@ public class Controller {
     protected void generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
         if (newValue.intValue() <= 0) {
             previousGenerationButton.setDisable(true);
-        }
-        else {
+        } else {
             previousGenerationButton.setDisable(false);
         }
     }
@@ -158,11 +151,10 @@ public class Controller {
     }
 
     private void play(Event event) {
-        if(!running){
+        if (!running) {
             running = true;
             t.start();
-        }
-        else{
+        } else {
             running = false;
             try {
                 t.join(); // wait for the thread to stop
@@ -173,7 +165,7 @@ public class Controller {
         }
     }
 
-    public void setCanvas(Canvas canvas){
+    public void setCanvas(Canvas canvas) {
         this.canvas = canvas;
     }
 
