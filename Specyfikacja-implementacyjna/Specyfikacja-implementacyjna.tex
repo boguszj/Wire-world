@@ -65,7 +65,8 @@ Package składający się z klas mających na celu połączenie graficznego inte
 \subsection{SetupController}
 Klasa będąca punktem startowym programu. Jej zadaniem będzie przekazanie referencji do elementów interfejsu kontrolerom konkretnych zakładek.
 
-\subsection{CellularAutomatonController}
+\subsection{CellularAutomatonController} %TODO Przerobic 3 pierwsze kontrolery żeby zrobić 1 abstrakcyjny
+\texttt{public abstract class CellularAutomatonController<T extends Enum>}
 Klasa łącząca w sobie wspólne cechy kontrolerów obydwu automatów skończonych - opisująca powtarzające się elementy graficznego interfejsu użytkownika i ich funkcjonalności.
 \subsubsection{Pola}
 \paragraph{Pola chronione:}
@@ -182,6 +183,7 @@ Klasa opisująca części kontrolera specyficzne dla automatu WireWorld.
  	\item \texttt{private void powerOff(Event event)} - metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego o tym, że należy zamienić wszystkie komórki będące głowami i ogonami elektronu na przewodniki.
 \end{itemize}
 \subsection{PatternsController}
+\texttt{public abstract class PatternsController<T extends Enum>}
 Klasa łącząca w sobie wspólne cechy kontrolerów edytorów wzorów do obydwu automatów komórkowych.
 \subsubsection{Pola}
 \paragraph{Pola chronione:}
@@ -215,6 +217,7 @@ Klasa łącząca w sobie wspólne cechy kontrolerów edytorów wzorów do obydwu
 \end{itemize}
 
 \subsection{GameOfLifePatternsController}
+\texttt{public class GameOfLifePatternsController extends PatternsController<GameOfLife.CellStates>}
 Klasa opisująca części kontrolera specyficzne dla edytora wzorów automatu komórkowego GameOfLife.
 \subsubsection{Pola}
 \paragraph{Pola prywatne:}
@@ -236,6 +239,7 @@ Klasa opisująca części kontrolera specyficzne dla edytora wzorów automatu ko
 Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[subsec:cellularAutomaton]{WireWorldPatternsController}.
 
 \subsection{WireWorldPatternsController}
+\texttt{public class WireWorldPatternsController extends PatternsController<WireWorld.CellStates>}
 Klasa opisująca części kontrolera specyficzne dla edytora wzorów automatu komórkowego WireWorld.
 \subsubsection{Pola}
 \paragraph{Pola prywatne:}
