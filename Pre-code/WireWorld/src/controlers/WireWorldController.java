@@ -16,7 +16,7 @@ import static javafx.scene.paint.Color.*;
 //TODO: States for GUI (Simulation paused, played, ...)
 
 /**
- * Sub controller used by gridSetupController
+ * Sub controller used by SetupController
  * It controls Game of Life tab of the main view
  */
 public class WireWorldController extends CellularAutomatonController<WireWorld.CellStates> {
