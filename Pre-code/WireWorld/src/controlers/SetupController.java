@@ -2,20 +2,29 @@ package controlers;
 
 import controlers.GameOfLifeController;
 import controlers.WireWorldController;
+import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
-public class SetupController implements Initializable {
+public class SetupController extends Application implements Initializable {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     //-------------------- Wireworld -------------------------
     private WireWorldController wireWorldController;
@@ -133,4 +142,12 @@ public class SetupController implements Initializable {
 
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("../views/mainWindow.fxml"));
+        primaryStage.setTitle("Cellular automaton simulator");
+        primaryStage.setScene(new Scene(root, 1350, 650));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
 }
