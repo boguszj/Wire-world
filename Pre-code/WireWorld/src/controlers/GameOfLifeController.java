@@ -16,7 +16,7 @@ import java.util.Map;
  * Sub controller used by gridSetupController
  * It controls Game of Life tab of the main view
  */
-public class GameOfLifeController extends Controller<GameOfLife.CellStates>{
+public class GameOfLifeController extends CellularAutomatonController<GameOfLife.CellStates> {
 
     private final RadioButton aliveRadioButton;
     private final RadioButton deadRadioButton;
