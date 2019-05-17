@@ -25,7 +25,7 @@ import static jdk.nashorn.internal.objects.NativeMath.max;
  * Sub controller used by gridSetupController
  * It controls Game of Life tab of the main view
  */
-public abstract class Controller<T extends Enum> {
+public abstract class CellularAutomatonController<T extends Enum> {
     protected Canvas canvas;
 
     protected Slider zoomSlider;
@@ -50,7 +50,7 @@ public abstract class Controller<T extends Enum> {
     private Thread t;
     private long delay;
 
-    public Controller(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
+    public CellularAutomatonController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
         this.speedSlider = speedSlider;
         this.zoomSlider = zoomSlider;
@@ -102,7 +102,7 @@ public abstract class Controller<T extends Enum> {
     protected abstract Map<T, Paint> getColoring();
 
     /**
-     * Controller should check which state is selected from input section and return it
+     * CellularAutomatonController should check which state is selected from input section and return it
      * @return state selected by a user
      */
     protected abstract T getSelectedState();

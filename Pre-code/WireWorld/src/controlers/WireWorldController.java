@@ -19,7 +19,7 @@ import static javafx.scene.paint.Color.*;
  * Sub controller used by gridSetupController
  * It controls Game of Life tab of the main view
  */
-public class WireWorldController extends Controller<WireWorld.CellStates> {
+public class WireWorldController extends CellularAutomatonController<WireWorld.CellStates> {
 
     private final Button powerOffButton;
     private final RadioButton emptyRadioButton;
