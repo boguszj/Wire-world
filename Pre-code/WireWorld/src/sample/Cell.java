@@ -9,7 +9,7 @@ public class Cell {
     int type;
     int x;
     int y;
-    public static final int SIZE = 50;//new gridSetupController().getGridWidth() / new gridSetupController().getWidth();
+    public static final int SIZE = 50;//new SetupController().getGridWidth() / new SetupController().getWidth();
 
     Cell(int type, int x, int y){
         this.type = type;

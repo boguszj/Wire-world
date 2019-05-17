@@ -1,4 +1,4 @@
-package sample;
+package controlers;
 
 import controlers.GameOfLifeController;
 import controlers.WireWorldController;
@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
-public class gridSetupController implements Initializable {
+public class SetupController implements Initializable {
 
     //-------------------- Wireworld -------------------------
     private WireWorldController wireWorldController;
