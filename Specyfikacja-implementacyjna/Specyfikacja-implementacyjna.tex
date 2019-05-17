@@ -201,12 +201,12 @@ Klasa łącząca w sobie wspólne cechy kontrolerów edytorów wzorów do obydwu
 
 \paragraph{Pola prywatne:}
 \begin{itemize}
-	\item \texttt{private Map<T, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor.
+	\item \texttt{private Map<T, Paint> colouring} - mapa przyporządkowująca stanowi automatu kolor.
 \end{itemize}
 \subsubsection{Funkcje}
 \paragraph{Konstruktory:}
 \begin{itemize}
-\item \texttt{public WireWorld(Button powerOff, Slider speedSlider, Canvas canvas, Slider zoomSlider, Spinner widthSpinner, Spinner heightSpinne, Button emptyButton, Button saveButton, Button loadButton, T[] Cellstates, CellularAutomatonView cellularAutomatonView)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
+\item \texttt{public WireWorld(Button powerOff, Slider speedSlider, Canvas canvas, Slider zoomSlider, Spinner widthSpinner, Spinner heightSpinnr, Button emptyButton, Button saveButton, Button loadButton, T[] CellStates, CellularAutomatonView cellularAutomatonView)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
 \end{itemize}
 \paragraph{Metody prywatne:}
 \begin{itemize}
@@ -229,7 +229,7 @@ Klasa opisująca części kontrolera specyficzne dla edytora wzorów automatu ko
 \subsubsection{Metody}
 \paragraph{Konstruktory:}
 \begin{itemize}
-\item \texttt{public WireWorldPatternsController(Button powerOff, Slider speedSlider, Canvas canvas, Slider zoomSlider, Spinner widthSpinner, Spinner heightSpinner, Button emptyButton, Button saveButton, Button loadButton, RadioButton aliveRadioButton, RadioButton deadRadioButton, T[] Cellstates, CellularAutomatonView cellularAutomatonView)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
+\item \texttt{public WireWorldPatternsController(Button powerOff, Slider speedSlider, Canvas canvas, Slider zoomSlider, Spinner widthSpinner, Spinner heightSpinner, Button emptyButton, Button saveButton, Button loadButton, RadioButton aliveRadioButton, RadioButton deadRadioButton, T[] CellStates, CellularAutomatonView cellularAutomatonView)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
 \end{itemize}
 \paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
 \begin{itemize}
@@ -253,7 +253,7 @@ Klasa opisująca części kontrolera specyficzne dla edytora wzorów automatu ko
 \subsubsection{Metody}
 \paragraph{Konstruktory:}
 \begin{itemize}
-\item \texttt{public WireWorldPatternsController(Button powerOff, Slider speedSlider, Canvas canvas, Slider zoomSlider, Spinner widthSpinner, Spinner heightSpinner, Button emptyButton, Button saveButton, Button loadButton, RadioButton emptyRadioButton, RadioButton tailRadioButton, , RadioButton headRadioButton, , RadioButton conductorRadioButton, T[] Cellstates, CellularAutomatonView cellularAutomatonView)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
+\item \texttt{public WireWorldPatternsController(Button powerOff, Slider speedSlider, Canvas canvas, Slider zoomSlider, Spinner widthSpinner, Spinner heightSpinner, Button emptyButton, Button saveButton, Button loadButton, RadioButton emptyRadioButton, RadioButton tailRadioButton, , RadioButton headRadioButton, , RadioButton conductorRadioButton, T[] CellStates, CellularAutomatonView cellularAutomatonView)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
 \end{itemize}
 \paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
 \begin{itemize}
@@ -335,8 +335,8 @@ public enum CellStates {
 
 \paragraph{Metody prywatne:}
 \begin{itemize}
-    \item \texttt{private int[] countAliveNeighbors()} -- Oblicza ilość żywych sąsiadów dla każdej komórki automatu,
-    \item private int countAliveNeighbors(final int cellX, final int cellY) -- Oblicza ilość żywych sąsiadów dla konkretnej komórki automatu.
+    \item \texttt{private int[] countAliveNeighbours()} -- Oblicza ilość żywych sąsiadów dla każdej komórki automatu,
+    \item private int countAliveNeighbours(final int cellX, final int cellY) -- Oblicza ilość żywych sąsiadów dla konkretnej komórki automatu.
 \end{itemize}
 
 \paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
@@ -398,7 +398,7 @@ Interfejs generalizujący wizualizacje planszy.
 \paragraph{Metody publiczne:}
 \begin{itemize}
 	\item \texttt{public void drawCell(T CellState, final int x, final int y, final double cellSize)} - metoda rysująca pojedynczą komórkę,
-	\item \texttt{public void draw(CellularAutoamaton ca, final double cellSize)} - metoda rysująca całą planszę, na podstawie tablicy komórek.
+	\item \texttt{public void draw(CellularAutomaton ca, final double cellSize)} - metoda rysująca całą planszę, na podstawie tablicy komórek.
 \end{itemize}
 \subsection{FXCellularAutomatonView}
 Implementacja interfejsu \texttt{CellularAutomatonView} przy użyciu obiektu Canvas z biblioteki JavaFX. Wizualizacja 2D automatu komórkowego.
@@ -406,16 +406,16 @@ Implementacja interfejsu \texttt{CellularAutomatonView} przy użyciu obiektu Can
 \paragraph{Pola prywatne:}
 \begin{itemize}
 	\item \texttt{private final Canvas canvas} - płótno, na którym rysowana będzie plansza z aktualnym stanem automatu komórkowego,
-	\item \texttt{private final Map<T, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor.
+	\item \texttt{private final Map<T, Paint> colouring} - mapa przyporządkowująca stanowi automatu kolor.
 \end{itemize}
 \paragraph{Konstruktory:}
 \begin{itemize}
-	\item \texttt{public FXCellularAutomatonView(Canvas canvas, Map<T, Paint> coloring )} - inicjacja pól.
+	\item \texttt{public FXCellularAutomatonView(Canvas canvas, Map<T, Paint> colouring )} - inicjacja pól.
 \end{itemize}
 \paragraph{Metody publiczne:}
 \begin{itemize}
 	\item \texttt{public void drawCell(T CellState, final int x, final int y, final double cellSize)} - metoda rysująca pojedynczą komórkę,
-	\item \texttt{public void draw(CellularAutoamaton ca, final double cellSize)} - metoda rysująca całą planszę, na podstawie tablicy komórek.
+	\item \texttt{public void draw(CellularAutomaton ca, final double cellSize)} - metoda rysująca całą planszę, na podstawie tablicy komórek.
 \end{itemize}
 
 
