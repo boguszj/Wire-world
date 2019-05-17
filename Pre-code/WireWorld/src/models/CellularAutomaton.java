@@ -79,7 +79,7 @@ public abstract class CellularAutomaton<T extends Enum> {
      * Cellular automaton moves to the next generation
      */
     public final void nextGeneration() {
-        currentGeneration.add(1);
+        currentGeneration.setValue(currentGeneration.getValue() + 1);
         if (currentGeneration.getValue() < history.size()) {
             cells = history.get(currentGeneration.getValue());
         } else {
@@ -92,7 +92,7 @@ public abstract class CellularAutomaton<T extends Enum> {
      * Cellular automaton moves to the previous generation
      */
     public final void previousGeneration() {
-        currentGeneration.subtract(1);
+        currentGeneration.setValue(currentGeneration.getValue() - 1);
         if (currentGeneration.getValue() < 0) {
             currentGeneration.setValue(0);
             throw new IllegalStateException("Cannot go back in history below state 0");
