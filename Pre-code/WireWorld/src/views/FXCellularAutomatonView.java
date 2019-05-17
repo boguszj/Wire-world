@@ -1,4 +1,4 @@
-package views.tmp;
+package views;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -29,7 +29,7 @@ public class FXCellularAutomatonView<T extends Enum> implements CellularAutomato
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.setFill(coloring.get(cellState));
-        gc.fillRect(x, y, cellSize, cellSize);
+        gc.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
     }
 
     @Override
