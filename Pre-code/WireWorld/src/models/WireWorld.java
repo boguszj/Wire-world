@@ -1,12 +1,7 @@
 package models;
 
-import sample.Cell;
-
-import java.awt.peer.SystemTrayPeer;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WireWorld extends CellularAutomaton<WireWorld.CellStates> {
