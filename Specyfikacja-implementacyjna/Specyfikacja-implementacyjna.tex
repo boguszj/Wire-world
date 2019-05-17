@@ -35,12 +35,55 @@
 \section{Graficzny interfejs użytkownika}
 Graficzny interfejs użytkownika zawarty będzie w pliku \texttt{.fxml}, napisanym ręcznie lub wygenerowanym przez służący do tego program. Następnie zostanie połączony z logiką działania programu przez klasę \texttt{SetupController}. \\
 Główne okno programu zawierać będzie 2 zakładki. Każda z nich będzie obsługiwała i przedstawiała działanie jednego automatu komórkowego.
+
 \section{Diagram klas}
+Diagram przedstawiający wszystkie klasy programu i zależności między nimi znajduje się na rysunku \ref{fig:wszystkie_klasy}
 \begin{figure}
-	\hspace*{-3cm}\includegraphics[width=18cm]{Klasy}
-	\caption{Diagram klas}	
-	%TODO: Wyśrodkować
-\end{figure}	
+	\hspace*{-3cm}\includegraphics[width=18cm]{Diagram_klas_calosc}
+	\caption{Diagram klas}
+	\label{fig:wszystkie_klasy}
+\end{figure}
+
+\section{Podział na pakiety}
+W celu wydzielenia klas projektu względem funkcji, które pełnią zostały one podzielone na pakiety. Przynależności klas do pakietów przedstawia rysunek \ref{fig:pakiety}.
+\begin{figure}
+	\hspace*{-3cm}\includegraphics[width=18cm]{Pakiety}
+	\caption{Podział na pakiety}
+	\label{fig:pakiety}
+\end{figure}
+
+\subsection{Pakiet models}
+Pakiet ten zawiera klasy modelujące poszczególne automaty komórkowe.
+Szczegółowy schemat klas z tego pakietu przedstawia diagram klas na rysunku \ref{fig:models}.
+
+\begin{figure}
+	\centering
+	\caption{Pakiet models}
+	\hspace*{-3cm}\includegraphics[width=18cm]{Pakiet_models}
+	\label{fig:models}
+\end{figure}
+
+\subsection{Pakiet controllers}
+Pakiet ten zawiera klasy przyjmujące dane oraz reagujące na akcje użytkownika. Zażądają one odpowiednimi modelami i widokami.
+Szczegółowy schemat klas z tego pakietu przedstawia diagram klas na rysunku \ref{fig:coltrollers}.
+
+\begin{figure}
+	\centering
+	\hspace*{-3cm}\includegraphics[width=17cm]{Pakiet_controllers}
+	\caption{Pakiet controllers}
+	\label{fig:coltrollers}
+\end{figure}
+
+\subsection{Pakiet views}
+Pakiet ten zawiera klasy odpowiedzialne za wyświetlanie elementów graficznego interfejsu użytkownika.
+Szczegółowy schemat klas z tego pakietu przedstawia diagram klas na rysunku \ref{fig:views}.
+
+\begin{figure}
+	\centering
+	\hspace*{-3cm}\includegraphics[width=17cm]{Pakiet_views}
+	\caption{Pakiet views}
+	\label{fig:views}
+\end{figure}
 
 \section{Wzorce projektowe}
 %TODO: Opisać zastosowane wzorce
@@ -51,10 +94,12 @@ Główne okno programu zawierać będzie 2 zakładki. Każda z nich będzie obs�
 %TODO: Diagram sekwencji UML
 
 \section{Zastosowane algorytmy}
+\begin{samepage}
+	Obydwa algorytmy muszą przejść przez całą plansze i sprawdzić całe otoczenie (8 komórek) do o koła tej aktualnie rozpatrywanej, co daje nam złożoność 8*n*m, gdzie n to wysokość planszy, m to szerokość planszy, czyli działają w czasie $\Theta$(n*m).
 
-Obydwa algorytmy muszą przejść przez całą plansze i sprawdzić całe otoczenie (8 komórek) do o koła tej aktualnie rozpatrywanej, co daje nam złożoność 8*n*m, gdzie n to wysokość planszy, m to szerokość planszy, czyli działają w czasie $\Theta$(n*m).
+	Podczas przeglądania otoczenia komórki, automat przepisuje komórki do tablicy wynikowej lub zmienia ich wartość, zgodnie z zasadami opisanymi w \href{https://github.com/boguszj/Wire-world/blob/master/Specyfikacja-funkcjonalna/Specyfikacja-funkcjonalna.pdf}{Specyfikacji funkcjonalnej}.
+\end{samepage}
 
-Podczas przeglądania otoczenia komórki, automat przepisuje komórki do tablicy wynikowej lub zmienia ich wartość, zgodnie z zasadami opisanymi w \href{https://github.com/boguszj/Wire-world/blob/master/Specyfikacja-funkcjonalna/Specyfikacja-funkcjonalna.pdf}{Specyfikacji funkcjonalnej}.
 
 
 \chapter{Opis klas}
