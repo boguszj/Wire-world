@@ -107,6 +107,10 @@ public abstract class Controller<T extends Enum> {
      */
     protected abstract T getSelectedState();
 
+    /**
+     * Seat cellular automaton to random state and display it
+     * @param event <b>Not used</b>
+     */
     protected void randomizeBoard(Event event) {
         int width = widthSpinner.getValue();
         int height = heightSpinner.getValue();
@@ -125,6 +129,10 @@ public abstract class Controller<T extends Enum> {
         cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
     }
 
+    /**
+     * Seat cellular automaton to clear state and display it
+     * @param event <b>Not used</b>
+     */
     protected void clearBoard(Event event) {
         enableButtons();
         shrinkSlider();
@@ -135,6 +143,10 @@ public abstract class Controller<T extends Enum> {
         cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
     }
 
+    /**
+     * Change value of clicked cell to value selected by the user
+     * @param event Used for extracting mouse coordinates
+     */
     protected void canvasClicked(MouseEvent event) {
         T selectedState = getSelectedState();
         final int row = (int) (event.getY() / zoomSlider.getValue());
@@ -199,11 +211,19 @@ public abstract class Controller<T extends Enum> {
         }
     }
 
+    /**
+     * Move cellular automaton to the next state and draw it
+     * @param event <b>Not used</b>
+     */
     private void nextGeneration(Event event) {
         cellularAutomaton.nextGeneration();
         cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
     }
 
+    /**
+     * Move cellular automaton to the previous state and draw it
+     * @param event <b>Not used</b>
+     */
     private void previousGeneration(Event event) {
         cellularAutomaton.previousGeneration();
         cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
