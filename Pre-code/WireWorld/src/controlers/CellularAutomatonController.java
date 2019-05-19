@@ -159,12 +159,11 @@ public abstract class CellularAutomatonController<T extends Enum> {
     protected void shrinkSlider() {
         double Max = myMin(8000, 8000 / myMax(widthSpinner.getValue(), heightSpinner.getValue()));
         double Min = myMax(500.0 / heightSpinner.getValue(), 1150.0 / widthSpinner.getValue());
-        System.out.println(Min);
-        System.out.println(Max);
-        zoomSlider.setValue(Max);
         zoomSlider.setMax(Max);
         if (Min < Max) {
             zoomSlider.setValue(Min);
+        }else{
+            zoomSlider.setValue(Max);
         }
     }
 
