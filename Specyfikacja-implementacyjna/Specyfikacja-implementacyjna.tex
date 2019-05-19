@@ -86,6 +86,17 @@ Szczegółowy schemat klas z tego pakietu przedstawia diagram klas na rysunku \r
 \end{figure}
 
 \section{Wzorce projektowe}
+W celu skorzystania z rozwiązań wymyślonych przez doświadczonych programistów z całego świata w projekcie zostaną zastosowane wzorce projektowe pasujące do napotkanych problemów.
+
+\subsection{Wzorzec MVC}
+Aby wprowadzić spójność wśród klas aplikacji, wyznaczyć zakres funkcji realizowany przez dany element oraz sprecyzować zasady komunikacji architektura projektu będzie bazować na wzorcu Model View Controller.
+Wyraźny podział elementów zaproponowany przez ten wzorzec będzie bezpośrednio realizowany przez podział klas na odpowiadające pakiety.
+
+Klasy z pakietu \textit{models} reprezentują automaty komórkowe Game of Life i WireWorld. Odpowiadają za prowadzenie symulacji.
+
+Klasy z pakietu \textit{vies} są odpowiedzialne za wygląd i wyświetlanie interfejsu programu. Są to pliki \texttt{.fxml} opisujące wygląd okienek programu oraz klasa \texttt{FXCellularAutomatonView} odpowiedzialna za rysowanie automatu komórkowego na płótnie.
+
+Klasy z pakietu \textit{controllers} bezpośrednio reagują na akcje użytkownika. Logika w nich zawarta opowiada za odpowiednią aktualizację modeli oraz odświeżanie widoków.
 %TODO: Opisać zastosowane wzorce
 
 \section{Przepływ sterowania}
@@ -97,8 +108,6 @@ Diagram obrazujący przepływ sterowania dla przypadku użycia \textit{Utworzeni
 	\caption{Diagram sekwencji}
 	\label{fig:baisicWWSequense}
 \end{figure}
-
-%TODO: Diagram sekwencji UML
 
 \section{Zastosowane algorytmy}
 \begin{samepage}
