@@ -97,6 +97,14 @@ Klasy z pakietu \textit{models} reprezentują automaty komórkowe Game of Life i
 Klasy z pakietu \textit{vies} są odpowiedzialne za wygląd i wyświetlanie interfejsu programu. Są to pliki \texttt{.fxml} opisujące wygląd okienek programu oraz klasa \texttt{FXCellularAutomatonView} odpowiedzialna za rysowanie automatu komórkowego na płótnie.
 
 Klasy z pakietu \textit{controllers} bezpośrednio reagują na akcje użytkownika. Logika w nich zawarta opowiada za odpowiednią aktualizację modeli oraz odświeżanie widoków.
+
+\subsection{Wzorzec mostu}
+Pozwala na oddzielenie abstrakcji, jaką są różne rodzaje automatów komórkowych, od implementacji, czyli poszczególnych widoków wyświetlających automat, tak by każde z nich mogło się zmieniać osobno.
+
+Jest zrealizowany w projekcie poprzez zastosowanie hermetyzacji.
+Klasy automatów komórkowych zą generalizowane przez klasę abstrakcyjną \texttt{CellularAutomaton} dzięki czemu łatwo jest dodać kolejne konkretne automaty do projektu.
+Klasy widoków rysujących automaty komórkowe implementują wspólny interfejs \texttt{CellularAutomatonView}. Pozwala to na proste dodanie nowych widoków rysujących automaty przy pomocy innych bibliotek, czy wyświetlające na inne urządzenia wyjściowe.
+
 %TODO: Opisać zastosowane wzorce
 
 \section{Przepływ sterowania}
