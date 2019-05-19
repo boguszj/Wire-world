@@ -119,7 +119,7 @@ Diagram obrazujący przepływ sterowania dla przypadku użycia \textit{Utworzeni
 
 \section{Zastosowane algorytmy}
 \begin{samepage}
-	Obydwa algorytmy muszą przejść przez całą plansze i sprawdzić całe otoczenie (8 komórek) do o koła tej aktualnie rozpatrywanej, co daje nam złożoność 8*n*m, gdzie n to wysokość planszy, m to szerokość planszy, czyli działają w czasie $\Theta$(n*m).
+	Obydwa algorytmy muszą przejść przez całą plansze i sprawdzić całe otoczenie (8 komórek) do o koła tej aktualnie rozpatrywanej, co daje nam złożoność 8 $\cdot$ n $\cdot$ m, gdzie n to wysokość planszy, m to szerokość planszy, czyli działają w czasie $\Theta$(n $\cdot$ m).
 
 	Podczas przeglądania otoczenia komórki, automat przepisuje komórki do tablicy wynikowej lub zmienia ich wartość, zgodnie z zasadami opisanymi w \href{https://github.com/boguszj/Wire-world/blob/master/Specyfikacja-funkcjonalna/Specyfikacja-funkcjonalna.pdf}{Specyfikacji funkcjonalnej}.
 \end{samepage}
@@ -471,7 +471,99 @@ Implementacja interfejsu \texttt{CellularAutomatonView} przy użyciu obiektu Can
 
 
 \chapter{Testy}
-%TODO: Opis testów
+Poprawność działania poszczególnych metod zostanie zweryfikowane przez przeprowadzenie testów jednostkowych. Do ich realizacji zastosowana zostanie biblioteka \textbf{JUnit}.
+\section{Zaplanowane testy:}
+\subsection{Parsowanie planszy}
+
+Test będzie polegał na zamianie kilku przykładowych obiektów plansz na pliki w formacie \texttt{*.xml} oraz \texttt{*.json} oraz porównaniu ich z przygotowanymi wcześniej, prawidłowymi plikami. Na przykład:
+
+Obiekt o następujących wartościach pól:\\
+
+\noindent \texttt{width = 2}\\
+\texttt{height = 3}\\
+\texttt{cells = {WireWorld.CONDUCTOR, WireWorld.HEAD, WireWorld.TAIL, WireWorld.TAIL, WireWorld.CONDUCTOR, WireWorld.EMPTY}}\\
+
+
+Powinien zostać przekonwertowany do plików:\\
+
+\noindent Plik \texttt{*.xml}
+\begin{verbatim}
+<Board>
+  <width>2</width>
+  <height>3</height>
+  <states>
+    <states>CONDUCTOR</states>
+    <states>HEAD</states>
+    <states>TAIL</states>
+    <states>TAIL</states>
+    <states>CONDUCTOR</states>
+    <states>EMPTY</states>
+  </states>
+</Board>
+\end{verbatim}
+\noindent Plik \texttt{*.json}
+\begin{verbatim}
+{
+  "width" : 2,
+  "height" : 3,
+  "states" : [ "HEAD", "TAIL", "HEAD", "HEAD", "HEAD", "EMPTY" ]
+}
+\end{verbatim}
+
+ \begin{figure}
+	\hspace*{3.5cm}\includegraphics[width=5cm]{przyklad-planszy-wireworld}
+	\caption{Rysunek 3.1 - Plansza omawiana w punktach 3.1.1. i 3.1.2.}
+\end{figure}
+
+\subsection{Wczytywanie planszy}
+Test będzie polegać na wczytaniu kilku przykładowych plików \texttt{*.json} oraz \texttt{*.xml}, przekonwertowaniu ich na obiektu odpowiednich klas i porównaniu ich z wcześniej przygotowanymi, prawidłowymi obiektami. Na przykład: \\
+
+\noindent Plik \texttt{*.xml}
+\begin{verbatim}
+<Board>
+  <width>2</width>
+  <height>3</height>
+  <states>
+    <states>CONDUCTOR</states>
+    <states>HEAD</states>
+    <states>TAIL</states>
+    <states>TAIL</states>
+    <states>CONDUCTOR</states>
+    <states>EMPTY</states>
+  </states>
+</Board>
+\end{verbatim}
+\noindent Plik \texttt{*.json}
+\begin{verbatim}
+{
+  "width" : 2,
+  "height" : 3,
+  "states" : [ "HEAD", "TAIL", "HEAD", "HEAD", "HEAD", "EMPTY" ]
+}
+\end{verbatim}
+
+Powinny reprezentować obiekt o następującej strukturze:\\
+
+\noindent \texttt{width = 2}\\
+\texttt{height = 3}\\
+\texttt{cells = {WireWorld.CONDUCTOR, WireWorld.HEAD, WireWorld.TAIL, WireWorld.TAIL, WireWorld.CONDUCTOR, WireWorld.EMPTY}}
+
+\subsection{Generacja następnego pokolenia}
+Test będzie polegać na wyznaczeniu następnego pokolenia dla kilku przykładowych planszy oraz porównaniu ich z wcześniej przygotowanymi, poprawnymi planszami. Na przykład:\\
+
+Obiekt planszy o poniższej strukturze:\\
+
+\noindent \texttt{width = 2}\\
+\texttt{height = 3}\\
+\texttt{cells = {WireWorld.CONDUCTOR, WireWorld.HEAD, WireWorld.TAIL, WireWorld.TAIL, WireWorld.CONDUCTOR, WireWorld.EMPTY}}\\
+
+Powinien w następnym pokoleniu wygenerować obiekt o poniższej strukturze:\\
+
+\noindent \texttt{width = 2}\\
+\texttt{height = 3}\\
+\texttt{cells = {WireWorld.CONDUCTOR, WireWorld.HEAD, WireWorld.TAIL, WireWorld.TAIL, WireWorld.CONDUCTOR, WireWorld.EMPTY}}\\
+
+
 
 \chapter{Biblioteki}
 Zastosowanie bibliotek z poza biblioteki standardowej Javy pozwoli na szybsze i łatwiejsze wprowadzenie do programu wymaganej funkcjonalności. Biblioteki będą instalowane przy pomocy wbudowanego narzędzia w programie IntelliJ IDE.
