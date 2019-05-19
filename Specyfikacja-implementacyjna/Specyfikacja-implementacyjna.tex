@@ -134,7 +134,7 @@ Package składający się z klas mających na celu połączenie graficznego inte
 \subsection{SetupController}
 Klasa będąca punktem startowym programu. Jej zadaniem będzie przekazanie referencji do elementów interfejsu kontrolerom konkretnych zakładek.
 
-\subsection{CellularAutomatonController} %TODO Przerobic 3 pierwsze kontrolery żeby zrobić 1 abstrakcyjny
+\subsection{CellularAutomatonController}
 \texttt{public abstract class CellularAutomatonController<T extends Enum>}
 Klasa łącząca w sobie wspólne cechy kontrolerów obydwu automatów skończonych - opisująca powtarzające się elementy graficznego interfejsu użytkownika i ich funkcjonalności.
 \subsubsection{Pola}
@@ -174,6 +174,12 @@ Klasa łącząca w sobie wspólne cechy kontrolerów obydwu automatów skończon
 \end{itemize}
 \paragraph{Metody chronione:}
 \begin{itemize}
+	\item \texttt{protected abstract CellularAutomaton createCellularAutomaton()} - metoda odpowiedzialna za stworzenie odpowiedniego modelu automatu komórkowego,
+	\item \texttt{protected abstract Map<T, Paint> getColoring()} - metoda zwracająca mapę przyporządkowującą kolory do stanów automatów komórkowych,
+	\item \texttt{protected abstract T getSelectedState()} - metoda odpowiedzialna za pobranie aktualnie wybranego stanu na podstawie zaznaczonych  zaznaczonych \hyperref[sec:checkbox]{checkbox'ów}, 
+	\item \texttt{protected void randomizeBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu automatu komórkowego z losowo wygenerowaną planszą początkową,
+	\item \texttt{protected void randomizeBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu automatu komórkowego z pustą planszą początkową,
+	\item \texttt{protected void canvasClicked(Event event)} metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy na podstawie zaznaczonych \hyperref[sec:checkbox]{checkbox'ów} należy zmienić stan odpowiedniej komórki oraz ją narysować,
  	\item \texttt{protected void shrinkSlider()} - metoda odpowiedzialna za dopasowanie maksymalnej wartość suwaka przybliżenia, tak aby 		wielkość wyświetlanego obrazu mieściła się w maksymalnym rozmiarze płótna,
  	\item \texttt{protected void enableButtons()} - metoda odpowiedzialna za aktywowanie przycisków, które przy starcie programu były 			nieaktywne ze względu na brak funkcjonalności,
  	\item \texttt{protected generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - metoda odpowiedzialna za aktywowanie i dezaktywowanie przycisku 							\texttt{previousGeneration}, gdy wyświetlenie poprzedniej generacji jest nie możliwe.
@@ -189,6 +195,7 @@ Klasa łącząca w sobie wspólne cechy kontrolerów obydwu automatów skończon
 \end{itemize}
 
 \subsection{GameOfLifeController}
+\texttt{public class GameOfLifeController extends CellularAutomatonController<GameOfLife.CellStates>}
 Klasa opisująca części kontrolera specyficzne dla automatu GameOfLife.
 \subsubsection{Pola}
 \paragraph{Pola chronione:}
@@ -196,27 +203,19 @@ Klasa opisująca części kontrolera specyficzne dla automatu GameOfLife.
 	\item \texttt{private RadioButton aliveRadioButton} - checkbox oznaczający, że rysowane komórki będą żywe,
 	\item \texttt{private RadioButton deadRadioButton} - checkbox oznaczający, że rysowane komórki będą martwe.
 \end{itemize}
-
-\paragraph{Pola prywatne:}
-\begin{itemize}
-	\item \texttt{private Map<GameOfLife.CellStates, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor (czarny - martwa komórka, biały - żywa komórka).
-\end{itemize}
 \subsubsection{Funkcje}
 \paragraph{Konstruktory:}
 \begin{itemize}
 \item \texttt{public GameOfLifeController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
 \end{itemize}
-\paragraph{Metody publiczne:}
+\paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
 \begin{itemize}
- 	\item \texttt{public Map<GameOfLife.CellStates, Paint> getColoring()} - metoda dostępowa pozwalająca ustawić wartość pola \texttt{coloring} funkcjom spoza tego pakietu.
+	\item \texttt{protected CellularAutomaton createCellularAutomaton()}
+	\item \texttt{protected Map<GameOfLife.CellStates, Paint> getColoring()} 
+	\item \texttt{protected GameOfLife.CellStates getSelectedState()}
 \end{itemize}
-\paragraph{Metody prywatne:}
-\begin{itemize}
- 	\item \texttt{ private void randomizeBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu GameOfLife z losowo wygenerowaną planszą początkową,
- 	\item \texttt{ private void clearBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu GameOfLife z pustą planszą początkową,
- 	\item \texttt{private void canvasClicked(Event event)} metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy na podstawie zaznaczonych \hyperref[sec:checkbox]{checkbox'ów} należy zmienić stan odpowiedniej komórki oraz ją narysować,
- 	\item \texttt{private GameOfLife.CellStates getSelectedState()} - metoda odpowiedzialna za pobranie aktualnie wybranego stanu na podstawie zaznaczonych  zaznaczonych \hyperref[sec:checkbox]{checkbox'ów}.
-\end{itemize}
+Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[]{CellularAutomatonController}.
+
 
 \subsection{WireWorldController}
 Klasa opisująca części kontrolera specyficzne dla automatu WireWorld.
@@ -230,27 +229,20 @@ Klasa opisująca części kontrolera specyficzne dla automatu WireWorld.
 	\item \texttt{private Button powerOff} -- przycisk zamieniający wszystkie komórki będące głowami lub ogonami elektronu na przewodniki.
 \end{itemize}
 
-\paragraph{Pola prywatne:}
-\begin{itemize}
-	\item \texttt{private Map<WireWorld.CellStates, Paint> coloring} - mapa przyporządkowująca stanowi automatu kolor (czerwony - głowa elektronu, niebieski - ogon elektronu, żółty - przewodnik, czarny - pusta komórka).
-\end{itemize}
 \subsubsection{Funkcje}
 \paragraph{Konstruktory:}
 \begin{itemize}
 \item \texttt{public WireWorld(Button powerOff, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton emptyRadioButton, RadioButton tailRadioButton, , RadioButton headRadioButton, , RadioButton conductorRadioButton)} - inicjuje wszystkie zmienne, łączy elementy graficzne z odpowiednimi funkcjami.
 \end{itemize}
-\paragraph{Metody publiczne:}
+\paragraph{Klasa implementuje poniższe metody abstrakcyjne z klasy bazowe:}
 \begin{itemize}
- 	\item \texttt{public Map<WireWorld.CellStates, Paint> getColoring()} - metoda dostępowa pozwalająca ustawić wartość pola \texttt{coloring} funkcjom spoza tego pakietu.
+	\item \texttt{protected CellularAutomaton createCellularAutomaton()}
+	\item \texttt{protected Map<WireWorld.CellStates, Paint> getColoring()} 
+	\item \texttt{protected WireWorld.CellStates getSelectedState()}
 \end{itemize}
-\paragraph{Metody prywatne:}
-\begin{itemize}
- 	\item \texttt{ private void randomizeBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu WireWorld z losowo wygenerowaną planszą początkową,
- 	\item \texttt{ private void clearBoard(Event event)} - metoda odpowiedzialna za stworzenie modelu WireWorld z pustą planszą początkową,
- 	\item \texttt{private void canvasClicked(Event event)} metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy na podstawie zaznaczonych \hyperref[sec:checkbox]{checkbox'ów} należy zmienić stan odpowiedniej komórki oraz ją narysować,
- 	\item \texttt{private GameOfLife.CellStates getSelectedState()} - metoda odpowiedzialna za pobranie aktualnie wybranego stanu na podstawie zaznaczonych  zaznaczonych \hyperref[sec:checkbox]{checkbox'ów},
- 	\item \texttt{private void powerOff(Event event)} - metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego o tym, że należy zamienić wszystkie komórki będące głowami i ogonami elektronu na przewodniki.
-\end{itemize}
+Szczegółowy opis każdej z metod znajduje się w klasie bazowej \hyperref[]{CellularAutomatonController}.
+
+
 \subsection{PatternsController}
 \texttt{public abstract class PatternsController<T extends Enum>}
 Klasa łącząca w sobie wspólne cechy kontrolerów edytorów wzorów do obydwu automatów komórkowych.
