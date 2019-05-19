@@ -105,7 +105,7 @@ Jest zrealizowany w projekcie poprzez zastosowanie hermetyzacji.
 Klasy automatów komórkowych zą generalizowane przez klasę abstrakcyjną \texttt{CellularAutomaton} dzięki czemu łatwo jest dodać kolejne konkretne automaty do projektu.
 Klasy widoków rysujących automaty komórkowe implementują wspólny interfejs \texttt{CellularAutomatonView}. Pozwala to na proste dodanie nowych widoków rysujących automaty przy pomocy innych bibliotek, czy wyświetlające na inne urządzenia wyjściowe.
 
-%TODO: Opisać zastosowane wzorce
+%TODO: Opisać zastosowane wzorce - Został Obserwator
 
 \section{Przepływ sterowania}
 Diagram obrazujący przepływ sterowania dla przypadku użycia \textit{Utworzenie automatu WireWorld zmiana kilu wybranych komórek a następnie symulacja przyszłych pokoleń} znajduje się na rysunku \ref{fig:baisicWWSequense}.
@@ -482,6 +482,18 @@ Implementacja interfejsu \texttt{CellularAutomatonView} przy użyciu obiektu Can
 %TODO: Opis testów
 
 \chapter{Biblioteki}
-%TODO: Opis bibliotek
+Zastosowanie bibliotek z poza biblioteki standardowej Javy pozwoli na szybsze i łatwiejsze wprowadzenie do programu wymaganej funkcjonalności. Biblioteki będą instalowane przy pomocy wbudowanego narzędzia w programie IntelliJ IDE.
+
+\subsection{Java FX}
+Do przygotowania graficznego interfejsu użytkownika zostanie wykorzystana biblioteka \textit{Java FX}. Została ona wybrana z uwagi na poniższe aspekty.
+
+Jest ona nowsza niż alternatywa w postaci biblioteki Swing oraz nie polega na jeszcze starszych zależnościach.
+Domyślnie wspiera korzystanie z kontrolerów do obsługi akcji użytkownika oraz oddzielenie widoków od logiki, co pasuje do zastosowanego wzorca MVC.
+Umożliwia stylizację elementów pryz pomocy języka \textit{CSS}.
+
+Dodatkowo posiada mechanizm \textit{Property}, który pozwoli na łatwe zastosowanie wzorca projektowego obserwator do śledzenia zmian wybranych atrybutów.
+
+\subsection{Jackson}
+W celu parsowania oraz serializacji obiektów do plików XML i JSON w projekcie zostanie wykorzystania biblioteka \textit{Jackson}. Pozwala ona na proste wykonywanie wspomnianych zadań. Dodatkową zaletą jest fakt, że obsługuje obydwa typy plików.
 
 \end{document}
