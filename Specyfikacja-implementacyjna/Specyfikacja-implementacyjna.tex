@@ -563,6 +563,27 @@ Powinien w następnym pokoleniu wygenerować obiekt o poniższej strukturze:\\
 \texttt{height = 3}\\
 \texttt{cells = {WireWorld.HEAD, WireWorld.TAIL, WireWorld.CONDUCTOR, WireWorld.CONDUCTOR, WireWorld.CONDUCTOR, WireWorld.EMPTY}}\\
 
+\subsection{Zamiana niepustych komórek na przewodniki:}
+Test będzie polegać na próbie zamiany wszystkich komórek będących głowami lub ogonami elektronu na przewodniki dla kilku przykładowych planszy oraz porównaniu ich z wcześniej przygotowanymi, poprawnymi planszami wynikowymi. Na przykład:\\
+
+Obiekt planszy o poniższej strukturze:\\
+
+\noindent \texttt{width = 2}\\
+\texttt{height = 3}\\
+\texttt{cells = {WireWorld.CONDUCTOR, WireWorld.HEAD, WireWorld.TAIL, WireWorld.TAIL, WireWorld.CONDUCTOR, WireWorld.EMPTY}}\\
+
+Po zamianie powinien mieć następującą strukturę:\\
+
+\noindent \texttt{width = 2}\\
+\texttt{height = 3}\\
+\texttt{cells = {WireWorld.CONDUCTOR, WireWorld.CONDUCTOR, WireWorld.CONDUCTOR, WireWorld.CONDUCTOR, WireWorld.CONDUCTOR, WireWorld.EMPTY}}\\
+
+\subsection{Reakcja elementów interfejsu graficznego:}
+Test będzie polegać na manualnym sprawdzeniu czy wszystkie części interfejsu działają poprawnie i zachowują się zgodnie z przewidywaniami. Na przykład:\\
+
+Przycisk "Previous generation" nie powinien być możliwy do kliknięcia jeżeli numer aktualnego pokolenia wynosi 1.
+
+Nie da się wprowadzić błędnych danych do pól określających wysokość i szerokość planszy.
 
 
 \chapter{Biblioteki}
