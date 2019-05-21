@@ -102,10 +102,15 @@ Klasy z pakietu \textit{controllers} bezpośrednio reagują na akcje użytkownik
 Pozwala na oddzielenie abstrakcji, jaką są różne rodzaje automatów komórkowych, od implementacji, czyli poszczególnych widoków wyświetlających automat, tak by każde z nich mogło się zmieniać osobno.
 
 Jest zrealizowany w projekcie poprzez zastosowanie hermetyzacji.
-Klasy automatów komórkowych zą generalizowane przez klasę abstrakcyjną \texttt{CellularAutomaton} dzięki czemu łatwo jest dodać kolejne konkretne automaty do projektu.
+Klasy automatów komórkowych są generalizowane przez klasę abstrakcyjną \texttt{CellularAutomaton} dzięki czemu łatwo jest dodać kolejne konkretne automaty do projektu.
 Klasy widoków rysujących automaty komórkowe implementują wspólny interfejs \texttt{CellularAutomatonView}. Pozwala to na proste dodanie nowych widoków rysujących automaty przy pomocy innych bibliotek, czy wyświetlające na inne urządzenia wyjściowe.
 
-%TODO: Opisać zastosowane wzorce - Został Obserwator
+\subsection{Wzorzec obserwator}
+Aby uprościć zależności między elementami zostanie wykorzystany wzorzec obserwator.
+Klasy projektu nie będą bezpośrednio implementować standardowego interfejsu \texttt{PropertyChangeListener}.
+Zamiast tego wykorzystany zostanie mechanizm \textbf{Property} z biblioteki \textit{JavaFX}.
+
+Wzorzec zostanie wykorzystany do automatycznej aktualizacji etykiety opisjącej numer aktualnego pokolenia oraz do reagowania na zmiany suwaków przybliżenia i prędkości automatycznej symulacji.
 
 \section{Przepływ sterowania}
 Diagram obrazujący przepływ sterowania dla przypadku użycia \textit{Utworzenie automatu WireWorld zmiana kilu wybranych komórek a następnie symulacja przyszłych pokoleń} znajduje się na rysunku \ref{fig:baisicWWSequense}.
