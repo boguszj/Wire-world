@@ -154,6 +154,7 @@ Klasa łącząca w sobie wspólne cechy kontrolerów obydwu automatów skończon
 	\item \texttt{protected Button loadButton} - przycisk służący do wczytania planszy,
 	\item \texttt{protected MenuButton menuButton} - przycisk służący do zapisania części planszy lub narysowania i zapisania wzoru,
 	\item \texttt{protected Label generationLabel} -  napis reprezentujący numer aktualnie wyświetlanej generacji,
+	\item \texttt{protected CellularAutomaton cellularAutomaton} - model automatu komórkowego,
 	\item \texttt{protected CellularAutomatonView cellularAutomatonView} - obiekt odpowiedzialny za narysowanie planszy.
 \end{itemize}
 
@@ -182,8 +183,11 @@ Klasa łącząca w sobie wspólne cechy kontrolerów obydwu automatów skończon
 	\item \texttt{protected void canvasClicked(Event event)} metoda odpowiedzialna za przekazanie informacji do modelu automatu komórkowego, o tym że należy na podstawie zaznaczonych \hyperref[sec:checkbox]{checkbox'ów} należy zmienić stan odpowiedniej komórki oraz ją narysować,
  	\item \texttt{protected void shrinkSlider()} - metoda odpowiedzialna za dopasowanie maksymalnej wartość suwaka przybliżenia, tak aby 		wielkość wyświetlanego obrazu mieściła się w maksymalnym rozmiarze płótna,
  	\item \texttt{protected void enableButtons()} - metoda odpowiedzialna za aktywowanie przycisków, które przy starcie programu były 			nieaktywne ze względu na brak funkcjonalności,
- 	\item \texttt{protected generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - metoda odpowiedzialna za aktywowanie i dezaktywowanie przycisku 							\texttt{previousGeneration}, gdy wyświetlenie poprzedniej generacji jest nie możliwe.
+ 	\item \texttt{protected generationNumberChanged(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)} - metoda odpowiedzialna za aktywowanie i dezaktywowanie przycisku 							\texttt{previousGeneration}, gdy wyświetlenie poprzedniej generacji jest nie możliwe,
+ 	\item \texttt{protected void save()} - metoda odpowiedzialna za wywołanie parsera w celu zapisania planszy do pliku,
+	\item \texttt{protected Cell load()} - metoda odpowiedzialna za wywołanie parsera w celu wczytania planszy z pliku.
 \end{itemize}
+
 \paragraph{Metody prywatne:}
 \begin{itemize}
  	\item \texttt{private createThread()} - metoda odpowiedzialna za stworzenie nowego wątku \hyperref[sec:thread]{t},
@@ -468,6 +472,20 @@ Implementacja interfejsu \texttt{CellularAutomatonView} przy użyciu obiektu Can
 	\item \texttt{public void draw(CellularAutomaton ca, final double cellSize)} - metoda rysująca całą planszę, na podstawie tablicy komórek.
 \end{itemize}
 
+\section{Package ,,Parsers''}
+Pakiet zawierający klasy odpowiedzialne za konwertowanie obiektów reprezentujących modele automatów skończonych na pliki \texttt{*.xml} i \texttt{*.json} i odwrotnie.
+
+\subsection{Parser}
+\texttt{public static class Parser}
+Klasa statyczna, będąca kontenerem metod parsujących modele automatów komórkowych.
+\paragraph{Metody publiczne:}
+\begin{itemize}
+	\item \texttt{public static void saveAsJSON(CellularAutomaton ca)} - metoda odpowiedzialna za zamianę planszy na ciąg znaków zgodny z formatem JSON oraz za zapis tego ciągu znaków do pliku,
+	\item \texttt{public static void saveAsXML(CellularAutomaton ca)} - metoda odpowiedzialna za zamianę planszy na ciąg znaków zgodny z formatem XML oraz za zapis tego ciągu znaków do pliku,
+	\item \texttt{public static CellularAutomaton loadJSON(String path, Class class)} - metoda odpowiedzialna za stworzenie planszy na podstawie pliku \texttt{*.json},
+	\item \texttt{public static CellularAutomaton loadXML(String path, Class class)} - metoda odpowiedzialna za stworzenie planszy na podstawie pliku \texttt{*.xml}.
+\end{itemize}
+
 
 
 \chapter{Testy}
@@ -475,7 +493,7 @@ Poprawność działania poszczególnych metod zostanie zweryfikowane przez przep
 \section{Zaplanowane testy:}
 \subsection{Parsowanie planszy}
 
-Test będzie polegał na zamianie kilku przykładowych obiektów plansz na pliki w formacie \texttt{*.xml} oraz \texttt{*.json} oraz porównaniu ich z przygotowanymi wcześniej, prawidłowymi plikami. Na przykład:
+Test będzie polegał na zamianie kilku przykładowych obiektów plansz na pliki w formacie \texttt{*.xml} oraz \texttt{*.JSON} oraz porównaniu ich z przygotowanymi wcześniej, prawidłowymi plikami. Na przykład:
 
 Obiekt o następujących wartościach pól:\\
 
@@ -501,7 +519,7 @@ Powinien zostać przekonwertowany do plików:\\
   </states>
 </Board>
 \end{verbatim}
-\noindent Plik \texttt{*.json}
+\noindent Plik \texttt{*.JSON}
 \begin{verbatim}
 {
   "width" : 2,
@@ -516,7 +534,7 @@ Powinien zostać przekonwertowany do plików:\\
 \end{figure}
 
 \subsection{Wczytywanie planszy}
-Test będzie polegać na wczytaniu kilku przykładowych plików \texttt{*.json} oraz \texttt{*.xml}, przekonwertowaniu ich na obiektu odpowiednich klas i porównaniu ich z wcześniej przygotowanymi, prawidłowymi obiektami. Na przykład: \\
+Test będzie polegać na wczytaniu kilku przykładowych plików \texttt{*.JSON} oraz \texttt{*.xml}, przekonwertowaniu ich na obiektu odpowiednich klas i porównaniu ich z wcześniej przygotowanymi, prawidłowymi obiektami. Na przykład: \\
 
 \noindent Plik \texttt{*.xml}
 \begin{verbatim}
@@ -533,7 +551,7 @@ Test będzie polegać na wczytaniu kilku przykładowych plików \texttt{*.json} 
   </states>
 </Board>
 \end{verbatim}
-\noindent Plik \texttt{*.json}
+\noindent Plik \texttt{*.JSON}
 \begin{verbatim}
 {
   "width" : 2,
