@@ -137,7 +137,7 @@ Diagram obrazujący przepływ sterowania dla przypadku użycia \textit{Utworzeni
 Package składający się z klas mających na celu połączenie graficznego interfejsu użytkownika z logiką działania automatów komórkowych. Będzie zawierać 4 klasy, jedną ogólna "CellularAutomatonController", łączącą w sobie cechy wspólne obsługi interfejsu obydwu automatów, oraz z dwóch klas dziedziczących z poprzedniej, zawierających elementu różne dla GameOfLife i WireWorld. Ostatnia z klas będzie pełniła rolę pośrednika między resztą klas a widokiem z pliku \texttt{.fxml}.
 
 \subsection{SetupController}
-Klasa będąca punktem startowym programu. Jej zadaniem będzie przekazanie referencji do elementów interfejsu kontrolerom konkretnych zakładek.
+Klasa będąca punktem startowym programu. Jej zadaniem będzie przekazanie referencji do elementów interfejsu kontrolerom konkretnych zakładek oraz stworzenie głównego okna programu.
 
 \subsection{CellularAutomatonController}
 \texttt{public abstract class CellularAutomatonController<T extends Enum>}
