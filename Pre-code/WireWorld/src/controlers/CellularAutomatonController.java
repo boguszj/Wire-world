@@ -8,6 +8,7 @@ import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Paint;
 import models.CellularAutomaton;
 import utils.Utils;
@@ -50,6 +51,8 @@ public abstract class CellularAutomatonController<T extends Enum> {
     private Thread t;
     private long delay;
 
+    private static final double scrollRatio = 0.5;
+
     public CellularAutomatonController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
         this.speedSlider = speedSlider;
@@ -85,6 +88,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
         emptyButton.setOnAction(this::clearBoard);
         canvas.setOnMouseClicked(this::canvasClicked);
         canvas.setOnMouseDragged(this::canvasClicked);
+        //canvas.setOnScroll(this::canvasScrolled);
     }
 
     /**
@@ -141,6 +145,10 @@ public abstract class CellularAutomatonController<T extends Enum> {
         generationNumberLabel.textProperty().bind(cellularAutomaton.currentGenerationProperty().asString());
         cellularAutomaton.clear();
         cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
+    }
+
+    private void canvasScrolled(ScrollEvent scrollEvent) {
+        zoomSlider.setValue(zoomSlider.getValue() + scrollEvent.getDeltaY() * scrollRatio);
     }
 
     /**
