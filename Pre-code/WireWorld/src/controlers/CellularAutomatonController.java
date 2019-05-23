@@ -2,6 +2,9 @@ package controlers;
 
 import static utils.Utils.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -89,6 +92,19 @@ public abstract class CellularAutomatonController<T extends Enum> {
         canvas.setOnMouseClicked(this::canvasClicked);
         canvas.setOnMouseDragged(this::canvasClicked);
         //canvas.setOnScroll(this::canvasScrolled);
+        saveButton.setOnAction(this::saveCurrentGeneration);
+    }
+
+    protected void saveCurrentGeneration(Event event) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        try {
+            String json = objectMapper.writeValueAsString(cellularAutomaton);
+            System.out.println(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -178,6 +194,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
     protected void enableButtons() {
         nextGenerationButton.setDisable(false);
         autoRunToggleButton.setDisable(false);
+        saveButton.setDisable(false);
     }
 
     private void createThread() {

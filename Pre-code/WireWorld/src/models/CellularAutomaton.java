@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -15,6 +16,7 @@ public abstract class CellularAutomaton<T extends Enum> {
     protected final int height;
     protected T[] cells;
 
+    @JsonIgnore
     private List<T[]> history = new ArrayList<>();
     //Number of generation that automaton is currently in. Used for lazy generation.
     private IntegerProperty currentGeneration = new SimpleIntegerProperty(0);
@@ -37,6 +39,7 @@ public abstract class CellularAutomaton<T extends Enum> {
      *
      * @return Array of all possible values that cell can have
      */
+    @JsonIgnore
     public abstract T[] getPossibleCellValues();
 
     public void setCells(T[] cells) {
@@ -71,6 +74,7 @@ public abstract class CellularAutomaton<T extends Enum> {
     /**
      * @return Number of cells in entire automaton
      */
+    @JsonIgnore
     public int getCellCount() {
         return height * width;
     }
@@ -139,6 +143,7 @@ public abstract class CellularAutomaton<T extends Enum> {
         history.add(cells);
     }
 
+    @JsonIgnore
     public int getCurrentGeneration() {
         return currentGeneration.getValue();
     }
