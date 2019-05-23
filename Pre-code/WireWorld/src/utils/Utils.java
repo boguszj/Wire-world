@@ -21,4 +21,17 @@ public final class Utils {
         if (a < b) return a;
         return b;
     }
+
+    /**
+     * Extracts extension from file name with the leading dot
+     * @param fileName
+     * @return file extension with . at the beginning or <c>null</c> if no extension exists
+     */
+    public static String extractFileExtension(String fileName) {
+        int lastDotIndex = fileName.lastIndexOf('.');
+        if (lastDotIndex == -1 || lastDotIndex == fileName.length()-1)
+            return null;
+
+        return fileName.substring(lastDotIndex);
+    }
 }
