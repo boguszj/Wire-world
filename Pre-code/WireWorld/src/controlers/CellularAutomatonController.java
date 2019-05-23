@@ -1,27 +1,30 @@
 package controlers;
 
-import static utils.Utils.*;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import models.CellularAutomaton;
 import utils.Utils;
 import views.CellularAutomatonView;
 import views.FXCellularAutomatonView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
-import static java.lang.Math.min;
-import static jdk.nashorn.internal.objects.NativeMath.max;
+import static utils.Utils.myMax;
+import static utils.Utils.myMin;
 
 //TODO: States for GUI (Simulation paused, played, ...)
 
@@ -96,14 +99,40 @@ public abstract class CellularAutomatonController<T extends Enum> {
     }
 
     protected void saveCurrentGeneration(Event event) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        //TODO: Stop auto play
+        Window window = ((Node) event.getTarget()).getScene().getWindow();
 
-        try {
-            String json = objectMapper.writeValueAsString(cellularAutomaton);
-            System.out.println(json);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save board");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON", "*.json"),
+                new FileChooser.ExtensionFilter("XML", "*.xml")
+        );
+
+        File selectedFile = fileChooser.showSaveDialog(window);
+        if (selectedFile == null) // User canceled
+            return;
+
+        //TODO: Check if selected file exists and would get overwritten
+        String extension = Utils.extractFileExtension(selectedFile.getName());
+        switch (extension) {
+            case ".json":
+                //FIXME: Move to some other function
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+                try {
+                    objectMapper.writeValue(selectedFile, cellularAutomaton);
+                } catch (IOException e) {
+                    //TODO: Display dialog
+                }
+                break;
+            case ".xml":
+                //TODO: Serialazie to XML
+                break;
+            default:
+                //TODO: Display fail dialog
+                break;
         }
     }
 
@@ -123,12 +152,14 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * CellularAutomatonController should check which state is selected from input section and return it
+     *
      * @return state selected by a user
      */
     protected abstract T getSelectedState();
 
     /**
      * Seat cellular automaton to random state and display it
+     *
      * @param event <b>Not used</b>
      */
     protected void randomizeBoard(Event event) {
@@ -151,6 +182,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * Seat cellular automaton to clear state and display it
+     *
      * @param event <b>Not used</b>
      */
     protected void clearBoard(Event event) {
@@ -169,6 +201,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * Change value of clicked cell to value selected by the user
+     *
      * @param event Used for extracting mouse coordinates
      */
     protected void canvasClicked(MouseEvent event) {
@@ -186,7 +219,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
         zoomSlider.setMax(Max);
         if (Min < Max) {
             zoomSlider.setValue(Min);
-        }else{
+        } else {
             zoomSlider.setValue(Max);
         }
     }
@@ -237,6 +270,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * Move cellular automaton to the next state and draw it
+     *
      * @param event <b>Not used</b>
      */
     private void nextGeneration(Event event) {
@@ -246,6 +280,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * Move cellular automaton to the previous state and draw it
+     *
      * @param event <b>Not used</b>
      */
     private void previousGeneration(Event event) {
