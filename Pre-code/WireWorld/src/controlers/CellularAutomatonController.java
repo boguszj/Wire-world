@@ -123,7 +123,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
             generationNumberLabel.textProperty().bind(cellularAutomaton.currentGenerationProperty().asString());
             cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
         } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to read file").showAndWait();
+            new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to read file\n\n" + e.getLocalizedMessage()).showAndWait();
         }
     }
 
