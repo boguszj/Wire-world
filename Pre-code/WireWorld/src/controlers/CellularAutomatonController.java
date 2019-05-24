@@ -15,6 +15,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import models.CellularAutomaton;
+import models.Serializer;
 import utils.Utils;
 import views.CellularAutomatonView;
 import views.FXCellularAutomatonView;
@@ -123,18 +124,14 @@ public abstract class CellularAutomatonController<T extends Enum> {
             String extension = Utils.extractFileExtension(selectedFile.getName());
             switch (extension) {
                 case ".json":
-                    //FIXME: Move to some other function
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
                     try {
-                        objectMapper.writeValue(selectedFile, cellularAutomaton);
+                        Serializer.serializeToJson(cellularAutomaton, selectedFile);
                     } catch (IOException e) {
                         new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to crate file").showAndWait();
                     }
                     break;
                 case ".xml":
-                    //TODO: Serialazie to XML
+                    //TODO: Serialize to XML
                     break;
                 default:
                     Alert alert = new Alert(Alert.AlertType.ERROR);
