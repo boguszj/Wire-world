@@ -99,7 +99,12 @@ public abstract class CellularAutomatonController<T extends Enum> {
     }
 
     protected void saveCurrentGeneration(Event event) {
-        //TODO: Stop auto play
+        boolean wasRunning = false;
+        if (running) {
+            autoRunToggleButton.fire();
+            wasRunning = true;
+        }
+
         Window window = ((Node) event.getTarget()).getScene().getWindow();
 
         FileChooser fileChooser = new FileChooser();
@@ -110,30 +115,33 @@ public abstract class CellularAutomatonController<T extends Enum> {
         );
 
         File selectedFile = fileChooser.showSaveDialog(window);
-        if (selectedFile == null) // User canceled
-            return;
+        if (selectedFile != null) { // User didn't canceled
+            //TODO: Check if selected file exists and would get overwritten
+            String extension = Utils.extractFileExtension(selectedFile.getName());
+            switch (extension) {
+                case ".json":
+                    //FIXME: Move to some other function
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-        //TODO: Check if selected file exists and would get overwritten
-        String extension = Utils.extractFileExtension(selectedFile.getName());
-        switch (extension) {
-            case ".json":
-                //FIXME: Move to some other function
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+                    try {
+                        objectMapper.writeValue(selectedFile, cellularAutomaton);
+                    } catch (IOException e) {
+                        //TODO: Display dialog
+                    }
+                    break;
+                case ".xml":
+                    //TODO: Serialazie to XML
+                    break;
+                default:
+                    //TODO: Display fail dialog
+                    break;
+            }
 
-                try {
-                    objectMapper.writeValue(selectedFile, cellularAutomaton);
-                } catch (IOException e) {
-                    //TODO: Display dialog
-                }
-                break;
-            case ".xml":
-                //TODO: Serialazie to XML
-                break;
-            default:
-                //TODO: Display fail dialog
-                break;
         }
+
+        if (wasRunning)
+            autoRunToggleButton.fire();
     }
 
     /**
