@@ -48,6 +48,11 @@ public class GameOfLifeController extends CellularAutomatonController<GameOfLife
     }
 
     @Override
+    protected Class getCellularAutomatonInstanceClass() {
+        return GameOfLife.class;
+    }
+
+    @Override
     protected CellularAutomaton creteCellularAutomaton() {
         return new GameOfLife(widthSpinner.getValue(), heightSpinner.getValue());
     }

@@ -1,8 +1,5 @@
 package controlers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -15,6 +12,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import models.CellularAutomaton;
+import models.Parser;
 import models.Serializer;
 import utils.Utils;
 import views.CellularAutomatonView;
@@ -23,7 +21,6 @@ import views.FXCellularAutomatonView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Optional;
 
 import static utils.Utils.myMax;
 import static utils.Utils.myMin;
@@ -98,7 +95,38 @@ public abstract class CellularAutomatonController<T extends Enum> {
         canvas.setOnMouseDragged(this::canvasClicked);
         //canvas.setOnScroll(this::canvasScrolled);
         saveButton.setOnAction(this::saveCurrentGeneration);
+        loadButton.setOnAction(this::lodBoard);
     }
+
+    protected void lodBoard(Event event) {
+        if (running)
+            autoRunToggleButton.fire();
+
+        Window window = ((Node) event.getTarget()).getScene().getWindow();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load board");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON", "*.json"),
+                new FileChooser.ExtensionFilter("XML", "*.xml")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(window);
+
+        //TODO: Prevent user from loading wrong CellularAutomaton type
+        try {
+            cellularAutomaton = Parser.loadCellularAutomaton(selectedFile, getCellularAutomatonInstanceClass());
+
+            enableButtons();
+            shrinkSlider();
+            generationNumberLabel.textProperty().bind(cellularAutomaton.currentGenerationProperty().asString());
+            cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to read file").showAndWait();
+        }
+    }
+
+    protected abstract Class getCellularAutomatonInstanceClass();
 
     protected void saveCurrentGeneration(Event event) {
         if (cellularAutomaton == null)
