@@ -22,6 +22,7 @@ import views.FXCellularAutomatonView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 import static utils.Utils.myMax;
 import static utils.Utils.myMin;
@@ -99,6 +100,9 @@ public abstract class CellularAutomatonController<T extends Enum> {
     }
 
     protected void saveCurrentGeneration(Event event) {
+        if (cellularAutomaton == null)
+            throw new IllegalStateException("No cellular automaton present whe trying to save it to the file");
+
         boolean wasRunning = false;
         if (running) {
             autoRunToggleButton.fire();
@@ -116,7 +120,6 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
         File selectedFile = fileChooser.showSaveDialog(window);
         if (selectedFile != null) { // User didn't canceled
-            //TODO: Check if selected file exists and would get overwritten
             String extension = Utils.extractFileExtension(selectedFile.getName());
             switch (extension) {
                 case ".json":
@@ -127,14 +130,18 @@ public abstract class CellularAutomatonController<T extends Enum> {
                     try {
                         objectMapper.writeValue(selectedFile, cellularAutomaton);
                     } catch (IOException e) {
-                        //TODO: Display dialog
+                        new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to crate file").showAndWait();
                     }
                     break;
                 case ".xml":
                     //TODO: Serialazie to XML
                     break;
                 default:
-                    //TODO: Display fail dialog
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Invalid extension");
+                    alert.setHeaderText(String.format("Invalid extension detected \"%s\"", extension));
+                    alert.setContentText("Board can be saved in JSON or XML format with .json and .xml respectably.");
+                    alert.showAndWait();
                     break;
             }
 
