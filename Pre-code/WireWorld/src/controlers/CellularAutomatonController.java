@@ -114,6 +114,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
         File selectedFile = fileChooser.showOpenDialog(window);
 
         //TODO: Prevent user from loading wrong CellularAutomaton type
+        //TODO: Deal with parsing exceptions (More specific messages)
         try {
             cellularAutomaton = Parser.loadCellularAutomaton(selectedFile, getCellularAutomatonInstanceClass());
 

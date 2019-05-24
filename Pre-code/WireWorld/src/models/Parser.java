@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import utils.Utils;
 
 import java.io.File;
@@ -21,14 +22,15 @@ public class Parser {
         if (file == null)
             throw new IllegalArgumentException("File cannot be null");
 
-        if (Utils.extractFileExtension(file.getName()).equals(".json"))
-            return loadCellularAutomatonFromJson(file, automatonClass);
+        ObjectMapper objectMapper;
+
+        String extension = Utils.extractFileExtension(file.getName());
+        if (extension.equals(".json"))
+            objectMapper = new ObjectMapper();
+        else if (extension.equals(".xml"))
+            objectMapper = new XmlMapper();
         else
             throw new IllegalArgumentException("Invalid file format");
-    }
-
-    private static CellularAutomaton loadCellularAutomatonFromJson(File file, Class automatonClass) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
 
         return (CellularAutomaton) objectMapper.readValue(file, automatonClass);
     }
