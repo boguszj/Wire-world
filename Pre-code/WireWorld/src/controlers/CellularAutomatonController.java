@@ -131,7 +131,11 @@ public abstract class CellularAutomatonController<T extends Enum> {
                     }
                     break;
                 case ".xml":
-                    //TODO: Serialize to XML
+                    try {
+                        Serializer.serializeToXml(cellularAutomaton, selectedFile);
+                    } catch (IOException e) {
+                        new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to crate file").showAndWait();
+                    }
                     break;
                 default:
                     Alert alert = new Alert(Alert.AlertType.ERROR);
