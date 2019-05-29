@@ -1,5 +1,8 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +30,15 @@ public class GameOfLife extends CellularAutomaton<GameOfLife.CellStates> {
         super(width, height);
 
         this.cells = new CellStates[getCellCount()];
-        clear();
+    }
+
+    @JsonCreator
+    public GameOfLife(
+            @JsonProperty("width") final int width,
+            @JsonProperty("height") final int height,
+            @JsonProperty("cells") final GameOfLife.CellStates[] cells) {
+        this(width, height);
+        setCells(cells);
     }
 
     @Override

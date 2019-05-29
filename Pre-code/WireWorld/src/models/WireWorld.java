@@ -1,5 +1,8 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +31,15 @@ public class WireWorld extends CellularAutomaton<WireWorld.CellStates> {
 
         this.cells = new CellStates[getCellCount()];
         clear();
+    }
+
+    @JsonCreator
+    public WireWorld(
+            @JsonProperty("width") final int width,
+            @JsonProperty("height") final int height,
+            @JsonProperty("cells") final WireWorld.CellStates[] cells) {
+        this(width, height);
+        setCells(cells);
     }
 
     @Override

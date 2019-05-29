@@ -43,6 +43,11 @@ public class WireWorldController extends CellularAutomatonController<WireWorld.C
 
 
     @Override
+    protected Class getCellularAutomatonInstanceClass() {
+        return WireWorld.class;
+    }
+
+    @Override
     protected CellularAutomaton creteCellularAutomaton() {
         return new WireWorld(widthSpinner.getValue(), heightSpinner.getValue());
     }

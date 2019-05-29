@@ -1,24 +1,29 @@
 package controlers;
 
-import static utils.Utils.*;
-
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import models.CellularAutomaton;
+import models.Parser;
+import models.Serializer;
 import utils.Utils;
 import views.CellularAutomatonView;
 import views.FXCellularAutomatonView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
-import static java.lang.Math.min;
-import static jdk.nashorn.internal.objects.NativeMath.max;
+import static utils.Utils.myMax;
+import static utils.Utils.myMin;
 
 //TODO: States for GUI (Simulation paused, played, ...)
 
@@ -89,6 +94,91 @@ public abstract class CellularAutomatonController<T extends Enum> {
         canvas.setOnMouseClicked(this::canvasClicked);
         canvas.setOnMouseDragged(this::canvasClicked);
         //canvas.setOnScroll(this::canvasScrolled);
+        saveButton.setOnAction(this::saveCurrentGeneration);
+        loadButton.setOnAction(this::lodBoard);
+    }
+
+    protected void lodBoard(Event event) {
+        if (running)
+            autoRunToggleButton.fire();
+
+        Window window = ((Node) event.getTarget()).getScene().getWindow();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load board");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON", "*.json"),
+                new FileChooser.ExtensionFilter("XML", "*.xml")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(window);
+
+        //TODO: Prevent user from loading wrong CellularAutomaton type
+        //TODO: Deal with parsing exceptions (More specific messages)
+        try {
+            cellularAutomaton = Parser.loadCellularAutomaton(selectedFile, getCellularAutomatonInstanceClass());
+
+            enableButtons();
+            shrinkSlider();
+            generationNumberLabel.textProperty().bind(cellularAutomaton.currentGenerationProperty().asString());
+            cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to read file\n\n" + e.getLocalizedMessage()).showAndWait();
+        }
+    }
+
+    protected abstract Class getCellularAutomatonInstanceClass();
+
+    protected void saveCurrentGeneration(Event event) {
+        if (cellularAutomaton == null)
+            throw new IllegalStateException("No cellular automaton present whe trying to save it to the file");
+
+        boolean wasRunning = false;
+        if (running) {
+            autoRunToggleButton.fire();
+            wasRunning = true;
+        }
+
+        Window window = ((Node) event.getTarget()).getScene().getWindow();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save board");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON", "*.json"),
+                new FileChooser.ExtensionFilter("XML", "*.xml")
+        );
+
+        File selectedFile = fileChooser.showSaveDialog(window);
+        if (selectedFile != null) { // User didn't canceled
+            String extension = Utils.extractFileExtension(selectedFile.getName());
+            switch (extension) {
+                case ".json":
+                    try {
+                        Serializer.serializeToJson(cellularAutomaton, selectedFile);
+                    } catch (IOException e) {
+                        new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to crate file").showAndWait();
+                    }
+                    break;
+                case ".xml":
+                    try {
+                        Serializer.serializeToXml(cellularAutomaton, selectedFile);
+                    } catch (IOException e) {
+                        new Alert(Alert.AlertType.ERROR, "Unexpected error encountered when trying to crate file").showAndWait();
+                    }
+                    break;
+                default:
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Invalid extension");
+                    alert.setHeaderText(String.format("Invalid extension detected \"%s\"", extension));
+                    alert.setContentText("Board can be saved in JSON or XML format with .json and .xml respectably.");
+                    alert.showAndWait();
+                    break;
+            }
+
+        }
+
+        if (wasRunning)
+            autoRunToggleButton.fire();
     }
 
     /**
@@ -107,12 +197,14 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * CellularAutomatonController should check which state is selected from input section and return it
+     *
      * @return state selected by a user
      */
     protected abstract T getSelectedState();
 
     /**
      * Seat cellular automaton to random state and display it
+     *
      * @param event <b>Not used</b>
      */
     protected void randomizeBoard(Event event) {
@@ -135,6 +227,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * Seat cellular automaton to clear state and display it
+     *
      * @param event <b>Not used</b>
      */
     protected void clearBoard(Event event) {
@@ -153,6 +246,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * Change value of clicked cell to value selected by the user
+     *
      * @param event Used for extracting mouse coordinates
      */
     protected void canvasClicked(MouseEvent event) {
@@ -170,7 +264,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
         zoomSlider.setMax(Max);
         if (Min < Max) {
             zoomSlider.setValue(Min);
-        }else{
+        } else {
             zoomSlider.setValue(Max);
         }
     }
@@ -178,6 +272,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
     protected void enableButtons() {
         nextGenerationButton.setDisable(false);
         autoRunToggleButton.setDisable(false);
+        saveButton.setDisable(false);
     }
 
     private void createThread() {
@@ -220,6 +315,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * Move cellular automaton to the next state and draw it
+     *
      * @param event <b>Not used</b>
      */
     private void nextGeneration(Event event) {
@@ -229,6 +325,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     /**
      * Move cellular automaton to the previous state and draw it
+     *
      * @param event <b>Not used</b>
      */
     private void previousGeneration(Event event) {
