@@ -119,12 +119,14 @@
                                        </content>
                                     </ScrollPane>
                                     <Button fx:id="wireWorldSaveButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" text="Save board" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="65.0" />
-                                    <SplitMenuButton layoutX="-4.0" layoutY="367.0" mnemonicParsing="false" text="Draw Pattern" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                                    <SplitMenuButton disable="true" layoutX="-4.0" layoutY="367.0" mnemonicParsing="false" text="Draw Pattern" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                       <items>
                                         <MenuItem mnemonicParsing="false" text="Save pattern" />
                                         <MenuItem mnemonicParsing="false" text="Draw pattern" />
                                       </items>
                                     </SplitMenuButton>
+                                    <Button fx:id="wireWorldNewPatternButton" layoutX="24.0" layoutY="410.0" mnemonicParsing="false" text="New pattern" />
+                                    <Button fx:id="wireWorldEditPatternButton" layoutX="26.0" layoutY="444.0" mnemonicParsing="false" text="Edit pattern" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -143,7 +145,7 @@
                      <content>
                         <Canvas fx:id="gameOfLifeCanvas" />
                      </content></ScrollPane>
-                  <TabPane layoutX="1188.0" layoutY="15.0" prefHeight="494.0" prefWidth="150.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="50.0" AnchorPane.bottomAnchor="108.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="15.0">
+                  <TabPane layoutX="1188.0" layoutY="15.0" prefHeight="494.0" prefWidth="150.0" style="-fx-border-color: black; -fx-border-radius: 5;" tabClosingPolicy="UNAVAILABLE" tabMinWidth="50.0" AnchorPane.bottomAnchor="108.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="15.0">
                     <tabs>
                       <Tab text="Cells">
                          <content>
@@ -204,9 +206,37 @@
                                  </children></VBox>
                          </content>
                       </Tab>
-                      <Tab disable="true" text="Figures">
+                      <Tab closable="false" text="Patterns">
                          <content>
-                            <VBox />
+                            <VBox alignment="TOP_CENTER">
+                                 <children>
+                                    <Label text="Pattern list" textAlignment="CENTER">
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="7.0" />
+                                       </VBox.margin>
+                                       <content>
+                                          <ListView prefHeight="227.0" prefWidth="148.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <Button fx:id="gameOfLifeEditPatternButton" disable="true" mnemonicParsing="false" text="Edit pattern">
+                                       <VBox.margin>
+                                          <Insets top="12.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button fx:id="gameOfLifeNewPatternButton" mnemonicParsing="false" text="New pattern">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children></VBox>
                          </content>
                       </Tab>
                     </tabs>
@@ -229,8 +259,8 @@
                               </Spinner>
                               <Button fx:id="gameOfLifeRandomButton" layoutX="164.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Random" AnchorPane.leftAnchor="164.0" AnchorPane.topAnchor="7.0" />
                               <Button fx:id="gameOfLifeEmptyButton" layoutX="164.0" layoutY="51.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="70.0" text="Empty" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="164.0" />
-                              <Button fx:id="gameOfLifeSaveButton" disable="true" layoutX="127.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="88.0" text="Save board" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
-                              <Button fx:id="gameOfLifeLoadButton" layoutX="156.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Load board" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" />
+                              <Button fx:id="gameOfLifeSaveButton" disable="true" layoutX="127.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Save board" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
+                              <Button fx:id="gameOfLifeLoadButton" layoutX="156.0" layoutY="56.0" mnemonicParsing="false" text="Load board" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </right>
