@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 
 <AnchorPane prefHeight="386.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameOfLifeFigureDrawer">
    <children>
@@ -20,12 +22,12 @@
       </Label>
       <AnchorPane layoutX="14.0" layoutY="48.0" prefHeight="320.0" prefWidth="446.0" style="-fx-border-color: black;">
          <children>
-            <Canvas height="319.0" layoutX="4.0" layoutY="4.0" width="443.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="3.0" />
+            <Canvas fx:id="canvas" height="319.0" layoutX="4.0" layoutY="4.0" width="443.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="3.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="472.0" layoutY="49.0" prefHeight="323.0" prefWidth="191.0" style="-fx-border-color: black; -fx-border-radius: 4;">
          <children>
-            <TextField layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="164.0" promptText="Enter figure name" />
+            <TextField fx:id="figureNameTextField" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="164.0" promptText="Enter figure name" />
              <AnchorPane fx:id="randomButton" layoutX="2.0" layoutY="4.0" minHeight="0.0" minWidth="0.0" prefHeight="136.0" prefWidth="188.0">
                  <children>
                      <RadioButton fx:id="headRadioButton" layoutX="20.0" layoutY="43.0" mnemonicParsing="false" selected="true" text="Head" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
@@ -42,17 +44,25 @@
                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUE" height="15.0" layoutX="23.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="51.0" />
                  </children>
              </AnchorPane>
-            <Spinner layoutX="76.0" layoutY="208.0" prefHeight="27.0" prefWidth="102.0" />
-            <Spinner layoutX="76.0" layoutY="239.0" prefHeight="27.0" prefWidth="102.0" />
+             <Spinner fx:id="widthSpinner" layoutX="76.0" layoutY="192.0" prefHeight="27.0" prefWidth="102.0">
+                 <valueFactory>
+                     <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
+                 </valueFactory>
+             </Spinner>
+             <Spinner fx:id="heightSpinner" layoutX="76.0" layoutY="223.0" prefHeight="27.0" prefWidth="102.0">
+                 <valueFactory>
+                     <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
+                 </valueFactory>
+             </Spinner>
             <Label layoutX="24.0" layoutY="213.0" text="Width" />
             <Label layoutX="21.0" layoutY="244.0" text="Height" />
             <AnchorPane layoutX="11.0" layoutY="281.0" prefHeight="28.0" prefWidth="170.0">
                 <children>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="68.0" text="Cancel" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" />
-                  <Button contentDisplay="RIGHT" layoutX="101.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="68.0" text="Save" textAlignment="CENTER" AnchorPane.rightAnchor="0.0" />
+                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="68.0" text="Cancel" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" />
+                  <Button fx:id="saveButton" contentDisplay="RIGHT" layoutX="101.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="68.0" text="Save" textAlignment="CENTER" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
-            <Button layoutX="18.0" layoutY="172.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="164.0" text="Reset" />
+            <Button fx:id="resetButton" layoutX="18.0" layoutY="172.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="164.0" text="Reset" />
          </children>
       </AnchorPane>
    </children>
