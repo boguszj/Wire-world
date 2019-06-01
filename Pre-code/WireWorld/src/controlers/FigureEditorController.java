@@ -6,6 +6,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import utils.Utils;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +32,7 @@ public abstract class FigureEditorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
+        Utils.makeSpinnerUpdateValueOnFocusLost(heightSpinner);
     }
 }
