@@ -3,13 +3,18 @@ package controlers;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import models.CellularAutomaton;
 import models.Parser;
@@ -101,7 +106,31 @@ public abstract class CellularAutomatonController<T extends Enum> {
         //canvas.setOnScroll(this::canvasScrolled);
         saveButton.setOnAction(this::saveCurrentGeneration);
         loadButton.setOnAction(this::lodBoard);
+
+        newPatternButton.setOnAction(this::openFigureEditor);
     }
+
+    protected void openFigureEditor(Event event) {
+        try {
+            Parent root = loadFXMLEditorFile();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node)event.getTarget()).getScene().getWindow());
+            stage.setTitle("Figure drawer");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create appropriate root node for figure editor
+     * @return root node used to create window
+     * @throws IOException thrown if unable to load FXML file
+     */
+    protected abstract Parent loadFXMLEditorFile() throws IOException;
 
     protected void lodBoard(Event event) {
         if (running)
@@ -118,8 +147,6 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
         File selectedFile = fileChooser.showOpenDialog(window);
 
-        //TODO: Prevent user from loading wrong CellularAutomaton type
-        //TODO: Deal with parsing exceptions (More specific messages)
         try {
             cellularAutomaton = Parser.loadCellularAutomaton(selectedFile, getCellularAutomatonInstanceClass());
 

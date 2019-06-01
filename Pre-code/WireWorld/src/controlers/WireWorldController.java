@@ -1,6 +1,8 @@
 package controlers;
 
 import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
@@ -8,6 +10,7 @@ import javafx.scene.paint.Paint;
 import models.CellularAutomaton;
 import models.WireWorld;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +44,11 @@ public class WireWorldController extends CellularAutomatonController<WireWorld.C
 
     }
 
+
+    @Override
+    protected Parent loadFXMLEditorFile() throws IOException {
+        return FXMLLoader.load(getClass().getResource("../views/WireWorldFigureDrawer.fxml"));
+    }
 
     @Override
     protected Class getCellularAutomatonInstanceClass() {

@@ -5,15 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
 
-<AnchorPane prefHeight="386.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameOfLifeFigureDrawer">
+<AnchorPane prefHeight="386.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.WireWorldFigureEditorController">
    <children>
       <Label layoutX="231.0" layoutY="14.0" prefHeight="28.0" prefWidth="139.0" text="Figure editor" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="230.0">
          <font>
@@ -44,12 +43,12 @@
                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUE" height="15.0" layoutX="23.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="51.0" />
                  </children>
              </AnchorPane>
-             <Spinner fx:id="widthSpinner" layoutX="76.0" layoutY="192.0" prefHeight="27.0" prefWidth="102.0">
+             <Spinner fx:id="widthSpinner" layoutX="76.0" layoutY="208.0" prefHeight="27.0" prefWidth="102.0">
                  <valueFactory>
                      <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
                  </valueFactory>
              </Spinner>
-             <Spinner fx:id="heightSpinner" layoutX="76.0" layoutY="223.0" prefHeight="27.0" prefWidth="102.0">
+             <Spinner fx:id="heightSpinner" layoutX="76.0" layoutY="239.0" prefHeight="27.0" prefWidth="102.0">
                  <valueFactory>
                      <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
                  </valueFactory>

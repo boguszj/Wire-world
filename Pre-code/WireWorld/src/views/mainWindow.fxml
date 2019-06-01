@@ -125,8 +125,8 @@
                                         <MenuItem mnemonicParsing="false" text="Draw pattern" />
                                       </items>
                                     </SplitMenuButton>
-                                    <Button fx:id="wireWorldNewPatternButton" layoutX="24.0" layoutY="410.0" mnemonicParsing="false" text="New pattern" />
-                                    <Button fx:id="wireWorldEditPatternButton" layoutX="26.0" layoutY="444.0" mnemonicParsing="false" text="Edit pattern" />
+                                    <Button fx:id="wireWorldNewPatternButton" layoutX="24.0" layoutY="440.0" mnemonicParsing="false" text="New pattern" />
+                                    <Button fx:id="wireWorldEditPatternButton" disable="true" layoutX="25.0" layoutY="403.0" mnemonicParsing="false" text="Edit pattern" />
                                  </children>
                               </AnchorPane>
                            </content>

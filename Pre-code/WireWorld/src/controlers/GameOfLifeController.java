@@ -1,5 +1,7 @@
 package controlers;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
@@ -7,6 +9,7 @@ import javafx.scene.paint.Paint;
 import models.CellularAutomaton;
 import models.GameOfLife;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +48,11 @@ public class GameOfLifeController extends CellularAutomatonController<GameOfLife
         coloring.put(GameOfLife.CellStates.ALIVE, Color.WHITE);
 
         return coloring;
+    }
+
+    @Override
+    protected Parent loadFXMLEditorFile() throws IOException {
+        return FXMLLoader.load(getClass().getResource("../views/GameOfLifeFigureDrawer.fxml"));
     }
 
     @Override
