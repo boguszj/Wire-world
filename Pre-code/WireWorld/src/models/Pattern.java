@@ -4,8 +4,8 @@ import java.util.UUID;
 
 //Class representing rectangular pattern that could be inserted to CellularAutomaton
 public class Pattern<T extends Enum> {
-    protected final int width;
-    protected final int height;
+    protected int width;
+    protected int height;
 
     protected String name;
     protected T[] cells;
@@ -14,7 +14,7 @@ public class Pattern<T extends Enum> {
         return id;
     }
 
-    protected UUID id;
+    protected final UUID id;
 
 
     public Pattern(int width, int height, T[] cells) {
@@ -37,6 +37,14 @@ public class Pattern<T extends Enum> {
 
     public int getWidth() {
         return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public int getHeight() {
