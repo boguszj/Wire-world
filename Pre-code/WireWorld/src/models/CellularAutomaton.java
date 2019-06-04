@@ -38,6 +38,8 @@ public abstract class CellularAutomaton<T extends Enum> {
      * @param y left upper corner y
      */
     public void insertPattern(Pattern<T> pattern, final int x, final int y) {
+        clearHistory();
+
         for (int r = 0; r < pattern.getHeight(); r++) {
             for (int c = 0; c < pattern.getWidth(); c++) {
                 final int patternIndex = r * pattern.getWidth() + c;
@@ -52,7 +54,6 @@ public abstract class CellularAutomaton<T extends Enum> {
                 final int automatonIndex = automatonRow * width + automatonColumn;
                 cells[automatonIndex] = newState;
             }
-            
         }
     }
 
