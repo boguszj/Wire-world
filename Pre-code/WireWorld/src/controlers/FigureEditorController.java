@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
@@ -56,6 +57,29 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
         canvas.setOnMouseDragged(this::canvasClicked);
 
         createNewDrawingBoard(null);
+    }
+
+    /**
+     * Check if pattern entered by the user is correct
+     * @return
+     */
+    protected boolean validateFigure() {
+        if (cellularAutomaton == null) {
+            new Alert(Alert.AlertType.ERROR, "No pattern drawn");
+            return false;
+        }
+
+        if (Utils.isNullOrEmpty(figureNameTextField.getText())) {
+            new Alert(Alert.AlertType.ERROR, "No figure name provided");
+            return false;
+        }
+
+        return true;
+    }
+
+    protected void saveFigure(Event event) {
+        if (!validateFigure())
+            return;
     }
 
     /**
