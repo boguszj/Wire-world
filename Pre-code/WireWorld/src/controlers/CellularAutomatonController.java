@@ -392,7 +392,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
                         @Override
                         public void run() {
                             nextGeneration(null);
-                            System.out.println(delay);
+                            //System.out.println(delay);
                         }
                     });
                     try {
