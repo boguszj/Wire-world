@@ -8,10 +8,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import models.CellularAutomaton;
 import models.GameOfLife;
+import models.Pattern;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static models.GameOfLife.CellStates.ALIVE;
+import static models.GameOfLife.CellStates.DEAD;
 
 //TODO: States for GUI (Simulation paused, played, ...)
 
@@ -30,22 +34,32 @@ public class GameOfLifeController extends CellularAutomatonController<GameOfLife
 
         this.aliveRadioButton = aliveRadioButton;
         this.deadRadioButton = deadRadioButton;
+
+        loadInitialPatterns();
+    }
+
+    private void loadInitialPatterns() {
+        Pattern<GameOfLife.CellStates> blinker = new Pattern<>("Blinker", 3, 3,
+                new GameOfLife.CellStates[] {DEAD, ALIVE, DEAD,
+                                             DEAD, ALIVE, DEAD,
+                                             DEAD, ALIVE, DEAD});
+        patterns.add(blinker);
     }
 
     @Override
     protected GameOfLife.CellStates getSelectedState() {
         if (aliveRadioButton.isSelected())
-            return GameOfLife.CellStates.ALIVE;
+            return ALIVE;
         else
-            return GameOfLife.CellStates.DEAD;
+            return DEAD;
     }
 
     @Override
     public Map<GameOfLife.CellStates, Paint> getColoring(){
         Map<GameOfLife.CellStates, Paint> coloring = new HashMap<>();
 
-        coloring.put(GameOfLife.CellStates.DEAD, Color.BLACK);
-        coloring.put(GameOfLife.CellStates.ALIVE, Color.WHITE);
+        coloring.put(DEAD, Color.BLACK);
+        coloring.put(ALIVE, Color.WHITE);
 
         return coloring;
     }
