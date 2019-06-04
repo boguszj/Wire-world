@@ -7,9 +7,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import models.CellularAutomaton;
+import models.Pattern;
 import utils.Utils;
 import views.CellularAutomatonView;
 import views.FXCellularAutomatonView;
@@ -50,8 +52,25 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
         cellularAutomatonView = new FXCellularAutomatonView<>(canvas, getColoring());
         cancelButton.setOnAction(event -> ((Stage) cancelButton.getScene().getWindow()).close());
         resetButton.setOnAction(this::createNewDrawingBoard);
+        canvas.setOnMouseClicked(this::canvasClicked);
+        canvas.setOnMouseDragged(this::canvasClicked);
 
         createNewDrawingBoard(null);
+    }
+
+    /**
+     * Change value of clicked cell to value selected by the user
+     *
+     * @param event Used for extracting mouse coordinates
+     */
+    protected void canvasClicked(MouseEvent event) {
+        final int row = (int) (event.getY() / cellSize);
+        final int column = (int) (event.getX() / cellSize);
+
+        T selectedState = getSelectedState();
+
+        cellularAutomaton.setCell(row, column, selectedState);
+        cellularAutomatonView.drawCell(selectedState, column, row, cellSize);
     }
 
     protected abstract CellularAutomaton creteCellularAutomaton();
