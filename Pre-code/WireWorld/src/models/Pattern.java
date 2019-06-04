@@ -16,9 +16,15 @@ public class Pattern<T extends Enum> {
 
     protected UUID id;
 
+
     public Pattern(int width, int height, T[] cells) {
+        this("", width, height, cells);
+    }
+
+    public Pattern(String name, int width, int height, T[] cells) {
         id = UUID.randomUUID();
 
+        this.name = name;
         this.width = width;
         this.height = height;
         this.cells = cells;
