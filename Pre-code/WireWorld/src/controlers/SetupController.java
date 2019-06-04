@@ -76,6 +76,8 @@ public class SetupController extends Application implements Initializable {
     private Button wireWorldEditPatternButton;
     @FXML
     private Button wireWorldNewPatternButton;
+    @FXML
+    private ListView wireWorldPatternListView;
 
 
 
@@ -123,6 +125,8 @@ public class SetupController extends Application implements Initializable {
     private Button gameOfLifeEditPatternButton;
     @FXML
     private Button gameOfLifeNewPatternButton;
+    @FXML
+    private ListView gameOfLifePatternListView;
 
 
     //-------------------- Wireworld -------------------------
@@ -137,8 +141,8 @@ public class SetupController extends Application implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Pass controls to GameOfLifeController
-        gameOfLifeController = new GameOfLifeController(gameOfLifeEditPatternButton, gameOfLifeNewPatternButton ,gameOfLifeSpeedSlider, gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
-        wireWorldController = new WireWorldController(wireWorldEditPatternButton, wireWorldNewPatternButton ,wireWorldPowerOffButton ,wireWorldSpeedSlider, wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
+        gameOfLifeController = new GameOfLifeController(gameOfLifePatternListView, gameOfLifeEditPatternButton, gameOfLifeNewPatternButton ,gameOfLifeSpeedSlider, gameOfLifeCanvas, gameOfLifeZoomSlider, gameOfLifeAutoRunToggleButton, gameOfLifePreviousGenerationButton, gameOfLifeNextGenerationButton, gameOfLifeWidthSpinner, gameOfLifeHeightSpinner, gameOfLifeRandomButton, gameOfLifeEmptyButton, gameOfLifeSaveButton, gameOfLifeLoadButton, gameOfLifeGenerationNumberLabel, aliveRadioButton, deadRadioButton);
+        wireWorldController = new WireWorldController(wireWorldPatternListView, wireWorldEditPatternButton, wireWorldNewPatternButton ,wireWorldPowerOffButton ,wireWorldSpeedSlider, wireWorldCanvas, wireWorldZoomSlider, wireWorldAutoRunToggleButton, wireWorldPreviousGenerationButton, wireWorldNextGenerationButton, wireWorldWidthSpinner, wireWorldHeightSpinner, wireWorldRandomButton, wireWorldEmptyButton, wireWorldSaveButton, wireWorldLoadButton, wireWorldGenerationNumberLabel, emptyRadioButton, tailRadioButton, headRadioButton, conductorRadioButton);
 
     }
 

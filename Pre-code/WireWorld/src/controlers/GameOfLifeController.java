@@ -24,9 +24,9 @@ public class GameOfLifeController extends CellularAutomatonController<GameOfLife
     private final RadioButton aliveRadioButton;
     private final RadioButton deadRadioButton;
 
-    public GameOfLifeController(Button editPatternButton, Button newPatternButton, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton) {
+    public GameOfLifeController(ListView patternListView, Button editPatternButton, Button newPatternButton, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel, RadioButton aliveRadioButton, RadioButton deadRadioButton) {
 
-        super(editPatternButton, newPatternButton ,speedSlider, canvas, zoomSlider,  autoRunToggleButton,  previousGenerationButton,  nextGenerationButton,  widthSpinner,  heightSpinner,  randomButton,  emptyButton,  saveButton,  loadButton,  generationNumberLabel);
+        super(patternListView, editPatternButton, newPatternButton ,speedSlider, canvas, zoomSlider,  autoRunToggleButton,  previousGenerationButton,  nextGenerationButton,  widthSpinner,  heightSpinner,  randomButton,  emptyButton,  saveButton,  loadButton,  generationNumberLabel);
 
         this.aliveRadioButton = aliveRadioButton;
         this.deadRadioButton = deadRadioButton;

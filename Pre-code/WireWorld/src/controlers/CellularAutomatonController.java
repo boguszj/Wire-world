@@ -60,13 +60,15 @@ public abstract class CellularAutomatonController<T extends Enum> {
     protected Button editPatternButton;
     protected Button newPatternButton;
 
+    protected ListView patternListView;
+
     private boolean running;
     private Thread t;
     private long delay;
 
     private static final double scrollRatio = 0.5;
 
-    public CellularAutomatonController(Button editPatternButton, Button newPatternButton, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
+    public CellularAutomatonController(ListView patternListView, Button editPatternButton, Button newPatternButton, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
         this.speedSlider = speedSlider;
         this.zoomSlider = zoomSlider;
@@ -84,6 +86,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
         this.delay = (long) speedSlider.getValue();
         this.editPatternButton = editPatternButton;
         this.newPatternButton = newPatternButton;
+        this.patternListView = patternListView;
 
         cellularAutomatonView = new FXCellularAutomatonView<>(canvas, getColoring());
 
