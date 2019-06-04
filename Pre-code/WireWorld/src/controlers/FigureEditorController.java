@@ -37,6 +37,8 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
     @FXML
     protected Button saveButton;
 
+    protected double cellSize = 40.;
+
     protected CellularAutomatonView<T> cellularAutomatonView;
     protected CellularAutomaton<T> cellularAutomaton;
 
@@ -47,12 +49,16 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
 
         cellularAutomatonView = new FXCellularAutomatonView<>(canvas, getColoring());
         cancelButton.setOnAction(event -> ((Stage) cancelButton.getScene().getWindow()).close());
+        resetButton.setOnAction(this::createNewDrawingBoard);
+
+        createNewDrawingBoard(null);
     }
 
     protected abstract CellularAutomaton creteCellularAutomaton();
 
     private void createNewDrawingBoard(Event event) {
-//        cellularAutomaton = new
+        cellularAutomaton = creteCellularAutomaton();
+        cellularAutomatonView.draw(cellularAutomaton, cellSize);
     }
 
     protected abstract T getSelectedState();
