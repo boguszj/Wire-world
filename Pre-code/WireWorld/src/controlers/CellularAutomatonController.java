@@ -2,6 +2,8 @@ package controlers;
 
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import models.CellularAutomaton;
 import models.Parser;
+import models.Pattern;
 import models.Serializer;
 import utils.Utils;
 import views.CellularAutomatonView;
@@ -61,6 +64,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
     protected Button newPatternButton;
 
     protected ListView patternListView;
+    protected ObservableList<Pattern<T>> patterns = FXCollections.<Pattern<T>>observableArrayList();
 
     private boolean running;
     private Thread t;
@@ -111,6 +115,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
         loadButton.setOnAction(this::lodBoard);
 
         newPatternButton.setOnAction(this::openFigureEditor);
+        patternListView.setItems(patterns);
     }
 
     protected void openFigureEditor(Event event) {
