@@ -1,5 +1,7 @@
 package models;
 
+import java.util.UUID;
+
 //Class representing rectangular pattern that could be inserted to CellularAutomaton
 public class Pattern<T extends Enum> {
     protected final int width;
@@ -8,7 +10,15 @@ public class Pattern<T extends Enum> {
     protected String name;
     protected T[] cells;
 
+    public UUID getId() {
+        return id;
+    }
+
+    protected UUID id;
+
     public Pattern(int width, int height, T[] cells) {
+        id = UUID.randomUUID();
+
         this.width = width;
         this.height = height;
         this.cells = cells;
