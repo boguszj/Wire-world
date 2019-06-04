@@ -136,6 +136,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
             stage.initOwner(((Node)event.getTarget()).getScene().getWindow());
             stage.setTitle("Figure drawer");
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         }
         catch (IOException e) {
