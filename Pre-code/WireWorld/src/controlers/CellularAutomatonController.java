@@ -3,6 +3,7 @@ package controlers;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -117,9 +118,18 @@ public abstract class CellularAutomatonController<T extends Enum> {
         saveButton.setOnAction(this::saveCurrentGeneration);
         loadButton.setOnAction(this::lodBoard);
 
-        newPatternButton.setOnAction(this::openFigureEditor);
+        newPatternButton.setOnAction(this::createFigure);
+        editPatternButton.setOnAction(this::editFigure);
         patternListView.setItems(patterns);
         patternListView.setOnMouseClicked(this::patternClicked);
+
+        editPatternButton.setDisable(true);
+        patterns.addListener(new ListChangeListener<Pattern<T>>() {
+            @Override
+            public void onChanged(Change<? extends Pattern<T>> c) {
+                editPatternButton.setDisable(patterns.size() == 0 ? true : false);
+            }
+        });
     }
 
     /**
@@ -137,7 +147,15 @@ public abstract class CellularAutomatonController<T extends Enum> {
 //        new Alert(Alert.AlertType.INFORMATION, "Click on left upper corner of place You want to insert selected pattern").showAndWait();
     }
 
-    protected void openFigureEditor(Event event) {
+    protected void createFigure(Event event) {
+        openFigureEditorWindow(event);
+    }
+
+    protected void editFigure(Event event) {
+        openFigureEditorWindow(event).loadPattern((Pattern<T>) patternListView.getSelectionModel().getSelectedItem());
+    }
+
+    protected FigureEditorController openFigureEditorWindow(Event event) {
         try {
             FXMLLoader loader = loadEditorFXMLLoader();
             Parent root = loader.load();
@@ -148,17 +166,32 @@ public abstract class CellularAutomatonController<T extends Enum> {
             stage.setScene(new Scene(root));
             stage.setResizable(false);
 
-            ((FigureEditorController) loader.getController()).setSaveCallback(pattern -> addPatternToList((Pattern<T>) pattern));
+            FigureEditorController controller = loader.getController();
+            controller.setSaveCallback(pattern -> addPatternToList((Pattern<T>) pattern));
 
             stage.show();
+
+            return controller;
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+
+        return null;
+    }
+
+    protected void openFigureEditor(Event event) {
+
     }
 
     protected void addPatternToList(Pattern<T> pattern) {
-        //TODO: Check id and if it exist on list replace pattern
+        for (int i = 0; i < patterns.size(); i++) {
+            if (patterns.get(i).getId() == pattern.getId()) {
+                patterns.set(i, pattern);
+                return;
+            }
+        }
+
         patterns.add(pattern);
     }
 

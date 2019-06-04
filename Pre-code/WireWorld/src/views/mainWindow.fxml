@@ -126,7 +126,7 @@
                                       </items>
                                     </SplitMenuButton>
                                     <Button fx:id="wireWorldNewPatternButton" layoutX="24.0" layoutY="440.0" mnemonicParsing="false" text="New pattern" />
-                                    <Button fx:id="wireWorldEditPatternButton" disable="true" layoutX="25.0" layoutY="403.0" mnemonicParsing="false" text="Edit pattern" />
+                                    <Button fx:id="wireWorldEditPatternButton" layoutX="25.0" layoutY="403.0" mnemonicParsing="false" text="Edit pattern" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -226,7 +226,7 @@
                                           <ListView fx:id="gameOfLifePatternListView" prefHeight="227.0" prefWidth="148.0" />
                                        </content>
                                     </ScrollPane>
-                                    <Button fx:id="gameOfLifeEditPatternButton" disable="true" mnemonicParsing="false" text="Edit pattern">
+                                    <Button fx:id="gameOfLifeEditPatternButton" mnemonicParsing="false" text="Edit pattern">
                                        <VBox.margin>
                                           <Insets top="12.0" />
                                        </VBox.margin>

@@ -49,6 +49,8 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
 
     protected Consumer<Pattern<T>> saveCallback;
 
+    protected Pattern<T> loadedPattern;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
@@ -62,6 +64,18 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
         saveButton.setOnAction(this::saveFigure);
 
         createNewDrawingBoard(null);
+    }
+
+    public void loadPattern(Pattern<T> pattern) {
+        loadedPattern = pattern;
+
+        figureNameTextField.setText(loadedPattern.getName());
+        widthSpinner.getValueFactory().setValue(loadedPattern.getWidth());
+        heightSpinner.getValueFactory().setValue(loadedPattern.getHeight());
+
+        cellularAutomaton = creteCellularAutomaton();
+        cellularAutomaton.setCells(loadedPattern.getCells());
+        cellularAutomatonView.draw(cellularAutomaton, cellSize);
     }
 
     /**
@@ -94,8 +108,18 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
         if (!validateFigure())
             return;
 
-        Pattern<T> pattern = new Pattern<>(figureNameTextField.getText() ,cellularAutomaton.getWidth(),
+        Pattern<T> pattern;
+        if (loadedPattern == null) {
+            pattern = new Pattern<>(figureNameTextField.getText() ,cellularAutomaton.getWidth(),
                 cellularAutomaton.getHeight(), cellularAutomaton.getCells());
+        }
+        else { //Editing existing pattern
+            pattern = loadedPattern;
+            pattern.setName(figureNameTextField.getText());
+            pattern.setWidth(cellularAutomaton.getWidth());
+            pattern.setHeight(cellularAutomaton.getHeight());
+            pattern.setCells(cellularAutomaton.getCells());
+        }
 
         ((Stage) cancelButton.getScene().getWindow()).close();
         if (saveCallback != null)
