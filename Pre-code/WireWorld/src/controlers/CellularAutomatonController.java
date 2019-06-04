@@ -67,6 +67,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
     protected ListView patternListView;
     protected ObservableList<Pattern<T>> patterns = FXCollections.<Pattern<T>>observableArrayList();
     protected boolean patternInsertionMode = false;
+    protected TabPane modesTabPane;
 
     private boolean running;
     private Thread t;
@@ -74,7 +75,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     private static final double scrollRatio = 0.5;
 
-    public CellularAutomatonController(ListView patternListView, Button editPatternButton, Button newPatternButton, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
+    public CellularAutomatonController(TabPane modesTabPane, ListView patternListView, Button editPatternButton, Button newPatternButton, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
         this.speedSlider = speedSlider;
         this.zoomSlider = zoomSlider;
@@ -93,6 +94,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
         this.editPatternButton = editPatternButton;
         this.newPatternButton = newPatternButton;
         this.patternListView = patternListView;
+        this.modesTabPane = modesTabPane;
 
         cellularAutomatonView = new FXCellularAutomatonView<>(canvas, getColoring());
 
