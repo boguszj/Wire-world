@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import models.CellularAutomaton;
 import models.GameOfLife;
 
 import java.util.HashMap;
@@ -29,5 +30,10 @@ public class GameOfLifeFigureEditorController extends FigureEditorController<Gam
     @Override
     protected GameOfLife.CellStates getSelectedState() {
         return aliveRadioButton.isSelected() ? GameOfLife.CellStates.ALIVE : GameOfLife.CellStates.DEAD;
+    }
+
+    @Override
+    protected CellularAutomaton creteCellularAutomaton() {
+        return new GameOfLife(widthSpinner.getValue(), heightSpinner.getValue());
     }
 }

@@ -1,5 +1,6 @@
 package controlers;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -8,6 +9,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import models.CellularAutomaton;
 import utils.Utils;
 import views.CellularAutomatonView;
 import views.FXCellularAutomatonView;
@@ -24,9 +26,9 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
     protected TextField figureNameTextField;
 
     @FXML
-    protected Spinner widthSpinner;
+    protected Spinner<Integer> widthSpinner;
     @FXML
-    protected Spinner heightSpinner;
+    protected Spinner<Integer> heightSpinner;
 
     @FXML
     protected Button resetButton;
@@ -36,6 +38,7 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
     protected Button saveButton;
 
     protected CellularAutomatonView<T> cellularAutomatonView;
+    protected CellularAutomaton<T> cellularAutomaton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,6 +47,12 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
 
         cellularAutomatonView = new FXCellularAutomatonView<>(canvas, getColoring());
         cancelButton.setOnAction(event -> ((Stage) cancelButton.getScene().getWindow()).close());
+    }
+
+    protected abstract CellularAutomaton creteCellularAutomaton();
+
+    private void createNewDrawingBoard(Event event) {
+//        cellularAutomaton = new
     }
 
     protected abstract T getSelectedState();

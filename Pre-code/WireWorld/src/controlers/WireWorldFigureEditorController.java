@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import models.CellularAutomaton;
 import models.WireWorld;
 
 import java.util.HashMap;
@@ -30,6 +31,11 @@ public class WireWorldFigureEditorController extends FigureEditorController<Wire
         coloring.put(WireWorld.CellStates.CONDUCTOR, Color.YELLOW);
 
         return coloring;
+    }
+
+    @Override
+    protected CellularAutomaton creteCellularAutomaton() {
+        return new WireWorld(widthSpinner.getValue(), heightSpinner.getValue());
     }
 
     @Override
