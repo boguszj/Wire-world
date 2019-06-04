@@ -35,7 +35,7 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
     @FXML
     protected Button saveButton;
 
-    CellularAutomatonView<T> cellularAutomatonView;
+    protected CellularAutomatonView<T> cellularAutomatonView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,6 +45,8 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
         cellularAutomatonView = new FXCellularAutomatonView<>(canvas, getColoring());
         cancelButton.setOnAction(event -> ((Stage) cancelButton.getScene().getWindow()).close());
     }
+
+    protected abstract T getSelectedState();
 
     /**
      * Mapping of each cellular automaton state to corresponding colour should be returned
