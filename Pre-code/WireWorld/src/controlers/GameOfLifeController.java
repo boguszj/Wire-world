@@ -44,6 +44,11 @@ public class GameOfLifeController extends CellularAutomatonController<GameOfLife
                                              DEAD, ALIVE, DEAD,
                                              DEAD, ALIVE, DEAD});
         patterns.add(blinker);
+
+        Pattern<GameOfLife.CellStates> block = new Pattern<>("Block", 2, 2,
+                new GameOfLife.CellStates[] {ALIVE, ALIVE,
+                                             ALIVE, ALIVE});
+        patterns.add(block);
     }
 
     @Override
