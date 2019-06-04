@@ -66,7 +66,6 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     protected ListView patternListView;
     protected ObservableList<Pattern<T>> patterns = FXCollections.<Pattern<T>>observableArrayList();
-    protected boolean patternInsertionMode = false;
     protected TabPane modesTabPane;
 
     private boolean running;
@@ -123,12 +122,19 @@ public abstract class CellularAutomatonController<T extends Enum> {
         patternListView.setOnMouseClicked(this::patternClicked);
     }
 
-    protected void patternClicked(MouseEvent event) {
-        if (cellularAutomaton == null)
-            return;
+    /**
+     * Informs if controller is currently in pattern insertion mode
+     * @return
+     */
+    protected boolean isInPatternInsertionMode() {
+        return modesTabPane.getSelectionModel().getSelectedIndex() == 1;
+    }
 
-        patternInsertionMode = true;
-        new Alert(Alert.AlertType.INFORMATION, "Click on left upper corner of place You want to insert selected pattern").showAndWait();
+    protected void patternClicked(MouseEvent event) {
+//        if (cellularAutomaton == null)
+//            return;
+//
+//        new Alert(Alert.AlertType.INFORMATION, "Click on left upper corner of place You want to insert selected pattern").showAndWait();
     }
 
     protected void openFigureEditor(Event event) {
@@ -316,11 +322,10 @@ public abstract class CellularAutomatonController<T extends Enum> {
         final int row = (int) (event.getY() / zoomSlider.getValue());
         final int column = (int) (event.getX() / zoomSlider.getValue());
 
-        if (patternInsertionMode) {
+        if (isInPatternInsertionMode()) {
             Pattern<T> selectedPattern = (Pattern<T>) patternListView.getSelectionModel().getSelectedItem();
             cellularAutomaton.insertPattern(selectedPattern, column, row);
             cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
-            patternInsertionMode = false;
         }else {
             T selectedState = getSelectedState();
 
