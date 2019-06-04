@@ -34,4 +34,10 @@ public final class Utils {
 
         return fileName.substring(lastDotIndex);
     }
+
+    public static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.trim().isEmpty())
+            return false;
+        return true;
+    }
 }

@@ -30,6 +30,33 @@ public abstract class CellularAutomaton<T extends Enum> {
 //        this.cells = new T[getCellCount()];
     }
 
+    /**
+     * Insert a pattern to automaton. Pattern have it's left upper cornet at specified coordinates
+     * If pattern doesn't fit as match as possible will be placed
+     * @param pattern
+     * @param x left upper corner x
+     * @param y left upper corner y
+     */
+    public void insertPattern(Pattern<T> pattern, final int x, final int y) {
+        clearHistory();
+
+        for (int r = 0; r < pattern.getHeight(); r++) {
+            for (int c = 0; c < pattern.getWidth(); c++) {
+                final int patternIndex = r * pattern.getWidth() + c;
+                T newState = pattern.getCell(r, c);
+
+                final int automatonRow = y + r;
+                final int automatonColumn = x + c;
+
+                if (automatonRow < 0 || automatonRow >= height || automatonColumn <0 || automatonColumn >= width)
+                    continue;
+
+                final int automatonIndex = automatonRow * width + automatonColumn;
+                cells[automatonIndex] = newState;
+            }
+        }
+    }
+
     public T[] getCells() {
         return cells;
     }

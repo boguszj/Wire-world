@@ -2,17 +2,26 @@ package controlers;
 
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import models.CellularAutomaton;
 import models.Parser;
+import models.Pattern;
 import models.Serializer;
 import utils.Utils;
 import views.CellularAutomatonView;
@@ -21,6 +30,7 @@ import views.FXCellularAutomatonView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static utils.Utils.myMax;
 import static utils.Utils.myMin;
@@ -52,13 +62,20 @@ public abstract class CellularAutomatonController<T extends Enum> {
     protected CellularAutomaton cellularAutomaton;
     protected CellularAutomatonView<T> cellularAutomatonView;
 
+    protected Button editPatternButton;
+    protected Button newPatternButton;
+
+    protected ListView patternListView;
+    protected ObservableList<Pattern<T>> patterns = FXCollections.<Pattern<T>>observableArrayList();
+    protected TabPane modesTabPane;
+
     private boolean running;
     private Thread t;
     private long delay;
 
     private static final double scrollRatio = 0.5;
 
-    public CellularAutomatonController(Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
+    public CellularAutomatonController(TabPane modesTabPane, ListView patternListView, Button editPatternButton, Button newPatternButton, Slider speedSlider, Canvas canvas, Slider zoomSlider, ToggleButton autoRunToggleButton, Button previousGenerationButton, Button nextGenerationButton, Spinner widthSpinner, Spinner heightSpinner, Button randomButton, Button emptyButton, Button saveButton, Button loadButton, Label generationNumberLabel) {
         this.canvas = canvas;
         this.speedSlider = speedSlider;
         this.zoomSlider = zoomSlider;
@@ -74,6 +91,10 @@ public abstract class CellularAutomatonController<T extends Enum> {
         this.generationNumberLabel = generationNumberLabel;
         this.running = false;
         this.delay = (long) speedSlider.getValue();
+        this.editPatternButton = editPatternButton;
+        this.newPatternButton = newPatternButton;
+        this.patternListView = patternListView;
+        this.modesTabPane = modesTabPane;
 
         cellularAutomatonView = new FXCellularAutomatonView<>(canvas, getColoring());
 
@@ -96,7 +117,90 @@ public abstract class CellularAutomatonController<T extends Enum> {
         //canvas.setOnScroll(this::canvasScrolled);
         saveButton.setOnAction(this::saveCurrentGeneration);
         loadButton.setOnAction(this::lodBoard);
+
+        newPatternButton.setOnAction(this::createFigure);
+        editPatternButton.setOnAction(this::editFigure);
+        patternListView.setItems(patterns);
+        patternListView.setOnMouseClicked(this::patternClicked);
+
+        editPatternButton.setDisable(true);
+        patterns.addListener(new ListChangeListener<Pattern<T>>() {
+            @Override
+            public void onChanged(Change<? extends Pattern<T>> c) {
+                editPatternButton.setDisable(patterns.size() == 0 ? true : false);
+            }
+        });
     }
+
+    /**
+     * Informs if controller is currently in pattern insertion mode
+     * @return
+     */
+    protected boolean isInPatternInsertionMode() {
+        return modesTabPane.getSelectionModel().getSelectedIndex() == 1;
+    }
+
+    protected void patternClicked(MouseEvent event) {
+//        if (cellularAutomaton == null)
+//            return;
+//
+//        new Alert(Alert.AlertType.INFORMATION, "Click on left upper corner of place You want to insert selected pattern").showAndWait();
+    }
+
+    protected void createFigure(Event event) {
+        openFigureEditorWindow(event);
+    }
+
+    protected void editFigure(Event event) {
+        openFigureEditorWindow(event).loadPattern((Pattern<T>) patternListView.getSelectionModel().getSelectedItem());
+    }
+
+    protected FigureEditorController openFigureEditorWindow(Event event) {
+        try {
+            FXMLLoader loader = loadEditorFXMLLoader();
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node)event.getTarget()).getScene().getWindow());
+            stage.setTitle("Figure drawer");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+
+            FigureEditorController controller = loader.getController();
+            controller.setSaveCallback(pattern -> addPatternToList((Pattern<T>) pattern));
+
+            stage.show();
+
+            return controller;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    protected void openFigureEditor(Event event) {
+
+    }
+
+    protected void addPatternToList(Pattern<T> pattern) {
+        for (int i = 0; i < patterns.size(); i++) {
+            if (patterns.get(i).getId() == pattern.getId()) {
+                patterns.set(i, pattern);
+                return;
+            }
+        }
+
+        patterns.add(pattern);
+    }
+
+    /**
+     * Create appropriate loader for figure editor
+     * @return FXMLLoader to create window
+     * @throws IOException thrown if unable to load FXML file
+     */
+    protected abstract FXMLLoader loadEditorFXMLLoader() throws IOException;
 
     protected void lodBoard(Event event) {
         if (running)
@@ -113,8 +217,6 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
         File selectedFile = fileChooser.showOpenDialog(window);
 
-        //TODO: Prevent user from loading wrong CellularAutomaton type
-        //TODO: Deal with parsing exceptions (More specific messages)
         try {
             cellularAutomaton = Parser.loadCellularAutomaton(selectedFile, getCellularAutomatonInstanceClass());
 
@@ -250,12 +352,19 @@ public abstract class CellularAutomatonController<T extends Enum> {
      * @param event Used for extracting mouse coordinates
      */
     protected void canvasClicked(MouseEvent event) {
-        T selectedState = getSelectedState();
         final int row = (int) (event.getY() / zoomSlider.getValue());
         final int column = (int) (event.getX() / zoomSlider.getValue());
 
-        cellularAutomaton.setCell(row, column, selectedState);
-        cellularAutomatonView.drawCell(selectedState, column, row, zoomSlider.getValue());
+        if (isInPatternInsertionMode()) {
+            Pattern<T> selectedPattern = (Pattern<T>) patternListView.getSelectionModel().getSelectedItem();
+            cellularAutomaton.insertPattern(selectedPattern, column, row);
+            cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
+        }else {
+            T selectedState = getSelectedState();
+
+            cellularAutomaton.setCell(row, column, selectedState);
+            cellularAutomatonView.drawCell(selectedState, column, row, zoomSlider.getValue());
+        }
     }
 
     protected void shrinkSlider() {
