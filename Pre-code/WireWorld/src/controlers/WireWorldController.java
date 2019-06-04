@@ -46,8 +46,8 @@ public class WireWorldController extends CellularAutomatonController<WireWorld.C
 
 
     @Override
-    protected Parent loadFXMLEditorFile() throws IOException {
-        return FXMLLoader.load(getClass().getResource("../views/WireWorldFigureDrawer.fxml"));
+    protected FXMLLoader loadEditorFXMLLoader() throws IOException {
+        return new FXMLLoader(getClass().getResource("../views/WireWorldFigureDrawer.fxml"));
     }
 
     @Override

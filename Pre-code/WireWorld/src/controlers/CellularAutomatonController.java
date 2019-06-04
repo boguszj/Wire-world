@@ -29,6 +29,7 @@ import views.FXCellularAutomatonView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static utils.Utils.myMax;
 import static utils.Utils.myMin;
@@ -130,13 +131,17 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     protected void openFigureEditor(Event event) {
         try {
-            Parent root = loadFXMLEditorFile();
+            FXMLLoader loader = loadEditorFXMLLoader();
+            Parent root = loader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(((Node)event.getTarget()).getScene().getWindow());
             stage.setTitle("Figure drawer");
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+
+            ((FigureEditorController) loader.getController()).setSaveCallback(pattern -> addPatternToList((Pattern<T>) pattern));
+
             stage.show();
         }
         catch (IOException e) {
@@ -144,12 +149,17 @@ public abstract class CellularAutomatonController<T extends Enum> {
         }
     }
 
+    protected void addPatternToList(Pattern<T> pattern) {
+        //TODO: Check id and if it exist on list replace pattern
+        patterns.add(pattern);
+    }
+
     /**
-     * Create appropriate root node for figure editor
-     * @return root node used to create window
+     * Create appropriate loader for figure editor
+     * @return FXMLLoader to create window
      * @throws IOException thrown if unable to load FXML file
      */
-    protected abstract Parent loadFXMLEditorFile() throws IOException;
+    protected abstract FXMLLoader loadEditorFXMLLoader() throws IOException;
 
     protected void lodBoard(Event event) {
         if (running)

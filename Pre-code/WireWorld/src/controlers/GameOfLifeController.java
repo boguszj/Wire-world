@@ -70,8 +70,8 @@ public class GameOfLifeController extends CellularAutomatonController<GameOfLife
     }
 
     @Override
-    protected Parent loadFXMLEditorFile() throws IOException {
-        return FXMLLoader.load(getClass().getResource("../views/GameOfLifeFigureDrawer.fxml"));
+    protected FXMLLoader loadEditorFXMLLoader() throws IOException {
+        return new FXMLLoader(getClass().getResource("../views/GameOfLifeFigureDrawer.fxml"));
     }
 
     @Override

@@ -20,6 +20,8 @@ import views.FXCellularAutomatonView;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public abstract class FigureEditorController<T extends Enum> implements Initializable {
     @FXML
@@ -45,6 +47,8 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
     protected CellularAutomatonView<T> cellularAutomatonView;
     protected CellularAutomaton<T> cellularAutomaton;
 
+    protected Consumer<Pattern<T>> saveCallback;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Utils.makeSpinnerUpdateValueOnFocusLost(widthSpinner);
@@ -55,8 +59,17 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
         resetButton.setOnAction(this::createNewDrawingBoard);
         canvas.setOnMouseClicked(this::canvasClicked);
         canvas.setOnMouseDragged(this::canvasClicked);
+        saveButton.setOnAction(this::saveFigure);
 
         createNewDrawingBoard(null);
+    }
+
+    /**
+     * Set function that should be run when user saves correct pattern
+     * @param saveCallback
+     */
+    public void setSaveCallback(Consumer<Pattern<T>> saveCallback) {
+        this.saveCallback = saveCallback;
     }
 
     /**
@@ -65,12 +78,12 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
      */
     protected boolean validateFigure() {
         if (cellularAutomaton == null) {
-            new Alert(Alert.AlertType.ERROR, "No pattern drawn");
+            new Alert(Alert.AlertType.ERROR, "No pattern drawn").showAndWait();
             return false;
         }
 
         if (Utils.isNullOrEmpty(figureNameTextField.getText())) {
-            new Alert(Alert.AlertType.ERROR, "No figure name provided");
+            new Alert(Alert.AlertType.ERROR, "No figure name provided").showAndWait();
             return false;
         }
 
@@ -80,6 +93,13 @@ public abstract class FigureEditorController<T extends Enum> implements Initiali
     protected void saveFigure(Event event) {
         if (!validateFigure())
             return;
+
+        Pattern<T> pattern = new Pattern<>(figureNameTextField.getText() ,cellularAutomaton.getWidth(),
+                cellularAutomaton.getHeight(), cellularAutomaton.getCells());
+
+        ((Stage) cancelButton.getScene().getWindow()).close();
+        if (saveCallback != null)
+            saveCallback.accept(pattern);
     }
 
     /**
