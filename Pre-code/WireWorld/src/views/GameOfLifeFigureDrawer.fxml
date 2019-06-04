@@ -75,12 +75,12 @@
              </GridPane>
             <Spinner fx:id="widthSpinner" layoutX="76.0" layoutY="192.0" prefHeight="27.0" prefWidth="102.0">
                 <valueFactory>
-                    <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="11" max="1000" min="1" />
                 </valueFactory>
             </Spinner>
              <Spinner fx:id="heightSpinner" layoutX="76.0" layoutY="223.0" prefHeight="27.0" prefWidth="102.0">
                  <valueFactory>
-                     <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
+                     <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="8" max="1000" min="1" />
                  </valueFactory>
              </Spinner>
             <Label layoutX="24.0" layoutY="197.0" text="Width" />
