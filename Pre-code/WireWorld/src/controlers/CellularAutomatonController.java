@@ -65,6 +65,7 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
     protected ListView patternListView;
     protected ObservableList<Pattern<T>> patterns = FXCollections.<Pattern<T>>observableArrayList();
+    protected boolean patternInsertionMode = false;
 
     private boolean running;
     private Thread t;
@@ -116,6 +117,15 @@ public abstract class CellularAutomatonController<T extends Enum> {
 
         newPatternButton.setOnAction(this::openFigureEditor);
         patternListView.setItems(patterns);
+        patternListView.setOnMouseClicked(this::patternClicked);
+    }
+
+    protected void patternClicked(MouseEvent event) {
+        if (cellularAutomaton == null)
+            return;
+
+        patternInsertionMode = true;
+        new Alert(Alert.AlertType.INFORMATION, "Click on left upper corner of place You want to insert selected pattern").showAndWait();
     }
 
     protected void openFigureEditor(Event event) {
@@ -290,12 +300,20 @@ public abstract class CellularAutomatonController<T extends Enum> {
      * @param event Used for extracting mouse coordinates
      */
     protected void canvasClicked(MouseEvent event) {
-        T selectedState = getSelectedState();
         final int row = (int) (event.getY() / zoomSlider.getValue());
         final int column = (int) (event.getX() / zoomSlider.getValue());
 
-        cellularAutomaton.setCell(row, column, selectedState);
-        cellularAutomatonView.drawCell(selectedState, column, row, zoomSlider.getValue());
+        if (patternInsertionMode) {
+            Pattern<T> selectedPattern = (Pattern<T>) patternListView.getSelectionModel().getSelectedItem();
+            cellularAutomaton.insertPattern(selectedPattern, column, row);
+            cellularAutomatonView.draw(cellularAutomaton, zoomSlider.getValue());
+            patternInsertionMode = false;
+        }else {
+            T selectedState = getSelectedState();
+
+            cellularAutomaton.setCell(row, column, selectedState);
+            cellularAutomatonView.drawCell(selectedState, column, row, zoomSlider.getValue());
+        }
     }
 
     protected void shrinkSlider() {
