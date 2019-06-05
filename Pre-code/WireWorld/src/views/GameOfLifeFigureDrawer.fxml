@@ -13,23 +13,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="386.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.GameOfLifeFigureEditorController">
    <children>
-      <Label layoutX="231.0" layoutY="14.0" prefHeight="28.0" prefWidth="139.0" text="Figure editor" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="230.0">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="48.0" prefHeight="323.0" prefWidth="447.0" vbarPolicy="ALWAYS">
+      <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="48.0" prefHeight="323.0" prefWidth="447.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="208.0" AnchorPane.topAnchor="48.0">
          <content>
             <Canvas fx:id="canvas" height="325.0" width="447.0" />
          </content>
       </ScrollPane>
-      <AnchorPane layoutX="472.0" layoutY="49.0" prefHeight="323.0" prefWidth="191.0" style="-fx-border-color: black; -fx-border-radius: 4;">
+      <AnchorPane layoutX="472.0" layoutY="49.0" prefHeight="323.0" prefWidth="191.0" style="-fx-border-color: black; -fx-border-radius: 4;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="49.0">
          <children>
             <TextField fx:id="figureNameTextField" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="164.0" promptText="Enter figure name" />
              <GridPane alignment="CENTER" layoutX="-13.0" layoutY="51.0" prefHeight="82.0" prefWidth="150.0">
@@ -94,5 +90,14 @@
             <Button fx:id="resetButton" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="164.0" text="Reset" />
          </children>
       </AnchorPane>
+      <HBox alignment="CENTER" layoutX="272.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <Label prefHeight="28.0" prefWidth="139.0" text="Figure editor">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

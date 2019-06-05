@@ -164,7 +164,6 @@ public abstract class CellularAutomatonController<T extends Enum> {
             stage.initOwner(((Node)event.getTarget()).getScene().getWindow());
             stage.setTitle("Figure drawer");
             stage.setScene(new Scene(root));
-            stage.setResizable(false);
 
             FigureEditorController controller = loader.getController();
             controller.setSaveCallback(pattern -> addPatternToList((Pattern<T>) pattern));
