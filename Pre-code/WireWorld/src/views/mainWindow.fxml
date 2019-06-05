@@ -19,6 +19,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -31,11 +32,11 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <!--<fx:include fx:id="gridPane" source="scrollPane.fxml" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0" />-->
-                  <ScrollPane hbarPolicy="ALWAYS" layoutX="20.0" layoutY="10.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="10.0">
+                  <ScrollPane hbarPolicy="ALWAYS" layoutX="20.0" layoutY="10.0" style="-fx-border-color: black; -fx-border-radius: 5;" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="10.0">
                      <content>
                         <Canvas fx:id="wireWorldCanvas" />
                      </content></ScrollPane>
-                  <AnchorPane layoutX="10.0" layoutY="512.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="535.0">
+                  <AnchorPane layoutX="10.0" layoutY="512.0" style="-fx-border-color: black; -fx-border-radius: 5;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="535.0">
                      <children>
                         <Label layoutX="522.0" layoutY="38.0" text="Speed" />
                         <Slider fx:id="wireWorldSpeedSlider" blockIncrement="1.0" layoutX="569.0" layoutY="39.0" max="10.0" min="1.0" value="3.0" />
@@ -45,20 +46,20 @@
                         <Slider fx:id="wireWorldZoomSlider" layoutX="70.0" layoutY="7.0" min="1.0" prefHeight="15.0" prefWidth="370.0" value="50.0" />
                         <ToggleButton fx:id="wireWorldAutoRunToggleButton" disable="true" layoutX="21.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" text="Auto run" />
                         <Button fx:id="wireWorldPreviousGenerationButton" disable="true" layoutX="320.0" layoutY="36.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="122.0" text="Previous generation" />
-                        <Spinner fx:id="wireWorldHeightSpinner" editable="true" layoutX="958.0" layoutY="32.0" prefHeight="10.0" prefWidth="65.0">
+                        <Spinner fx:id="wireWorldHeightSpinner" editable="true" layoutX="958.0" layoutY="35.0" prefHeight="10.0" prefWidth="65.0">
                            <valueFactory>
                               <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="10" max="1000" min="1" />
                            </valueFactory>
                         </Spinner>
-                        <Spinner fx:id="wireWorldWidthSpinner" editable="true" layoutX="957.0" layoutY="2.0" prefHeight="25.0" prefWidth="68.0">
+                        <Spinner fx:id="wireWorldWidthSpinner" editable="true" layoutX="957.0" layoutY="5.0" prefHeight="25.0" prefWidth="68.0">
                            <valueFactory>
                               <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="24" max="1000" min="1" />
                            </valueFactory>
                         </Spinner>
-                        <Button fx:id="wireWorldRandomButton" layoutX="1056.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="79.0" text="Random" />
-                        <Label layoutX="916.0" layoutY="6.0" text="Width:" />
-                        <Button fx:id="wireWorldEmptyButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1056.0" layoutY="35.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="27.0" prefWidth="80.0" text="Empty" />
-                        <Label layoutX="914.0" layoutY="38.0" text="Height:" />
+                        <Button fx:id="wireWorldRandomButton" layoutX="1056.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="79.0" text="Random" />
+                        <Label layoutX="916.0" layoutY="9.0" text="Width:" />
+                        <Button fx:id="wireWorldEmptyButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1056.0" layoutY="38.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="27.0" prefWidth="80.0" text="Empty" />
+                        <Label layoutX="914.0" layoutY="41.0" text="Height:" />
                         <HBox alignment="CENTER" layoutX="544.0" layoutY="4.0" prefHeight="36.0" prefWidth="142.0">
                            <children>
                               <Label text="Generation number:" />
@@ -72,7 +73,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <Button fx:id="wireWorldPowerOffButton" layoutX="800.0" layoutY="20.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Power Off" />
+                        <Button fx:id="wireWorldPowerOffButton" layoutX="750.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="Power Off" />
                         <Label layoutX="56.0" layoutY="-1.0" text="-" textFill="#00000084">
                            <font>
                               <Font size="18.0" />
@@ -83,8 +84,8 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="wireWorldSaveButton" layoutX="1243.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Save board" AnchorPane.leftAnchor="1243.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Button fx:id="wireWorldLoadButton" contentDisplay="CENTER" layoutX="1243.0" layoutY="37.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Load board" AnchorPane.leftAnchor="1243.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0" />
+                        <Button fx:id="wireWorldSaveButton" layoutX="1187.0" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="125.0" text="Save board" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="6.0" />
+                        <Button fx:id="wireWorldLoadButton" contentDisplay="CENTER" layoutX="1190.0" layoutY="39.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="125.0" text="Load board" AnchorPane.leftAnchor="1189.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="38.0" />
                      </children>
                   </AnchorPane>
                   <TabPane fx:id="wireWorldModesTabPane" layoutX="1184.0" layoutY="14.0" prefHeight="504.0" prefWidth="156.0" style="-fx-border-color: black; -fx-border-radius: 5;" tabClosingPolicy="UNAVAILABLE" tabMinWidth="50.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="1184.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -134,7 +135,7 @@
          <content>
             <AnchorPane>
                <children>
-                  <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="14.0" prefHeight="493.0" prefWidth="1163.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="14.0">
+                  <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="14.0" prefHeight="493.0" prefWidth="1163.0" style="-fx-border-color: black; -fx-border-radius: 5;" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="14.0">
                      <content>
                         <Canvas fx:id="gameOfLifeCanvas" />
                      </content></ScrollPane>
@@ -234,7 +235,7 @@
                       </Tab>
                     </tabs>
                   </TabPane>
-                  <BorderPane layoutX="14.0" layoutY="518.0" prefHeight="83.0" prefWidth="1326.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0">
+                  <BorderPane layoutX="14.0" layoutY="518.0" prefHeight="83.0" prefWidth="1326.0" style="-fx-border-color: black; -fx-border-radius: 5;" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0">
                      <right>
                         <AnchorPane prefHeight="83.0" prefWidth="429.0" BorderPane.alignment="CENTER">
                            <children>
@@ -252,8 +253,8 @@
                               </Spinner>
                               <Button fx:id="gameOfLifeRandomButton" layoutX="164.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Random" AnchorPane.leftAnchor="164.0" AnchorPane.topAnchor="7.0" />
                               <Button fx:id="gameOfLifeEmptyButton" layoutX="164.0" layoutY="51.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="70.0" text="Empty" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="164.0" />
-                              <Button fx:id="gameOfLifeSaveButton" disable="true" layoutX="127.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Save board" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
-                              <Button fx:id="gameOfLifeLoadButton" layoutX="156.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Load board" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" />
+                              <Button fx:id="gameOfLifeSaveButton" disable="true" layoutX="127.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="149.0" text="Save board" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
+                              <Button fx:id="gameOfLifeLoadButton" layoutX="156.0" layoutY="56.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="149.0" text="Load board" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </right>
@@ -306,6 +307,7 @@
                         </AnchorPane>
                      </center>
                   </BorderPane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
                </children></AnchorPane>
          </content>
       </Tab>
