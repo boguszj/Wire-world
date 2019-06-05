@@ -179,9 +179,6 @@ public abstract class CellularAutomatonController<T extends Enum> {
         return null;
     }
 
-    protected void openFigureEditor(Event event) {
-
-    }
 
     protected void addPatternToList(Pattern<T> pattern) {
         for (int i = 0; i < patterns.size(); i++) {
@@ -229,6 +226,8 @@ public abstract class CellularAutomatonController<T extends Enum> {
     }
 
     protected abstract Class getCellularAutomatonInstanceClass();
+
+    protected abstract void loadInitialPatterns();
 
     protected void saveCurrentGeneration(Event event) {
         if (cellularAutomaton == null)

@@ -171,9 +171,7 @@ public abstract class CellularAutomaton<T extends Enum> {
     }
 
     @JsonIgnore
-    public int getCurrentGeneration() {
-        return currentGeneration.getValue();
-    }
+    public int getCurrentGeneration() { return currentGeneration.getValue(); }
 
     public IntegerProperty currentGenerationProperty() {
         return currentGeneration;

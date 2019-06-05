@@ -38,7 +38,8 @@ public class GameOfLifeController extends CellularAutomatonController<GameOfLife
         loadInitialPatterns();
     }
 
-    private void loadInitialPatterns() {
+    @Override
+    protected void loadInitialPatterns() {
         Pattern<GameOfLife.CellStates> blinker = new Pattern<>("Blinker", 3, 3,
                 new GameOfLife.CellStates[] {DEAD, ALIVE, DEAD,
                                              DEAD, ALIVE, DEAD,

@@ -46,7 +46,8 @@ public class WireWorldController extends CellularAutomatonController<WireWorld.C
         loadInitialPatterns();
     }
 
-    private void loadInitialPatterns() {
+    @Override
+    protected void loadInitialPatterns() {
         Pattern<WireWorld.CellStates> circuit = new Pattern<>("Closed circuit", 6, 4,
                 new WireWorld.CellStates[] {
                         CONDUCTOR, CONDUCTOR, CONDUCTOR, TAIL, HEAD, CONDUCTOR,
