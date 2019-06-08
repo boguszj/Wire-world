@@ -163,15 +163,19 @@ Nowa klasa będąca modelem wzoru:
 \subsection{CellularAutomaton}
 Do części metod i pól dodano adnotację ,,JsonIgnore'' w celu pominięcia ich podczas parsowania.
 
-Dodano metodę \texttt{public IntegerProperty currentGenerationProperty()} zwracającą numer aktualnie wyświetlanego pokolenia.
+Dodano metodę \texttt{public IntegerProperty currentGenerationProperty()} zwracającą numer aktualnie wyświetlanego pokolenia. Poprzez zastosowanie klasy \texttt{Property} z JavaFX możliwe jest ,,obserwowanie'' zmian numeru pokolenia.
 
 Dodano metodę \texttt{public void insertPattern(Pattern<T> pattern, final int x, final int y)} wstawiającą do automatu komórkowego wybrany wzór.
 
 \subsection{WireWorld}
-Dodano konstruktor będący kreatorem Json--ów: \texttt{public WireWorld(@JsonProperty("width") final int  width, @JsonProperty("height")final int height, @JsonProperty("cells") final WireWorld.CellStates[] cells)}.
+Dodano konstruktor umożliwiający utworzenie klasy na podstawie zparsowanego pliku: \texttt{public WireWorld(@JsonProperty("width") final int  width, @JsonProperty("height")final int height, @JsonProperty("cells") final WireWorld.CellStates[] cells)}.
+
+Sprawdza on poprawność wczytanych informacji -- czy rozmiar planszy zgadza się z liczbą komórek.
 
 \subsection{GameOfLife}
-Dodano konstruktor będący kreatorem Json--ów: \texttt{public GameOfLife(@JsonProperty("width") final int  width, @JsonProperty("height")final int height, @JsonProperty("cells") final GameOfLife.CellStates[] cells)}.
+Dodano konstruktor umożliwiający utworzenie klasy na podstawie zparsowanego pliku: \texttt{public GameOfLife(@JsonProperty("width") final int  width, @JsonProperty("height")final int height, @JsonProperty("cells") final GameOfLife.CellStates[] cells)}.
+
+Sprawdza on poprawność wczytanych informacji -- czy rozmiar planszy zgadza się z liczbą komórek.
 
 \subsection{Parser}
 Klasa PatternsController została całkowicie przebudowana:
@@ -192,7 +196,7 @@ Nowa klasa odpowiadająca za konwersję i zapis stanu automatu komórkowego do p
 \end{itemize}
 
 \subsection{Utils}
-Nowa klasa będąca kontenerem metod używanych w projekcie:
+Nowa klasa będąca kontenerem metod niezwiązanych z żadną konktetną klasą używanych w projekcie:
 \texttt{public final class Utils}
 
 \paragraph{Statyczne metody publiczne:}
