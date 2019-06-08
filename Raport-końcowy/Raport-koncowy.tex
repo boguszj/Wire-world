@@ -302,6 +302,21 @@ Schemat postępowania w celu dodania nowego automatu komórkowego:
 	\item \textbf{potencjalnie: } zaimplementować edytor figur dla danego automatu.
 \end{itemize}
 
+\subsection{Dodanie modelu nowego automatu}
+Dzięki wykorzystaniu typów szablonowych dodanie modelu nowego automatu jest bardzo proste.
+W tym celu należy:
+
+\begin{enumerate}
+	\item Utworzyć typ wyliczeniowy reprezentujący możliwe stany automatu,
+	\item Rozszerzyć klasę \texttt{CellularAutomaton} konkretyzując T jako typ wyliczeniowy stanów automatu,
+	\item Napisać metodę zwracającą stan następnego pokolenia na podstawie aktualnego,
+	\item Uzupełnić metody pomocnicze takie jak zwracanie losowego stanu.
+\end{enumerate}
+
+Ponieważ większość zachowań jest realizowanych przez klasę abstrakcyjną \texttt{CellularAutomaton} tworzenie nowych automatów sprowadza się tylko do opisania jak będą generowane następne pokolenia.
+
+Dzięki temu, że jest to odpowiedzialność automatu a nie poszczególne komórki możliwe są automaty delegujące generację następnego stanu do swoich komórek oraz niesymetryczne automaty, których stan następnego pokolenia może zależeć od czynników zewnętrznych.
+
 \section{Zmiana interfejsu programu}
 W związku z faktem, iż modele automatów komórkowych są niezależne od interfejsu użytkownika, można ich używać w połączeniu z dowolnym innym interfejsem -- inną biblioteką graficzną, trybem wsadowym itp. Sposób działania tych modeli opisany jest w specyfikacji implementacyjnej. Zmiany pozwalające na współpracę modeli z Parserm i Serializerem plików typu JSON lub XML -- wyżej w tym dokumencie.
 
