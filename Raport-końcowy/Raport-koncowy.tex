@@ -191,6 +191,17 @@ Nowa klasa odpowiadająca za konwersję i zapis stanu automatu komórkowego do p
 	\item \texttt{public static void serializeToXml(CellularAutomaton cellularAutomaton, File file)} -- metoda zapisująca stan automatu komórkowego do pliku w formacie \texttt{*.xml}.
 \end{itemize}
 
+\subsection{Utils}
+Nowa klasa będąca kontenerem metod używanych w projekcie:
+\texttt{public final class Utils}
+
+\paragraph{Statyczne metody publiczne:}
+\begin{itemize}
+	\item \texttt{public static boolean isNullOrEmpty(String str)} - metoda sprawdzająca czy dana zamienna z łańcuchem jest niepusta,
+	\item \texttt{public static String extractFileExtension(String fileName)} - metoda zwracające rozszerzenie pliku na podstawie jego nazwy,
+	\item \texttt{public static void makeSpinnerUpdateValueOnFocusLost(Spinner spinner)} - metoda usprawniająca działanie komponentu \texttt{Spinner}, tak żeby aktualizował swoją wartość po faktycznej zmianie zawartości pola (bez oczekiwania na wciśnięcie klawisza ,,Enter'').
+\end{itemize}
+
 \section{Prezentacja działania}
 Program pozwala symulować działanie 2 automatów komórkowych - GameOfLife oraz WireWorld. Daje nam możliwość oglądania po kolei następnych pokoleń automatu lub automatycznej generacji. Jesteśmy w stanie kontrolować prędkość symulacji oraz oglądać dowolny fragment planszy z wybranych przez nas przybliżeniem, a także w czasie rzeczywistym, podczas symulacji, edytować komórki na planszy. Program daje również możliwość wczytywania wcześniej przygotowanych plansz oraz zapisu własnych kreacji. Istnieje też edytor figur, który pozwala na proste powielanie wzorów bez konieczności wielokrotnego ich rysowania.
 
