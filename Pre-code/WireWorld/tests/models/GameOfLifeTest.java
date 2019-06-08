@@ -1,14 +1,16 @@
 package models;
 
+import javafx.scene.control.Cell;
 import models.GameOfLife;
 import models.GameOfLife.CellStates;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.fail;
 
 public class GameOfLifeTest {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         GameOfLife gameOfLife = new GameOfLife(2, 3);
 
         CellStates[] states = {
@@ -23,11 +25,16 @@ public class GameOfLifeTest {
         gameOfLife.nextGeneration();
 
         System.out.println(gameOfLife);
-    }
+    }*/
 
-    @org.junit.Test
+    @Test
     public void nextGeneration() {
-//        fail();
+        GameOfLife gameOfLife = new GameOfLife(3, 3);
+        CellStates[] states = {CellStates.DEAD, CellStates.DEAD, CellStates.DEAD, CellStates.ALIVE, CellStates.ALIVE, CellStates.ALIVE, CellStates.DEAD, CellStates.DEAD, CellStates.DEAD};
+        gameOfLife.setCells(states);
+        gameOfLife.nextGeneration();
+        CellStates[] result = {CellStates.DEAD, CellStates.ALIVE, CellStates.DEAD, CellStates.DEAD, CellStates.ALIVE, CellStates.DEAD, CellStates.DEAD, CellStates.ALIVE, CellStates.DEAD};
+        assertArrayEquals(result, gameOfLife.getCells());
     }
 
     @Test
