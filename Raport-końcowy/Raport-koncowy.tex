@@ -285,6 +285,11 @@ W trakcie pracy nad projektem oraz poznawania przez nas większej liczby wzorcó
 Ponieważ główne okno symulacji udostępnia możliwość wstawiania figur jak i rysowania poszczególnych komórek za pomocą klikania widoku automatu myszą należało wyróżnić te dwie sytuacje. 
 W tym celu został zastosowany wzorzec \textit{Stan}. \texttt{CellularAutomatonController} może znajdować się w stanie rysowania komórek lub wstawiania figur i w zależności od swojego stanu inaczej zareaguje na kliknięcie myszą.
 
+\paragraphnl{Strategia}
+Podczas pisania klasy \texttt{FigureEditorController} okazało się, że sporo z jej zachowań jest wspólnych z klasą \texttt{CellularAutomatonController}. By zenkapsulować te zachowania i ograniczyć duplikację kodu można by skorzystać ze wzorca \textit{Strategii}.
+
+Niestety nie mamy doświadczenia w korzystanie z tego wzorca i nie wystarczyło czasu na jego wprowadzenie. Przy refaktoryzacji należałoby wprowadzić ten wzorzec.
+
 \section{Potencjalna rozbudowa -- dodanie nowego automatu komórkowego}
 Schemat postępowania w celu dodania nowego automatu komórkowego:
 \begin{itemize}
