@@ -269,6 +269,16 @@ Opis elementów interfejsu:
 	\item przycisk ,,Height'' -- pole reprezentujące wysokość tworzonego wzorca.
 \end{itemize}
 
+\section{Wzorce projektowe}
+Zastosowanie wzorców projektowych nadało wyraźną strukturę projektowy. Szczególnie istotny wpływ na postać projektu miał wzorzec MVC. Dzięki niemu łatwo było wprowadzić nieprzewidziane na poprzednim etapie elementy związanie z edycją figur.
+
+\subsection{Nowe wzorce}
+W trakcie pracy nad projektem oraz poznawania przez nas większej liczby wzorców doszliśmy do wniosku, że należy skorzystać ze wzorców nieprzewidzianych w \textit{Specyfikacji Implementacyjnej}.
+
+\paragraph{Stan} \mbox{} \\
+Ponieważ główne okno symulacji udostępnia możliwość wstawiania figur jak i rysowania poszczególnych komórek za pomocą klikania widoku automatu myszą należało wyróżnić te dwie sytuacje. 
+W tym celu został zastosowany wzorzec \textit{Stan}. \texttt{CellularAutomatonController} może znajdować się w stanie rysowania komórek lub wstawiania figur i w zależności od swojego stanu inaczej zareaguje na kliknięcie myszą.
+
 \section{Potencjalna rozbudowa -- dodanie nowego automatu komórkowego}
 Schemat postępowania w celu dodania nowego automatu komórkowego:
 \begin{itemize}
