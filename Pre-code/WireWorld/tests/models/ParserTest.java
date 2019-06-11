@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import static models.GameOfLife.CellStates.ALIVE;
+import static models.GameOfLife.CellStates.DEAD;
 import static org.junit.Assert.*;
 
 public class ParserTest {
@@ -25,7 +27,16 @@ public class ParserTest {
 
         try{
             Files.write(file.toPath(), fileContent.getBytes());
-        } catch (IOException e) {
+
+            GameOfLife loadedAutomaton = (GameOfLife) Parser.loadCellularAutomaton(file, GameOfLife.class);
+
+            assertEquals(3, loadedAutomaton.getHeight());
+            assertEquals(3, loadedAutomaton.getWidth());
+
+            GameOfLife.CellStates[] expectedCells = {ALIVE, ALIVE, ALIVE, DEAD, ALIVE, DEAD, ALIVE, ALIVE, ALIVE};
+            assertArrayEquals(expectedCells, loadedAutomaton.getCells());
+
+        } catch (IOException | ClassCastException e) {
             fail();
         } finally {
             assertTrue(file.delete());
